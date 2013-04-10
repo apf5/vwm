@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.1.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_1_0.dtd">
+<service-builder package-path="mx.com.vw.jhanlos.ads">
+	<author>Jorge Loayza</author>
+	<namespace>vwm_ads</namespace>
+	
+	<entity local-service="true" remote-service="true" name="Propertie">
+
+		<!-- PK fields -->
+
+		<column name="propertieId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="createDate" type="long" />
+		<column name="modifiedDate" type="long" />
+
+		<!-- Other fields -->
+
+		<column name="name" type="String" />
+		<column name="value" type="String" />
+		
+		
+		<!-- Order -->
+
+		<order by="asc" >
+			<order-column name="name" />
+		</order>
+
+		<!-- Finder methods -->
+
+	</entity>
+</service-builder>

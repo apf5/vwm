@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="mx.com.vw.jhanlos.news.model.Propertie">
+		<field name="propertieId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createDate" type="long" />
+		<field name="modifiedDate" type="long" />
+		<field name="name" type="String" />
+		<field name="value" type="String" />
+	</model>
+</model-hints>

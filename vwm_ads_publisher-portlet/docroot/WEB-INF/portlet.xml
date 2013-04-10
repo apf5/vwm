@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+
+<portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" version="2.0">
+	
+	<portlet>
+		<portlet-name>adsdisplay</portlet-name>
+		<display-name>Ads Display Portlet</display-name>
+		<portlet-class>
+			mx.com.vw.jhanlos.ads.portlet.AdsDisplayPortlet
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/ads/display/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<supported-locale>es</supported-locale>
+		<resource-bundle>content/display/Language</resource-bundle>
+		<portlet-info>
+			<title>Ads Display Portlet</title>
+			<short-title>Ads Display Portlet</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>adspublish</portlet-name>
+		<display-name>Ads Publish Portlet</display-name>
+		<portlet-class>
+			mx.com.vw.jhanlos.ads.portlet.AdsPublishPortlet
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/ads/publish/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content/publish/Language</resource-bundle>
+		<portlet-info>
+			<title>Ads Publish Portlet</title>
+			<short-title>Ads Publish Portlet</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>adsadmin</portlet-name>
+		<display-name>Ads Admin Portlet</display-name>
+		<portlet-class>
+			mx.com.vw.jhanlos.ads.portlet.AdsAdminPortlet
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/ads/admin/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content/admin/Language</resource-bundle>
+		<portlet-info>
+			<title>Ads Admin Portlet</title>
+			<short-title>Ads Admin Portlet</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+</portlet-app>

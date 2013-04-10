@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+
+<portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" version="2.0">
+	<portlet>
+		<portlet-name>newsdisplay</portlet-name>
+		<display-name>News Diplay Portlet</display-name>
+		<portlet-class>mx.com.vw.jhanlos.news.portlet.NewsDisplayPortlet</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/news/display/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<supported-locale>en</supported-locale>
+      	<supported-locale>de</supported-locale>
+      	<supported-locale>es</supported-locale>
+		<resource-bundle>content/display/Language</resource-bundle>
+		<portlet-info>
+			<title>News Display Portlet</title>
+			<short-title>View Display Portlet</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>newsadmin</portlet-name>
+		<display-name>News Admin Portlet</display-name>
+		<portlet-class>
+			mx.com.vw.jhanlos.news.portlet.NewsAdminPortlet
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/news/admin/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<supported-locale>en</supported-locale>
+      	<supported-locale>de</supported-locale>
+      	<supported-locale>es</supported-locale>
+		<resource-bundle>content/admin/Language</resource-bundle>
+		<portlet-info>
+			<title>News Admin Portlet</title>
+			<short-title>Admin Admin Portlet</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+</portlet-app>
