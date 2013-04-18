@@ -25,6 +25,8 @@ import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.BaseModel;
 
+import mx.com.vw.jhanlos.ads.model.MailboxAdminClp;
+import mx.com.vw.jhanlos.ads.model.MailboxClp;
 import mx.com.vw.jhanlos.ads.model.PropertieClp;
 
 import java.io.ObjectInputStream;
@@ -102,6 +104,14 @@ public class ClpSerializer {
 
 		String oldModelClassName = oldModelClass.getName();
 
+		if (oldModelClassName.equals(MailboxClp.class.getName())) {
+			return translateInputMailbox(oldModel);
+		}
+
+		if (oldModelClassName.equals(MailboxAdminClp.class.getName())) {
+			return translateInputMailboxAdmin(oldModel);
+		}
+
 		if (oldModelClassName.equals(PropertieClp.class.getName())) {
 			return translateInputPropertie(oldModel);
 		}
@@ -119,6 +129,26 @@ public class ClpSerializer {
 		}
 
 		return newList;
+	}
+
+	public static Object translateInputMailbox(BaseModel<?> oldModel) {
+		MailboxClp oldClpModel = (MailboxClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getMailboxRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputMailboxAdmin(BaseModel<?> oldModel) {
+		MailboxAdminClp oldClpModel = (MailboxAdminClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getMailboxAdminRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
 	}
 
 	public static Object translateInputPropertie(BaseModel<?> oldModel) {
@@ -147,6 +177,16 @@ public class ClpSerializer {
 		Class<?> oldModelClass = oldModel.getClass();
 
 		String oldModelClassName = oldModelClass.getName();
+
+		if (oldModelClassName.equals(
+					"mx.com.vw.jhanlos.ads.model.impl.MailboxImpl")) {
+			return translateOutputMailbox(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"mx.com.vw.jhanlos.ads.model.impl.MailboxAdminImpl")) {
+			return translateOutputMailboxAdmin(oldModel);
+		}
 
 		if (oldModelClassName.equals(
 					"mx.com.vw.jhanlos.ads.model.impl.PropertieImpl")) {
@@ -233,11 +273,40 @@ public class ClpSerializer {
 			return new SystemException();
 		}
 
+		if (className.equals("mx.com.vw.jhanlos.ads.NoSuchMailboxException")) {
+			return new mx.com.vw.jhanlos.ads.NoSuchMailboxException();
+		}
+
+		if (className.equals(
+					"mx.com.vw.jhanlos.ads.NoSuchMailboxAdminException")) {
+			return new mx.com.vw.jhanlos.ads.NoSuchMailboxAdminException();
+		}
+
 		if (className.equals("mx.com.vw.jhanlos.ads.NoSuchPropertieException")) {
 			return new mx.com.vw.jhanlos.ads.NoSuchPropertieException();
 		}
 
 		return throwable;
+	}
+
+	public static Object translateOutputMailbox(BaseModel<?> oldModel) {
+		MailboxClp newModel = new MailboxClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setMailboxRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputMailboxAdmin(BaseModel<?> oldModel) {
+		MailboxAdminClp newModel = new MailboxAdminClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setMailboxAdminRemoteModel(oldModel);
+
+		return newModel;
 	}
 
 	public static Object translateOutputPropertie(BaseModel<?> oldModel) {

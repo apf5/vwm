@@ -1,6 +1,12 @@
 <?xml version="1.0"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="mx.com.vw.jhanlos.ads.service.MailboxLocalService" class="mx.com.vw.jhanlos.ads.service.impl.MailboxLocalServiceImpl" />
+	<bean id="mx.com.vw.jhanlos.ads.service.MailboxService" class="mx.com.vw.jhanlos.ads.service.impl.MailboxServiceImpl" />
+	<bean id="mx.com.vw.jhanlos.ads.service.persistence.MailboxPersistence" class="mx.com.vw.jhanlos.ads.service.persistence.MailboxPersistenceImpl" parent="basePersistence" />
+	<bean id="mx.com.vw.jhanlos.ads.service.MailboxAdminLocalService" class="mx.com.vw.jhanlos.ads.service.impl.MailboxAdminLocalServiceImpl" />
+	<bean id="mx.com.vw.jhanlos.ads.service.MailboxAdminService" class="mx.com.vw.jhanlos.ads.service.impl.MailboxAdminServiceImpl" />
+	<bean id="mx.com.vw.jhanlos.ads.service.persistence.MailboxAdminPersistence" class="mx.com.vw.jhanlos.ads.service.persistence.MailboxAdminPersistenceImpl" parent="basePersistence" />
 	<bean id="mx.com.vw.jhanlos.ads.service.PropertieLocalService" class="mx.com.vw.jhanlos.ads.service.impl.PropertieLocalServiceImpl" />
 	<bean id="mx.com.vw.jhanlos.ads.service.PropertieService" class="mx.com.vw.jhanlos.ads.service.impl.PropertieServiceImpl" />
 	<bean id="mx.com.vw.jhanlos.ads.service.persistence.PropertiePersistence" class="mx.com.vw.jhanlos.ads.service.persistence.PropertiePersistenceImpl" parent="basePersistence" />

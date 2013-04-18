@@ -32,4 +32,59 @@
 		<!-- Finder methods -->
 
 	</entity>
+	
+	<entity local-service="true" remote-service="true" name="Mailbox">
+
+		<!-- PK fields -->
+
+		<column name="mailboxId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="createDate" type="long" />
+		<column name="modifiedDate" type="long" />
+
+		<!-- Other fields -->
+
+		<column name="name" type="String" />
+		<column name="iconId" type="long" />
+				
+		<!-- Order -->
+
+		<order by="asc" >
+			<order-column name="name" />
+		</order>
+
+		<!-- Finder methods -->
+
+	</entity>
+	
+	<entity local-service="true" remote-service="true" name="MailboxAdmin">
+
+		<!-- PK fields -->
+
+		<column name="mailboxAdminId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+	
+		<column name="createDate" type="long" />
+		<column name="modifiedDate" type="long" />
+
+		<!-- Other fields -->
+
+		<column name="mailboxId" type="long" />
+		<column name="userId" type="long" />
+				
+		<!-- Order -->
+
+		<order by="asc" >
+			<order-column name="mailboxId" />
+		</order>
+
+		<!-- Finder methods -->
+
+	</entity>
+	
 </service-builder>

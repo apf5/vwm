@@ -606,6 +606,10 @@ public class PropertiePersistenceImpl extends BasePersistenceImpl<Propertie>
 		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@BeanReference(type = MailboxPersistence.class)
+	protected MailboxPersistence mailboxPersistence;
+	@BeanReference(type = MailboxAdminPersistence.class)
+	protected MailboxAdminPersistence mailboxAdminPersistence;
 	@BeanReference(type = PropertiePersistence.class)
 	protected PropertiePersistence propertiePersistence;
 	@BeanReference(type = ResourcePersistence.class)

@@ -7,6 +7,34 @@
 			<access>PROPERTY</access>
 		</persistence-unit-defaults>
 	</persistence-unit-metadata>
+	<mapped-superclass class="mx.com.vw.jhanlos.ads.model.impl.MailboxModelImpl">
+		<attributes>
+			<id name="mailboxId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="createDate" />
+			<basic name="modifiedDate" />
+			<basic name="name" />
+			<basic name="iconId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="mx.com.vw.jhanlos.ads.model.impl.MailboxAdminModelImpl">
+		<attributes>
+			<id name="mailboxAdminId" />
+			<basic name="createDate" />
+			<basic name="modifiedDate" />
+			<basic name="mailboxId" />
+			<basic name="userId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="mx.com.vw.jhanlos.ads.model.impl.PropertieModelImpl">
 		<attributes>
 			<id name="propertieId" />
@@ -22,6 +50,14 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<entity class="mx.com.vw.jhanlos.ads.model.impl.MailboxImpl" name="Mailbox">
+		<table name="vwm_ads_Mailbox" />
+		<attributes />
+	</entity>
+	<entity class="mx.com.vw.jhanlos.ads.model.impl.MailboxAdminImpl" name="MailboxAdmin">
+		<table name="vwm_ads_MailboxAdmin" />
+		<attributes />
+	</entity>
 	<entity class="mx.com.vw.jhanlos.ads.model.impl.PropertieImpl" name="Propertie">
 		<table name="vwm_ads_Propertie" />
 		<attributes />

@@ -104,23 +104,23 @@ public class PropertieLocalServiceClpInvoker {
 				"mx.com.vw.jhanlos.ads.model.Propertie", "boolean"
 			};
 
-		_methodName38 = "getBeanIdentifier";
+		_methodName50 = "getBeanIdentifier";
 
-		_methodParameterTypes38 = new String[] {  };
+		_methodParameterTypes50 = new String[] {  };
 
-		_methodName39 = "setBeanIdentifier";
+		_methodName51 = "setBeanIdentifier";
 
-		_methodParameterTypes39 = new String[] { "java.lang.String" };
+		_methodParameterTypes51 = new String[] { "java.lang.String" };
 
-		_methodName44 = "getValue";
+		_methodName56 = "getValue";
 
-		_methodParameterTypes44 = new String[] {
+		_methodParameterTypes56 = new String[] {
 				"java.lang.String", "java.lang.Object"
 			};
 
-		_methodName45 = "setValue";
+		_methodName57 = "setValue";
 
-		_methodParameterTypes45 = new String[] {
+		_methodParameterTypes57 = new String[] {
 				"java.lang.String", "java.lang.Object"
 			};
 	}
@@ -214,24 +214,24 @@ public class PropertieLocalServiceClpInvoker {
 				((Boolean)arguments[1]).booleanValue());
 		}
 
-		if (_methodName38.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes38, parameterTypes)) {
+		if (_methodName50.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
 			return PropertieLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName39.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes39, parameterTypes)) {
+		if (_methodName51.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
 			PropertieLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 		}
 
-		if (_methodName44.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes44, parameterTypes)) {
+		if (_methodName56.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
 			return PropertieLocalServiceUtil.getValue((java.lang.String)arguments[0],
 				(java.lang.Object)arguments[1]);
 		}
 
-		if (_methodName45.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes45, parameterTypes)) {
+		if (_methodName57.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes57, parameterTypes)) {
 			return PropertieLocalServiceUtil.setValue((java.lang.String)arguments[0],
 				(java.lang.Object)arguments[1]);
 		}
@@ -271,12 +271,12 @@ public class PropertieLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName38;
-	private String[] _methodParameterTypes38;
-	private String _methodName39;
-	private String[] _methodParameterTypes39;
-	private String _methodName44;
-	private String[] _methodParameterTypes44;
-	private String _methodName45;
-	private String[] _methodParameterTypes45;
+	private String _methodName50;
+	private String[] _methodParameterTypes50;
+	private String _methodName51;
+	private String[] _methodParameterTypes51;
+	private String _methodName56;
+	private String[] _methodParameterTypes56;
+	private String _methodName57;
+	private String[] _methodParameterTypes57;
 }

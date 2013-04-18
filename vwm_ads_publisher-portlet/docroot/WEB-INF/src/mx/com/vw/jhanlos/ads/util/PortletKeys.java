@@ -9,4 +9,6 @@ public class PortletKeys extends com.liferay.portal.util.PortletKeys {
 	
 	public static final String CURRENT_TEMPLATE = "CURRENT_TEMPLATE";
 	
+	public static final String CURRENT_FOLDER = "CURRENT_FOLDER";
+	
 }

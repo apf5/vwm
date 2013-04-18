@@ -2,7 +2,31 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="mx.com.vw.jhanlos.ads.model.Mailbox" />
+	<import class="mx.com.vw.jhanlos.ads.model.MailboxAdmin" />
 	<import class="mx.com.vw.jhanlos.ads.model.Propertie" />
+	<class name="mx.com.vw.jhanlos.ads.model.impl.MailboxImpl" table="vwm_ads_Mailbox">
+		<cache usage="read-write" />
+		<id name="mailboxId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="modifiedDate" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="iconId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="mx.com.vw.jhanlos.ads.model.impl.MailboxAdminImpl" table="vwm_ads_MailboxAdmin">
+		<cache usage="read-write" />
+		<id name="mailboxAdminId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="createDate" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="modifiedDate" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="mailboxId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
 	<class name="mx.com.vw.jhanlos.ads.model.impl.PropertieImpl" table="vwm_ads_Propertie">
 		<cache usage="read-write" />
 		<id name="propertieId" type="long">

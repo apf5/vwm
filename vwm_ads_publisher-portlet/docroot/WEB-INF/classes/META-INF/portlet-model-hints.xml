@@ -1,6 +1,22 @@
 <?xml version="1.0"?>
 
 <model-hints>
+	<model name="mx.com.vw.jhanlos.ads.model.Mailbox">
+		<field name="mailboxId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createDate" type="long" />
+		<field name="modifiedDate" type="long" />
+		<field name="name" type="String" />
+		<field name="iconId" type="long" />
+	</model>
+	<model name="mx.com.vw.jhanlos.ads.model.MailboxAdmin">
+		<field name="mailboxAdminId" type="long" />
+		<field name="createDate" type="long" />
+		<field name="modifiedDate" type="long" />
+		<field name="mailboxId" type="long" />
+		<field name="userId" type="long" />
+	</model>
 	<model name="mx.com.vw.jhanlos.ads.model.Propertie">
 		<field name="propertieId" type="long" />
 		<field name="companyId" type="long" />

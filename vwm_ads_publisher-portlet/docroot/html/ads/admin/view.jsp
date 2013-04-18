@@ -6,18 +6,43 @@
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
 <portlet:defineObjects />
+
+<portlet:actionURL name="addMailbox" var="addMailbox"></portlet:actionURL>
+<portlet:resourceURL var="portletResource"></portlet:resourceURL>
+
 <%
  // renderRequest and portletConfig are objects which, accoring to the
  // portlet spec, are required to be in context. So they should just be 
  // there for you to use.
  Locale locale = renderRequest.getLocale();
  ResourceBundle res = portletConfig.getResourceBundle(locale);
+		 
+ String tabNames = res.getString("ads-mailbox-admin")+", "+res.getString("ads-settings");
 
  %>
  
+<link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/smoothness/jquery-ui.css">
+<link href="<%=request.getContextPath()%>/css/tagit-simple-grey.css" rel="stylesheet" type="text/css">
+<style>
+<!--
+.tagit{
+	margin: 0;
+}
+
+input.tagit-input {
+	-moz-box-shadow:none;
+	-webkit-box-shadow: none;
+	-o-box-shadow: nonet;
+	box-shadow: none;
+}
+-->
+</style>
+
 
 <script type="text/javascript" src="/html/js/liferay/service.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="<%=request.getContextPath()%>/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
 
 <script type="text/javascript" >
 	
@@ -33,26 +58,31 @@
 </script>
 
 <script type="text/javascript" >
-		
-	/*
-	 * Jhanlos: variables de control del html
-	 *
-	 */
-	 /*
-		 * Jhanlos: variables de control del html
+
+
+		/*
+		 * Jhanlos: funcion inicial despues de la carga
 		 *
 		 */
-			
-		var currentGroup=-1;
-		var currentStructure=-1;
-		var currentTemplate=-1;
-		
-		
-		
+
+
 		$(function() {
+			loadMailboxes();
 			loadConfigFieldset();
 		});
-	   
+
+
+</script>
+<script type="text/javascript" >
+		
+	/*
+	 * Jhanlos: variables de control del html para el configuracion general
+	 *
+	 */
+				
+		var currentGroup=-1;
+		var currentStructure=-1;
+		var currentTemplate=-1;	   
 	         
 	   function loadConfigFieldset(){
 		   	   	
@@ -180,9 +210,72 @@
 			});
 		}
 	 
+		
+				
 	 
 </script>
 
+
+<script type="text/javascript" >
+		
+	/*
+	 * Jhanlos: variables de control del html para administracion de categorias
+	 *
+	 */
+	 var users=[];
+	 var admins=[];
+	 
+	 function loadMailboxes(){
+		 setLoading("mailbox-results-grid",true);
+		 $("#mailbox-editor").hide();
+		 $("#mailbox-list").show();
+		 Liferay.Service.vwm_ads.Mailbox.getMailboxes({}, buildMailboxes);
+	 }
+	 
+	 
+	 function buildMailboxes(data){
+		 
+		for ( var i = 0; i < data.length; i++) {
+			
+		}		 
+		 setLoading("mailbox-results-grid",false);
+	 }
+	 
+	 function addMailbox(){
+		 $("#mailbox-list").hide();
+		 $("#mailbox-editor").show();
+		 
+		 $("#save-mailbox input").bind("click",saveMailbox);
+		 
+		 enableButton("save-mailbox",false);
+		 Liferay.Service.Portal.User.getCompanyUsers({
+			 companyId:themeDisplay.getCompanyId(),
+			 start:-1,
+			 end:-1
+		 },function(data){
+			 var email="";
+			 users=[];
+			for ( var k = 0; k < data.length; k++) {
+				email = data[k].emailAddress;
+				if (!(email=="")) {
+					users.push({value:data[k].userId,label:email});
+				} 
+			}
+			$("#mailboxAdmins-ul").tagit({
+				    tagSource: users,
+				    placeholderText: "email de administradores"
+			});
+			enableButton("save-mailbox",true); 
+		 });
+		 
+	 }
+	 
+	 function saveMailbox(){
+		$("#mailboxAdmins").val($("#mailboxAdmins-ul").tagit("tags"));
+		$("#mailbox-editor-form").submit();
+	 }
+	 
+</script>
 
 <!-- Jhanlos: para manejar el contexto del portlet  -->
 <script type="text/javascript" >   
@@ -201,8 +294,17 @@
 <!-- Jhanlos: para manejar la interfaz  -->
 <script type="text/javascript" >   
       
-   function setLoading(parent){
-	   $(parent).html("<div class='loading-animation'></div>");
+   function setLoading(id,enale){
+	    if (enale) {
+	    	$("#"+id).hide();
+	    	$("#"+id+"-loading").html("<div class='loading-animation'></div>");
+	    	$("#"+id+"-loading").show();
+	    	
+		} else {
+			$("#"+id+"-loading").hide();
+	    	$("#"+id).show();
+		}
+	   
    }
    
    function buildOption(id,name,isSelected){
@@ -238,9 +340,7 @@
    }
 </script>
 
-<%
-	String tabNames = res.getString("ads-mailbox-admin")+", "+res.getString("ads-settings");
-%>
+
 
 <liferay-ui:tabs
 	names="<%=tabNames %>"
@@ -248,15 +348,130 @@
 >
 
 	<liferay-ui:section>
-		sample 1
+		
+			<div id="msg-error-mailbox" class="portlet-msg-error" style="display: none;">
+		    	<%= res.getString("msg-error") %> <span id="msg-error-mailbox-span"></span>
+		    </div>
+		    
+		    <div id="msg-success-mailbox" class="portlet-msg-success" style="display: none;">
+		    	<%= res.getString("msg-success") %> <span id="msg-success-mailbox-span"></span>
+		    </div>
+		   
+		   
+		   <div id="mailbox-editor"  style="display: none;">
+		   		<form action="<%=addMailbox%>" id="mailbox-editor-form" method="POST" enctype="multipart/form-data">
+		   		<input type="hidden" name="cmd" value="add" />
+		   		<fieldset >
+					<legend>Buzon:</legend>
+					
+					<table>
+						
+						<tr>
+							<td><label for="mailboxId" >Id de Buzon:</label>
+							</td>
+							<td><span id="mailboxId" >-1<input type="hidden" name="mailboxId" value="-1" /></span>
+							</td>
+						</tr>
+						
+						<tr>
+							<td><label for="mailboxName" >Nombre:</label>
+							</td>
+							<td><input id="mailboxName" name="mailboxName" type="text" />
+							</td>
+						</tr>
+						
+						<tr>
+						
+							<td><label for="mailboxIcon" >Icono:</label>
+							</td>
+							<td><span>No file</span><br/> <input id="mailboxIcon" name="mailboxIcon"  type="file"/>
+							</td>
+							
+						</tr>
+						
+						<tr>
+							
+							<td><label for="mailboxAdmins" >Administradores:</label>
+							</td>
+							<td>
+								<input id="mailboxAdmins" name="mailboxAdmins" type="hidden" />
+								<ul id="mailboxAdmins-ul" ></ul>
+							</td>
+							
+						</tr>
+						
+					</table>
+					
+							
+				</fieldset>
+				</form>
+				<div style="padding-top: 10px;">
+						<!-- aui-button-disabled  -->
+					<span class="aui-button delete-articles-button"> 
+						<span class="aui-button-content"> 
+							<input class="aui-button-input" onclick="loadMailboxes()" type="button"  value="Cancel" />
+						</span>
+					</span>
+					
+					<span class="aui-button delete-articles-button" id="save-mailbox"> 
+						<span class="aui-button-content"> 
+							<input class="aui-button-input" type="button" value="Guardar" />
+						</span>
+					</span>
+				</div>
+		   </div>
+		   		   
+		    <div id="mailbox-list"  style="display: none;">
+			   <div class="lfr-panel-title"> 
+			   		Lista de Buzones
+			   </div>
+			   
+			   <div style="padding-top: 10px;padding-bottom: 10px;" >
+					
+					<!-- aui-button-disabled  -->
+					<span class="aui-button delete-articles-button" id="update-mailbox"> 
+						<span class="aui-button-content"> 
+							<input class="aui-button-input" onclick="loadMailboxes()" type="button"  value="Actulizar Buzones" />
+						</span>
+					</span>
+					
+					<span class="aui-button delete-articles-button" id="add-mailbox"> 
+						<span class="aui-button-content"> 
+							<input class="aui-button-input" onclick="addMailbox()" type="button" value="<%= res.getString("add-mailbox") %>" />
+						</span>
+					</span>
+					
+				</div>	
+			   
+			   <div id="mailbox-results-grid-loading" style="padding-top: 10px;"></div>
+			   
+			   <div class="results-grid" id="mailbox-results-grid" >
+				   <table class="taglib-search-iterator">
+				   		<thead>
+				   			<tr class="results-header">
+				   				<th class="first" >#</th>
+				   				<th>Icono</th>
+				   				<th>Nombre</th>
+				   				<th>Administradores</th>
+				   				<th class="last"></th>
+				   			</tr>
+			   			</thead>
+			   			<tbody id="main_mailbox">
+			   			</tbody>
+			   						   			   
+				   </table>
+			   </div>
+		   </div>
+						
+			
+		
 	</liferay-ui:section>
 	
 	
 	
 	<liferay-ui:section>
 		
-		<div >
-		    
+				    
 		    <div id="msg-error-config" class="portlet-msg-error" style="display: none;">
 		    	<%= res.getString("msg-error") %> <span id="msg-error-config-span"></span>
 		    </div>
@@ -315,8 +530,7 @@
 			</div>
 			
 			
-		</div>		
+				
 	</liferay-ui:section>
-	
 	
 </liferay-ui:tabs>

@@ -18,6 +18,10 @@ import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 
 import mx.com.vw.jhanlos.ads.service.ClpSerializer;
+import mx.com.vw.jhanlos.ads.service.MailboxAdminLocalServiceUtil;
+import mx.com.vw.jhanlos.ads.service.MailboxAdminServiceUtil;
+import mx.com.vw.jhanlos.ads.service.MailboxLocalServiceUtil;
+import mx.com.vw.jhanlos.ads.service.MailboxServiceUtil;
 import mx.com.vw.jhanlos.ads.service.PropertieLocalServiceUtil;
 import mx.com.vw.jhanlos.ads.service.PropertieServiceUtil;
 
@@ -36,6 +40,12 @@ public class ClpMessageListener extends BaseMessageListener {
 
 		if (command.equals("undeploy") &&
 				servletContextName.equals(getServletContextName())) {
+			MailboxLocalServiceUtil.clearService();
+
+			MailboxServiceUtil.clearService();
+			MailboxAdminLocalServiceUtil.clearService();
+
+			MailboxAdminServiceUtil.clearService();
 			PropertieLocalServiceUtil.clearService();
 
 			PropertieServiceUtil.clearService();

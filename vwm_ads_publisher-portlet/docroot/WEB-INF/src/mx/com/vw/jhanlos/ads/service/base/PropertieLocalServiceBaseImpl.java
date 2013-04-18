@@ -38,8 +38,14 @@ import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
 
 import mx.com.vw.jhanlos.ads.model.Propertie;
+import mx.com.vw.jhanlos.ads.service.MailboxAdminLocalService;
+import mx.com.vw.jhanlos.ads.service.MailboxAdminService;
+import mx.com.vw.jhanlos.ads.service.MailboxLocalService;
+import mx.com.vw.jhanlos.ads.service.MailboxService;
 import mx.com.vw.jhanlos.ads.service.PropertieLocalService;
 import mx.com.vw.jhanlos.ads.service.PropertieService;
+import mx.com.vw.jhanlos.ads.service.persistence.MailboxAdminPersistence;
+import mx.com.vw.jhanlos.ads.service.persistence.MailboxPersistence;
 import mx.com.vw.jhanlos.ads.service.persistence.PropertiePersistence;
 
 import java.io.Serializable;
@@ -269,6 +275,116 @@ public abstract class PropertieLocalServiceBaseImpl extends BaseLocalServiceImpl
 		propertie.setNew(false);
 
 		return propertiePersistence.update(propertie, merge);
+	}
+
+	/**
+	 * Returns the mailbox local service.
+	 *
+	 * @return the mailbox local service
+	 */
+	public MailboxLocalService getMailboxLocalService() {
+		return mailboxLocalService;
+	}
+
+	/**
+	 * Sets the mailbox local service.
+	 *
+	 * @param mailboxLocalService the mailbox local service
+	 */
+	public void setMailboxLocalService(MailboxLocalService mailboxLocalService) {
+		this.mailboxLocalService = mailboxLocalService;
+	}
+
+	/**
+	 * Returns the mailbox remote service.
+	 *
+	 * @return the mailbox remote service
+	 */
+	public MailboxService getMailboxService() {
+		return mailboxService;
+	}
+
+	/**
+	 * Sets the mailbox remote service.
+	 *
+	 * @param mailboxService the mailbox remote service
+	 */
+	public void setMailboxService(MailboxService mailboxService) {
+		this.mailboxService = mailboxService;
+	}
+
+	/**
+	 * Returns the mailbox persistence.
+	 *
+	 * @return the mailbox persistence
+	 */
+	public MailboxPersistence getMailboxPersistence() {
+		return mailboxPersistence;
+	}
+
+	/**
+	 * Sets the mailbox persistence.
+	 *
+	 * @param mailboxPersistence the mailbox persistence
+	 */
+	public void setMailboxPersistence(MailboxPersistence mailboxPersistence) {
+		this.mailboxPersistence = mailboxPersistence;
+	}
+
+	/**
+	 * Returns the mailbox admin local service.
+	 *
+	 * @return the mailbox admin local service
+	 */
+	public MailboxAdminLocalService getMailboxAdminLocalService() {
+		return mailboxAdminLocalService;
+	}
+
+	/**
+	 * Sets the mailbox admin local service.
+	 *
+	 * @param mailboxAdminLocalService the mailbox admin local service
+	 */
+	public void setMailboxAdminLocalService(
+		MailboxAdminLocalService mailboxAdminLocalService) {
+		this.mailboxAdminLocalService = mailboxAdminLocalService;
+	}
+
+	/**
+	 * Returns the mailbox admin remote service.
+	 *
+	 * @return the mailbox admin remote service
+	 */
+	public MailboxAdminService getMailboxAdminService() {
+		return mailboxAdminService;
+	}
+
+	/**
+	 * Sets the mailbox admin remote service.
+	 *
+	 * @param mailboxAdminService the mailbox admin remote service
+	 */
+	public void setMailboxAdminService(MailboxAdminService mailboxAdminService) {
+		this.mailboxAdminService = mailboxAdminService;
+	}
+
+	/**
+	 * Returns the mailbox admin persistence.
+	 *
+	 * @return the mailbox admin persistence
+	 */
+	public MailboxAdminPersistence getMailboxAdminPersistence() {
+		return mailboxAdminPersistence;
+	}
+
+	/**
+	 * Sets the mailbox admin persistence.
+	 *
+	 * @param mailboxAdminPersistence the mailbox admin persistence
+	 */
+	public void setMailboxAdminPersistence(
+		MailboxAdminPersistence mailboxAdminPersistence) {
+		this.mailboxAdminPersistence = mailboxAdminPersistence;
 	}
 
 	/**
@@ -533,6 +649,18 @@ public abstract class PropertieLocalServiceBaseImpl extends BaseLocalServiceImpl
 		}
 	}
 
+	@BeanReference(type = MailboxLocalService.class)
+	protected MailboxLocalService mailboxLocalService;
+	@BeanReference(type = MailboxService.class)
+	protected MailboxService mailboxService;
+	@BeanReference(type = MailboxPersistence.class)
+	protected MailboxPersistence mailboxPersistence;
+	@BeanReference(type = MailboxAdminLocalService.class)
+	protected MailboxAdminLocalService mailboxAdminLocalService;
+	@BeanReference(type = MailboxAdminService.class)
+	protected MailboxAdminService mailboxAdminService;
+	@BeanReference(type = MailboxAdminPersistence.class)
+	protected MailboxAdminPersistence mailboxAdminPersistence;
 	@BeanReference(type = PropertieLocalService.class)
 	protected PropertieLocalService propertieLocalService;
 	@BeanReference(type = PropertieService.class)
