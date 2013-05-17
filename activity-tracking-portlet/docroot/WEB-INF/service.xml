@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.1.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_1_0.dtd">
+<service-builder package-path="com.liferay.consistent.tracking">
+	<author>Jorge Loayza Soloisolo</author>
+	<namespace>CONSIS_TRACK</namespace>
+	
+	<entity name="PortletProperty" local-service="true" remote-service="false">
+
+        <!-- PK fields -->
+
+        <column name="propertyId" type="long" primary="true" id-type="increment"/>
+        
+        <!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+				
+        <!-- Other fields -->
+
+        <column name="name" type="String"/>
+        <column name="value" type="String"/>
+        
+        <!-- Order -->
+
+		<order by="asc">
+			<order-column name="name" />
+		</order>
+		
+        <!-- Finder methods -->
+
+        <finder name="Name" return-type="Property" unique="true">
+        	<finder-column name="companyId" />
+            <finder-column name="name" />
+        </finder>
+        
+        <finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+        
+    </entity>
+    
+    <entity local-service="true" remote-service="false" name="Browser">
+
+		<!-- PK fields -->
+
+		<column name="browserId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<!-- column name="companyId" type="long" /-->
+		
+		
+		<!-- Other fields -->
+		
+		<column name="name" type="String" />
+		<column name="version" type="String" />
+										
+		<!-- Order -->
+
+		<order by="asc" >
+			<order-column name="name" />
+		</order>
+
+		<!-- Finder methods -->
+		
+		<finder name="Name" return-type="Collection" >
+			<finder-column name="name" />
+		</finder>
+		
+		<finder name="N_V" return-type="Browser" unique="true">
+			<finder-column name="name" />
+			<finder-column name="version"/>
+		</finder>
+		
+	</entity>
+	
+	<entity local-service="true" remote-service="false" name="OS">
+
+		<!-- PK fields -->
+
+		<column name="osId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<!-- column name="companyId" type="long" /-->
+		
+		
+		<!-- Other fields -->
+		
+		<column name="name" type="String" />
+		<column name="version" type="String" />
+										
+		<!-- Order -->
+
+		<order by="asc" >
+			<order-column name="name" />
+		</order>
+
+		<!-- Finder methods -->
+		
+		<finder name="Name" return-type="Collection" >
+			<finder-column name="name" />
+		</finder>
+		
+		<finder name="N_V" return-type="OS" unique="true">
+			<finder-column name="name" />
+			<finder-column name="version"/>
+		</finder>
+
+	</entity>
+
+	
+    <entity local-service="true" remote-service="false" name="Userlog">
+
+		<!-- PK fields -->
+
+		<column name="userlogId" type="long" primary="true" id-type="increment" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		
+		
+		<!-- Other fields -->
+		
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		
+		<column name="serverName" type="String" />
+		<column name="serverPort" type="int" />
+		
+		<column name="remoteHost" type="String" />
+		<column name="remoteAddress" type="String" />
+		<column name="osId" type="long" />
+		<column name="browserId" type="long" />
+		<column name="sessionId" type="String" />
+		
+		<column name="accessDate" type="long" />
+		<column name="timeSlapse" type="long" />
+						
+		<!-- Order -->
+
+		<order by="desc" >
+			<order-column name="accessDate" />
+		</order>
+
+		<!-- Finder methods -->
+		
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+		
+	</entity>
+	
+    	
+	<entity name="TrackEvent" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="trackEventId" type="long" primary="true" id-type="increment"/>
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="long" />
+
+		<!-- Other fields -->
+
+		<column name="userlogId" type="long"/>
+		<column name="eventType" type="String" />
+		<column name="className" type="String" />
+		<column name="classPK" type="String" />
+		<column name="message" type="String" />
+		<column name="clientHost" type="String" />
+		<column name="clientAddr" type="String" />
+		<column name="serverName" type="String" />
+		<column name="serverPort" type="int" />
+		<column name="additionalInfo" type="String" />
+
+		
+		<!-- Relationships -->
+		
+		
+		
+        <!-- Order -->
+
+		<order by="desc">
+			<order-column name="createDate" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+		
+		<finder name="UserlogId" return-type="Collection">
+			<finder-column name="userlogId" />
+		</finder>
+		
+		<finder name="UId_Event" return-type="Collection">
+			<finder-column name="userlogId" />
+			<finder-column name="eventType" />
+		</finder>
+		
+		<finder name="UId_Event_Class" return-type="Collection">
+			<finder-column name="userlogId" />
+			<finder-column name="eventType" />
+			<finder-column name="className" />
+		</finder>
+		
+	</entity>
+	
+	<entity local-service="true" remote-service="false" name="Browsinglog">
+
+		<!-- PK fields -->
+
+		<column name="browsinglogId" type="long" primary="true" id-type="increment"/>
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		
+		
+		<!-- Other fields -->
+		
+		<column name="userlogId" type="long" />
+		<column name="userAgent" type="String" />
+		<column name="url" type="String" />
+		<column name="plId" type="long" />
+		<column name="accessName" type="String" />
+		<column name="accessFound" type="boolean" />
+		<column name="accessDate" type="long" />
+		<column name="elapseLoad" type="long" />
+		<column name="uploadSize" type="long" />
+		<column name="downloadSize" type="long" />
+		
+						
+		<!-- Order -->
+
+		<order by="desc" >
+			<order-column name="accessDate" />
+		</order>
+
+		<!-- Finder methods -->
+		
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+		
+		<finder name="UserlogId" return-type="Collection">
+			<finder-column name="userlogId" />
+		</finder>
+
+	</entity>
+	
+	<entity local-service="true" remote-service="false" name="Filelog">
+
+		<!-- PK fields -->
+
+		<column name="FilelogId" type="long" primary="true" id-type="increment"/>
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		
+		
+		<!-- Other fields -->
+		
+		<!-- id = -1 if no guest register -->
+		<column name="guest" type="boolean" />
+		<column name="userlogId" type="long" />
+		<column name="fileId" type="long" />
+		<column name="accessDate" type="long" />
+		<column name="elapseLoad" type="long" />
+		<!-- true if download or false if upload -->
+		<column name="trafic" type="boolean" />
+		<!-- true if success or false if interup -->
+		<column name="status" type="boolean" />
+		
+						
+		<!-- Order -->
+
+		<order by="desc" >
+			<order-column name="accessDate" />
+		</order>
+
+		<!-- Finder methods -->
+		
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+		
+		<finder name="C_G" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="guest" />
+		</finder>
+		
+		<finder name="UserlogId" return-type="Collection">
+			<finder-column name="userlogId" />
+		</finder>
+
+	</entity>
+	
+	<entity local-service="true" remote-service="false" name="Word">
+
+		<!-- PK fields -->
+
+		<column name="wordId" type="long" primary="true" id-type="increment" />
+
+		<!-- Audit fields -->
+
+		
+		<!-- Other fields -->
+		
+		<column name="wordName" type="String" />
+		
+										
+		<!-- Order -->
+
+		<order by="asc" >
+			<order-column name="wordName" />
+		</order>
+
+		<!-- Finder methods -->
+		
+		<finder return-type="Word" name="WordName" unique="true">
+			<finder-column name="wordName"/>
+		</finder>
+
+	</entity>
+	
+	<entity local-service="true" remote-service="false" name="Phrase">
+
+		<!-- PK fields -->
+
+		<column name="phraseId" type="long" primary="true" id-type="increment" />
+
+		<!-- Audit fields -->
+
+		
+		<!-- Other fields -->
+		
+		<column name="phraseName" type="String" />
+		
+										
+		<!-- Order -->
+
+		<order by="asc" >
+			<order-column name="phraseName" />
+		</order>
+
+		<!-- Finder methods -->
+		
+		<finder return-type="Phrase" name="PhraseName" unique="true">
+			<finder-column name="phraseName"/>
+		</finder>
+
+	</entity>
+	
+	<entity local-service="true" remote-service="false" name="SearchWordHit">
+
+		<!-- PK fields -->
+
+		<column name="hitId" type="long" primary="true" id-type="increment" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		
+		
+		<!-- Other fields -->
+		
+		<column name="wordId" type="long" />
+		<column name="guest" type="boolean" />
+		<column name="accessDate" type="long" />
+		<!-- column name="timeElapse" type="long" />
+		
+		<column name="numberHits" type="boolean" /-->
+										
+		<!-- Order -->
+
+		<order by="asc" >
+			<order-column name="wordId" />
+		</order>
+
+		<!-- Finder methods -->
+		
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+		
+		<finder name="C_G" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="guest" />
+		</finder>
+		
+		<finder name="C_W_G" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="wordId" />
+			<finder-column name="guest" />
+		</finder>
+		
+	</entity>
+	
+	<entity local-service="true" remote-service="false" name="SearchPhraseHit">
+
+		<!-- PK fields -->
+
+		<column name="hitId" type="long" primary="true" id-type="increment" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		
+		
+		<!-- Other fields -->
+		
+		<column name="phraseId" type="long" />
+		<column name="guest" type="boolean" />
+		<column name="accessDate" type="long" />
+		<!-- column name="timeElapse" type="long" />
+		
+		<column name="numberHits" type="boolean" /-->
+										
+		<!-- Order -->
+
+		<order by="asc" >
+			<order-column name="phraseId" />
+		</order>
+
+		<!-- Finder methods -->
+		
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+		
+		<finder name="C_G" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="guest" />
+		</finder>
+		
+		<finder name="C_P_G" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="phraseId" />
+			<finder-column name="guest" />
+		</finder>
+
+	</entity>
+	
+	
+	<entity local-service="true" remote-service="false" name="SiteHit">
+
+		<!-- PK fields -->
+
+		<column name="hitId" type="long" primary="true" id-type="increment" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		
+		
+		<!-- Other fields -->
+		
+		<column name="siteId" type="long" />
+		<column name="guest" type="boolean" />
+		<column name="accessDate" type="long" />
+		<!-- column name="timeElapse" type="long" />
+		
+		<column name="numberHits" type="boolean" /-->
+		
+						
+		<!-- Order -->
+
+		<order by="asc" >
+			<order-column name="siteId" />
+		</order>
+
+		<!-- Finder methods -->
+		
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+		
+		<finder name="C_G" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="guest" />
+		</finder>
+		
+		<finder name="C_S_G" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="siteId" />
+			<finder-column name="guest" />
+		</finder>
+
+	</entity>
+	
+	<entity local-service="true" remote-service="false" name="OrganizationHit">
+
+		<!-- PK fields -->
+
+		<column name="hitId" type="long" primary="true" id-type="increment" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+				
+		<!-- Other fields -->
+		
+		<column name="organizationId" type="long" />
+		<column name="guest" type="boolean" />
+		<column name="accessDate" type="long" />
+		<!-- column name="timeElapse" type="long" />
+		
+		<column name="numberHits" type="boolean" /-->
+					
+		<!-- Order -->
+
+		<order by="asc" >
+			<order-column name="organizationId" />
+		</order>
+
+		<!-- Finder methods -->
+		
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+		
+		<finder name="C_G" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="guest" />
+		</finder>
+		
+		<finder name="C_O_G" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="organizationId" />
+			<finder-column name="guest" />
+		</finder>
+
+	</entity>
+	
+	<entity local-service="true" remote-service="false" name="PortletHit">
+
+		<!-- PK fields -->
+
+		<column name="hitId" type="long" primary="true" id-type="increment" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		
+		
+		<!-- Other fields -->
+		
+		<column name="portletId" type="String" />
+		<column name="guest" type="boolean" />
+		<column name="userId" type="long" />
+		<column name="userlogId" type="long" />
+		<column name="accessDate" type="long" />
+		<!-- column name="timeElapse" type="long" />
+		
+		
+		<column name="numberHits" type="boolean" /-->
+										
+		<!-- Order -->
+
+		<order by="asc" >
+			<order-column name="portletId" />
+		</order>
+
+		<!-- Finder methods -->
+		
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+		
+		<finder name="C_G" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="guest" />
+		</finder>
+		
+		<finder name="C_P_G" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="portletId" />
+			<finder-column name="guest" />
+		</finder>
+		
+		<finder name="C_P_U" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="portletId" />
+			<finder-column name="userId" />
+		</finder>
+		
+	</entity>
+	
+</service-builder>

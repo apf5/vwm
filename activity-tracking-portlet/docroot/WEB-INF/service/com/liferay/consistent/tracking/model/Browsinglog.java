@@ -1,0 +1,34 @@
+/**
+ * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
+package com.liferay.consistent.tracking.model;
+
+import com.liferay.portal.model.PersistedModel;
+
+/**
+ * The extended model interface for the Browsinglog service. Represents a row in the &quot;CONSIS_TRACK_Browsinglog&quot; database table, with each column mapped to a property of this class.
+ *
+ * @author Jorge Loayza Soloisolo
+ * @see BrowsinglogModel
+ * @see com.liferay.consistent.tracking.model.impl.BrowsinglogImpl
+ * @see com.liferay.consistent.tracking.model.impl.BrowsinglogModelImpl
+ * @generated
+ */
+public interface Browsinglog extends BrowsinglogModel, PersistedModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify this interface directly. Add methods to {@link com.liferay.consistent.tracking.model.impl.BrowsinglogImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.liferay.consistent.tracking.service.BrowserLocalService" class="com.liferay.consistent.tracking.service.impl.BrowserLocalServiceImpl" />
+	<bean id="com.liferay.consistent.tracking.service.persistence.BrowserPersistence" class="com.liferay.consistent.tracking.service.persistence.BrowserPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.consistent.tracking.service.BrowsinglogLocalService" class="com.liferay.consistent.tracking.service.impl.BrowsinglogLocalServiceImpl" />
+	<bean id="com.liferay.consistent.tracking.service.persistence.BrowsinglogPersistence" class="com.liferay.consistent.tracking.service.persistence.BrowsinglogPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.consistent.tracking.service.FilelogLocalService" class="com.liferay.consistent.tracking.service.impl.FilelogLocalServiceImpl" />
+	<bean id="com.liferay.consistent.tracking.service.persistence.FilelogPersistence" class="com.liferay.consistent.tracking.service.persistence.FilelogPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.consistent.tracking.service.OrganizationHitLocalService" class="com.liferay.consistent.tracking.service.impl.OrganizationHitLocalServiceImpl" />
+	<bean id="com.liferay.consistent.tracking.service.persistence.OrganizationHitPersistence" class="com.liferay.consistent.tracking.service.persistence.OrganizationHitPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.consistent.tracking.service.OSLocalService" class="com.liferay.consistent.tracking.service.impl.OSLocalServiceImpl" />
+	<bean id="com.liferay.consistent.tracking.service.persistence.OSPersistence" class="com.liferay.consistent.tracking.service.persistence.OSPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.consistent.tracking.service.PhraseLocalService" class="com.liferay.consistent.tracking.service.impl.PhraseLocalServiceImpl" />
+	<bean id="com.liferay.consistent.tracking.service.persistence.PhrasePersistence" class="com.liferay.consistent.tracking.service.persistence.PhrasePersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.consistent.tracking.service.PortletHitLocalService" class="com.liferay.consistent.tracking.service.impl.PortletHitLocalServiceImpl" />
+	<bean id="com.liferay.consistent.tracking.service.persistence.PortletHitPersistence" class="com.liferay.consistent.tracking.service.persistence.PortletHitPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.consistent.tracking.service.PortletPropertyLocalService" class="com.liferay.consistent.tracking.service.impl.PortletPropertyLocalServiceImpl" />
+	<bean id="com.liferay.consistent.tracking.service.persistence.PortletPropertyPersistence" class="com.liferay.consistent.tracking.service.persistence.PortletPropertyPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.consistent.tracking.service.SearchPhraseHitLocalService" class="com.liferay.consistent.tracking.service.impl.SearchPhraseHitLocalServiceImpl" />
+	<bean id="com.liferay.consistent.tracking.service.persistence.SearchPhraseHitPersistence" class="com.liferay.consistent.tracking.service.persistence.SearchPhraseHitPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.consistent.tracking.service.SearchWordHitLocalService" class="com.liferay.consistent.tracking.service.impl.SearchWordHitLocalServiceImpl" />
+	<bean id="com.liferay.consistent.tracking.service.persistence.SearchWordHitPersistence" class="com.liferay.consistent.tracking.service.persistence.SearchWordHitPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.consistent.tracking.service.SiteHitLocalService" class="com.liferay.consistent.tracking.service.impl.SiteHitLocalServiceImpl" />
+	<bean id="com.liferay.consistent.tracking.service.persistence.SiteHitPersistence" class="com.liferay.consistent.tracking.service.persistence.SiteHitPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.consistent.tracking.service.TrackEventLocalService" class="com.liferay.consistent.tracking.service.impl.TrackEventLocalServiceImpl" />
+	<bean id="com.liferay.consistent.tracking.service.persistence.TrackEventPersistence" class="com.liferay.consistent.tracking.service.persistence.TrackEventPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.consistent.tracking.service.UserlogLocalService" class="com.liferay.consistent.tracking.service.impl.UserlogLocalServiceImpl" />
+	<bean id="com.liferay.consistent.tracking.service.persistence.UserlogPersistence" class="com.liferay.consistent.tracking.service.persistence.UserlogPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.consistent.tracking.service.WordLocalService" class="com.liferay.consistent.tracking.service.impl.WordLocalServiceImpl" />
+	<bean id="com.liferay.consistent.tracking.service.persistence.WordPersistence" class="com.liferay.consistent.tracking.service.persistence.WordPersistenceImpl" parent="basePersistence" />
+</beans>

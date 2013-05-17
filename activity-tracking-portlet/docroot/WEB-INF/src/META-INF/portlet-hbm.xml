@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.liferay.consistent.tracking.model.Browser" />
+	<import class="com.liferay.consistent.tracking.model.Browsinglog" />
+	<import class="com.liferay.consistent.tracking.model.Filelog" />
+	<import class="com.liferay.consistent.tracking.model.OrganizationHit" />
+	<import class="com.liferay.consistent.tracking.model.OS" />
+	<import class="com.liferay.consistent.tracking.model.Phrase" />
+	<import class="com.liferay.consistent.tracking.model.PortletHit" />
+	<import class="com.liferay.consistent.tracking.model.PortletProperty" />
+	<import class="com.liferay.consistent.tracking.model.SearchPhraseHit" />
+	<import class="com.liferay.consistent.tracking.model.SearchWordHit" />
+	<import class="com.liferay.consistent.tracking.model.SiteHit" />
+	<import class="com.liferay.consistent.tracking.model.TrackEvent" />
+	<import class="com.liferay.consistent.tracking.model.Userlog" />
+	<import class="com.liferay.consistent.tracking.model.Word" />
+	<class name="com.liferay.consistent.tracking.model.impl.BrowserImpl" table="CONSIS_TRACK_Browser">
+		<cache usage="read-write" />
+		<id name="browserId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="version" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.liferay.consistent.tracking.model.impl.BrowsinglogImpl" table="CONSIS_TRACK_Browsinglog">
+		<cache usage="read-write" />
+		<id name="browsinglogId" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userlogId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userAgent" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="url" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="plId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="accessName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="accessFound" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="accessDate" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="elapseLoad" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="uploadSize" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="downloadSize" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.liferay.consistent.tracking.model.impl.FilelogImpl" table="CONSIS_TRACK_Filelog">
+		<cache usage="read-write" />
+		<id name="FilelogId" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="guest" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="userlogId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="fileId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="accessDate" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="elapseLoad" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="trafic" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+	</class>
+	<class name="com.liferay.consistent.tracking.model.impl.OrganizationHitImpl" table="CONSIS_TRACK_OrganizationHit">
+		<cache usage="read-write" />
+		<id name="hitId" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="organizationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="guest" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="accessDate" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.liferay.consistent.tracking.model.impl.OSImpl" table="CONSIS_TRACK_OS">
+		<cache usage="read-write" />
+		<id name="osId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="version" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.liferay.consistent.tracking.model.impl.PhraseImpl" table="CONSIS_TRACK_Phrase">
+		<cache usage="read-write" />
+		<id name="phraseId" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="phraseName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.liferay.consistent.tracking.model.impl.PortletHitImpl" table="CONSIS_TRACK_PortletHit">
+		<cache usage="read-write" />
+		<id name="hitId" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="portletId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="guest" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userlogId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="accessDate" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.liferay.consistent.tracking.model.impl.PortletPropertyImpl" table="CONSIS_TRACK_PortletProperty">
+		<cache usage="read-write" />
+		<id name="propertyId" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="value" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.liferay.consistent.tracking.model.impl.SearchPhraseHitImpl" table="CONSIS_TRACK_SearchPhraseHit">
+		<cache usage="read-write" />
+		<id name="hitId" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="phraseId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="guest" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="accessDate" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.liferay.consistent.tracking.model.impl.SearchWordHitImpl" table="CONSIS_TRACK_SearchWordHit">
+		<cache usage="read-write" />
+		<id name="hitId" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="wordId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="guest" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="accessDate" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.liferay.consistent.tracking.model.impl.SiteHitImpl" table="CONSIS_TRACK_SiteHit">
+		<cache usage="read-write" />
+		<id name="hitId" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="siteId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="guest" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="accessDate" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.liferay.consistent.tracking.model.impl.TrackEventImpl" table="CONSIS_TRACK_TrackEvent">
+		<cache usage="read-write" />
+		<id name="trackEventId" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userlogId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="eventType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="className" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="message" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="clientHost" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="clientAddr" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="serverName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="serverPort" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="additionalInfo" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.liferay.consistent.tracking.model.impl.UserlogImpl" table="CONSIS_TRACK_Userlog">
+		<cache usage="read-write" />
+		<id name="userlogId" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="serverName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="serverPort" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="remoteHost" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="remoteAddress" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="osId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="browserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="sessionId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="accessDate" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="timeSlapse" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.liferay.consistent.tracking.model.impl.WordImpl" table="CONSIS_TRACK_Word">
+		<cache usage="read-write" />
+		<id name="wordId" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="wordName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

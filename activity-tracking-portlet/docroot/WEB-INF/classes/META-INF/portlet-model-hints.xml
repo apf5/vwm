@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.liferay.consistent.tracking.model.Browser">
+		<field name="browserId" type="long" />
+		<field name="name" type="String" />
+		<field name="version" type="String" />
+	</model>
+	<model name="com.liferay.consistent.tracking.model.Browsinglog">
+		<field name="browsinglogId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userlogId" type="long" />
+		<field name="userAgent" type="String" />
+		<field name="url" type="String" />
+		<field name="plId" type="long" />
+		<field name="accessName" type="String" />
+		<field name="accessFound" type="boolean" />
+		<field name="accessDate" type="long" />
+		<field name="elapseLoad" type="long" />
+		<field name="uploadSize" type="long" />
+		<field name="downloadSize" type="long" />
+	</model>
+	<model name="com.liferay.consistent.tracking.model.Filelog">
+		<field name="FilelogId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="guest" type="boolean" />
+		<field name="userlogId" type="long" />
+		<field name="fileId" type="long" />
+		<field name="accessDate" type="long" />
+		<field name="elapseLoad" type="long" />
+		<field name="trafic" type="boolean" />
+		<field name="status" type="boolean" />
+	</model>
+	<model name="com.liferay.consistent.tracking.model.OrganizationHit">
+		<field name="hitId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="organizationId" type="long" />
+		<field name="guest" type="boolean" />
+		<field name="accessDate" type="long" />
+	</model>
+	<model name="com.liferay.consistent.tracking.model.OS">
+		<field name="osId" type="long" />
+		<field name="name" type="String" />
+		<field name="version" type="String" />
+	</model>
+	<model name="com.liferay.consistent.tracking.model.Phrase">
+		<field name="phraseId" type="long" />
+		<field name="phraseName" type="String" />
+	</model>
+	<model name="com.liferay.consistent.tracking.model.PortletHit">
+		<field name="hitId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="portletId" type="String" />
+		<field name="guest" type="boolean" />
+		<field name="userId" type="long" />
+		<field name="userlogId" type="long" />
+		<field name="accessDate" type="long" />
+	</model>
+	<model name="com.liferay.consistent.tracking.model.PortletProperty">
+		<field name="propertyId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="name" type="String" />
+		<field name="value" type="String" />
+	</model>
+	<model name="com.liferay.consistent.tracking.model.SearchPhraseHit">
+		<field name="hitId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="phraseId" type="long" />
+		<field name="guest" type="boolean" />
+		<field name="accessDate" type="long" />
+	</model>
+	<model name="com.liferay.consistent.tracking.model.SearchWordHit">
+		<field name="hitId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="wordId" type="long" />
+		<field name="guest" type="boolean" />
+		<field name="accessDate" type="long" />
+	</model>
+	<model name="com.liferay.consistent.tracking.model.SiteHit">
+		<field name="hitId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="siteId" type="long" />
+		<field name="guest" type="boolean" />
+		<field name="accessDate" type="long" />
+	</model>
+	<model name="com.liferay.consistent.tracking.model.TrackEvent">
+		<field name="trackEventId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userName" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="createDate" type="long" />
+		<field name="userlogId" type="long" />
+		<field name="eventType" type="String" />
+		<field name="className" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="classPK" type="String" />
+		<field name="message" type="String" />
+		<field name="clientHost" type="String">
+			<hint name="max-length">255</hint>
+		</field>
+		<field name="clientAddr" type="String" />
+		<field name="serverName" type="String">
+			<hint name="max-length">255</hint>
+		</field>
+		<field name="serverPort" type="int" />
+		<field name="additionalInfo" type="String">
+			<hint-collection name="CLOB" />
+		</field>
+	</model>
+	<model name="com.liferay.consistent.tracking.model.Userlog">
+		<field name="userlogId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="serverName" type="String" />
+		<field name="serverPort" type="int" />
+		<field name="remoteHost" type="String" />
+		<field name="remoteAddress" type="String" />
+		<field name="osId" type="long" />
+		<field name="browserId" type="long" />
+		<field name="sessionId" type="String" />
+		<field name="accessDate" type="long" />
+		<field name="timeSlapse" type="long" />
+	</model>
+	<model name="com.liferay.consistent.tracking.model.Word">
+		<field name="wordId" type="long" />
+		<field name="wordName" type="String" />
+	</model>
+</model-hints>

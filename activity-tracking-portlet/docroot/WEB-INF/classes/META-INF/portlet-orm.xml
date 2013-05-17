@@ -1,0 +1,255 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="com.liferay.consistent.tracking.model.impl.BrowserModelImpl">
+		<attributes>
+			<id name="browserId" />
+			<basic name="name" />
+			<basic name="version" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.consistent.tracking.model.impl.BrowsinglogModelImpl">
+		<attributes>
+			<id name="browsinglogId" />
+			<basic name="companyId" />
+			<basic name="userlogId" />
+			<basic name="userAgent" />
+			<basic name="url" />
+			<basic name="plId" />
+			<basic name="accessName" />
+			<basic name="accessFound" />
+			<basic name="accessDate" />
+			<basic name="elapseLoad" />
+			<basic name="uploadSize" />
+			<basic name="downloadSize" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.consistent.tracking.model.impl.FilelogModelImpl">
+		<attributes>
+			<id name="FilelogId" />
+			<basic name="companyId" />
+			<basic name="guest" />
+			<basic name="userlogId" />
+			<basic name="fileId" />
+			<basic name="accessDate" />
+			<basic name="elapseLoad" />
+			<basic name="trafic" />
+			<basic name="status" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.consistent.tracking.model.impl.OrganizationHitModelImpl">
+		<attributes>
+			<id name="hitId" />
+			<basic name="companyId" />
+			<basic name="organizationId" />
+			<basic name="guest" />
+			<basic name="accessDate" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.consistent.tracking.model.impl.OSModelImpl">
+		<attributes>
+			<id name="osId" />
+			<basic name="name" />
+			<basic name="version" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.consistent.tracking.model.impl.PhraseModelImpl">
+		<attributes>
+			<id name="phraseId" />
+			<basic name="phraseName" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.consistent.tracking.model.impl.PortletHitModelImpl">
+		<attributes>
+			<id name="hitId" />
+			<basic name="companyId" />
+			<basic name="portletId" />
+			<basic name="guest" />
+			<basic name="userId" />
+			<basic name="userlogId" />
+			<basic name="accessDate" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.consistent.tracking.model.impl.PortletPropertyModelImpl">
+		<attributes>
+			<id name="propertyId" />
+			<basic name="companyId" />
+			<basic name="name" />
+			<basic name="value" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.consistent.tracking.model.impl.SearchPhraseHitModelImpl">
+		<attributes>
+			<id name="hitId" />
+			<basic name="companyId" />
+			<basic name="phraseId" />
+			<basic name="guest" />
+			<basic name="accessDate" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.consistent.tracking.model.impl.SearchWordHitModelImpl">
+		<attributes>
+			<id name="hitId" />
+			<basic name="companyId" />
+			<basic name="wordId" />
+			<basic name="guest" />
+			<basic name="accessDate" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.consistent.tracking.model.impl.SiteHitModelImpl">
+		<attributes>
+			<id name="hitId" />
+			<basic name="companyId" />
+			<basic name="siteId" />
+			<basic name="guest" />
+			<basic name="accessDate" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.consistent.tracking.model.impl.TrackEventModelImpl">
+		<attributes>
+			<id name="trackEventId" />
+			<basic name="companyId" />
+			<basic name="userName" />
+			<basic name="createDate" />
+			<basic name="userlogId" />
+			<basic name="eventType" />
+			<basic name="className" />
+			<basic name="classPK" />
+			<basic name="message" />
+			<basic name="clientHost" />
+			<basic name="clientAddr" />
+			<basic name="serverName" />
+			<basic name="serverPort" />
+			<basic name="additionalInfo" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.consistent.tracking.model.impl.UserlogModelImpl">
+		<attributes>
+			<id name="userlogId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="serverName" />
+			<basic name="serverPort" />
+			<basic name="remoteHost" />
+			<basic name="remoteAddress" />
+			<basic name="osId" />
+			<basic name="browserId" />
+			<basic name="sessionId" />
+			<basic name="accessDate" />
+			<basic name="timeSlapse" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.consistent.tracking.model.impl.WordModelImpl">
+		<attributes>
+			<id name="wordId" />
+			<basic name="wordName" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="com.liferay.consistent.tracking.model.impl.BrowserImpl" name="Browser">
+		<table name="CONSIS_TRACK_Browser" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.consistent.tracking.model.impl.BrowsinglogImpl" name="Browsinglog">
+		<table name="CONSIS_TRACK_Browsinglog" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.consistent.tracking.model.impl.FilelogImpl" name="Filelog">
+		<table name="CONSIS_TRACK_Filelog" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.consistent.tracking.model.impl.OrganizationHitImpl" name="OrganizationHit">
+		<table name="CONSIS_TRACK_OrganizationHit" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.consistent.tracking.model.impl.OSImpl" name="OS">
+		<table name="CONSIS_TRACK_OS" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.consistent.tracking.model.impl.PhraseImpl" name="Phrase">
+		<table name="CONSIS_TRACK_Phrase" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.consistent.tracking.model.impl.PortletHitImpl" name="PortletHit">
+		<table name="CONSIS_TRACK_PortletHit" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.consistent.tracking.model.impl.PortletPropertyImpl" name="PortletProperty">
+		<table name="CONSIS_TRACK_PortletProperty" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.consistent.tracking.model.impl.SearchPhraseHitImpl" name="SearchPhraseHit">
+		<table name="CONSIS_TRACK_SearchPhraseHit" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.consistent.tracking.model.impl.SearchWordHitImpl" name="SearchWordHit">
+		<table name="CONSIS_TRACK_SearchWordHit" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.consistent.tracking.model.impl.SiteHitImpl" name="SiteHit">
+		<table name="CONSIS_TRACK_SiteHit" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.consistent.tracking.model.impl.TrackEventImpl" name="TrackEvent">
+		<table name="CONSIS_TRACK_TrackEvent" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.consistent.tracking.model.impl.UserlogImpl" name="Userlog">
+		<table name="CONSIS_TRACK_Userlog" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.consistent.tracking.model.impl.WordImpl" name="Word">
+		<table name="CONSIS_TRACK_Word" />
+		<attributes />
+	</entity>
+</entity-mappings>

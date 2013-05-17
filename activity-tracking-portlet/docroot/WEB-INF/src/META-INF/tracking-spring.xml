@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans
+	default-destroy-method="destroy"
+	default-init-method="afterPropertiesSet"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+>
+
+	<!-- Router -->
+
+	<bean id="com.liferay.portal.kernel.audit.AuditRouter" class="com.liferay.consistent.tracking.DefaultAuditRouter">
+		<!--<property name="auditMessageProcessors">
+			<map key-type="java.lang.String" value-type="java.util.List">
+				<entry key="VIEW">
+					<list value-type="com.liferay.portal.kernel.audit.AuditMessageProcessor">
+						<ref bean="com.liferay.consistent.tracking.DatabaseAuditRouterProcessor" />
+						<ref bean="com.liferay.consistent.tracking.LogAuditRouterProcessor" />
+					</list>
+				</entry>
+			</map>
+		</property>-->
+		
+		<property name="globalAuditMessageProcessors">
+			<list value-type="com.liferay.portal.kernel.audit.AuditMessageProcessor">
+				<ref bean="com.liferay.consistent.tracking.DatabaseAuditRouterProcessor" />
+				<ref bean="com.liferay.consistent.tracking.LogAuditRouterProcessor" />
+			</list>
+		</property>
+		
+	</bean>
+
+	<!-- Processors -->
+
+	<bean id="com.liferay.consistent.tracking.DatabaseAuditRouterProcessor" class="com.liferay.consistent.tracking.DatabaseAuditRouterProcessor" />
+	<bean id="com.liferay.consistent.tracking.LogAuditRouterProcessor" class="com.liferay.consistent.tracking.LogAuditRouterProcessor">
+		<property name="logMessageFormatter" ref="com.liferay.consistent.tracking.CSVLogMessageFormatter" />
+		<property name="outputToConsole" value="false" />
+	</bean>
+
+	<!-- Message formatters -->
+
+	<bean id="com.liferay.consistent.tracking.CSVLogMessageFormatter" class="com.liferay.consistent.tracking.CSVLogMessageFormatter">
+		<property name="columns" value="additionalInfo,className,classPK,clientHost,clientIP,companyId,eventType,message,serverName,serverPort,sessionID,timestamp,userId,userName" />
+	</bean>
+	<bean id="com.liferay.consistent.tracking.JSONLogMessageFormatter" class="com.liferay.consistent.tracking.JSONLogMessageFormatter" />
+</beans>
