@@ -1,36 +1,44 @@
+<%--
+/**
+ * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ *
+ * The contents of this file are subject to the terms of the Liferay Enterprise
+ * Subscription License ("License"). You may not use this file except in
+ * compliance with the License. You can obtain a copy of the License by
+ * contacting Liferay, Inc. See the License for the specific language governing
+ * permissions and limitations under the License, including but not limited to
+ * distribution rights of the Software.
+ *
+ *
+ *
+ */
+--%>
 
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui" %>
-<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
-<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
-<%@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
-
-<portlet:defineObjects />
-
+<%@ include file="/html/tracking/init.jsp" %>
 
 <liferay-ui:tabs
-	names="user-log,site-log,search-log,doc-log"
+	names="user-log,site-log,search-log,doc-log,Tab 3"
 	refresh="<%=false%>"
 >
 	<!-- Jhanlos: En cada tab se incluyen los jsps respectivos -->
 	<liferay-ui:section>
 		<!-- Jhanlos: JSP de registros de monitoreo de usuarios -->
-		<jsp:include page="/html/tracking/user_log.jsp"></jsp:include>
+		<liferay-util:include page="/html/tracking/user_log.jsp" servletContext="<%= application %>" />
 	</liferay-ui:section>
 	
 	<liferay-ui:section>
 		<!-- Jhanlos: JSP de registros de monitoreo de sitios -->
-		<jsp:include page="/html/tracking/site_log.jsp"></jsp:include>
+		<liferay-util:include page="/html/tracking/site_log.jsp" servletContext="<%= application %>" />
 	</liferay-ui:section>
 	
 	<liferay-ui:section>
 		<!-- Jhanlos: JSP de registros de monitoreo de busquedas -->
-		<jsp:include page="/html/tracking/search_log.jsp"></jsp:include>
+		<liferay-util:include page="/html/tracking/search_log.jsp" servletContext="<%= application %>" />
 	</liferay-ui:section>
 	
 	<liferay-ui:section>
 		<!-- Jhanlos: JSP de registros de monitoreo de docuemntos -->
-		<jsp:include page="/html/tracking/doc_log.jsp"></jsp:include>
+		<liferay-util:include page="/html/tracking/doc_log.jsp" servletContext="<%= application %>" />
 	</liferay-ui:section>
 	
 	
