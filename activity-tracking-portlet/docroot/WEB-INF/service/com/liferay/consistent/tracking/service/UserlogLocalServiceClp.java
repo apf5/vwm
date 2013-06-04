@@ -111,6 +111,19 @@ public class UserlogLocalServiceClp implements UserlogLocalService {
 		_methodName17 = "setBeanIdentifier";
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
+
+		_methodName19 = "addUserlog";
+
+		_methodParameterTypes19 = new String[] {
+				"long", "long", "java.lang.String", "java.lang.String", "int",
+				"java.lang.String", "java.lang.String", "long",
+				"java.lang.String", "long", "java.lang.String",
+				"java.lang.String", "java.util.Date"
+			};
+
+		_methodName20 = "updateTimeSlapse";
+
+		_methodParameterTypes20 = new String[] { "long" };
 	}
 
 	public com.liferay.consistent.tracking.model.Userlog addUserlog(
@@ -639,6 +652,94 @@ public class UserlogLocalServiceClp implements UserlogLocalService {
 		throw new UnsupportedOperationException();
 	}
 
+	public com.liferay.consistent.tracking.model.Userlog addUserlog(
+		long companyId, long userId, java.lang.String userName,
+		java.lang.String serverName, int serverPort,
+		java.lang.String remoteHost, java.lang.String remoteAddress, long osId,
+		java.lang.String osManufacturer, long browserId,
+		java.lang.String browserVersion, java.lang.String sessionId,
+		java.util.Date accessDate)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19,
+					new Object[] {
+						companyId,
+						
+					userId,
+						
+					ClpSerializer.translateInput(userName),
+						
+					ClpSerializer.translateInput(serverName),
+						
+					serverPort,
+						
+					ClpSerializer.translateInput(remoteHost),
+						
+					ClpSerializer.translateInput(remoteAddress),
+						
+					osId,
+						
+					ClpSerializer.translateInput(osManufacturer),
+						
+					browserId,
+						
+					ClpSerializer.translateInput(browserVersion),
+						
+					ClpSerializer.translateInput(sessionId),
+						
+					ClpSerializer.translateInput(accessDate)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.consistent.tracking.model.Userlog)ClpSerializer.translateOutput(returnObj);
+	}
+
+	public com.liferay.consistent.tracking.model.Userlog updateTimeSlapse(
+		long userlogId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20, new Object[] { userlogId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.consistent.tracking.model.Userlog)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -676,4 +777,8 @@ public class UserlogLocalServiceClp implements UserlogLocalService {
 	private String[] _methodParameterTypes16;
 	private String _methodName17;
 	private String[] _methodParameterTypes17;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
 }

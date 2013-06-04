@@ -1,0 +1,157 @@
+<%--
+/**
+ * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ *
+ * The contents of this file are subject to the terms of the Liferay Enterprise
+ * Subscription License ("License"). You may not use this file except in
+ * compliance with the License. You can obtain a copy of the License by
+ * contacting Liferay, Inc. See the License for the specific language governing
+ * permissions and limitations under the License, including but not limited to
+ * distribution rights of the Software.
+ *
+ *
+ *
+ */
+--%>
+
+<%@page import="com.liferay.portal.kernel.messaging.Message"%>
+<%@page import="com.liferay.portal.model.User"%>
+<%@page import="java.util.Date"%>
+<%@page import="com.liferay.portal.monitoring.statistics.portlet.PortletRequestDataSample"%>
+<%@page import="java.util.Set"%>
+<%@page import="java.util.Map"%>
+<%@ page import="com.liferay.portal.kernel.monitoring.RequestStatus" %>
+<%@ page import="com.liferay.portal.kernel.monitoring.statistics.DataSample" %>
+<%@ page import="com.liferay.portal.kernel.monitoring.statistics.DataSampleThreadLocal" %>
+<%@ page import="com.liferay.portal.monitoring.statistics.portal.PortalRequestDataSample" %>
+
+<%
+PortalRequestDataSample portalRequestDataSample = (PortalRequestDataSample)request.getAttribute(WebKeys.PORTAL_REQUEST_DATA_SAMPLE);
+
+if (portalRequestDataSample != null) {
+	portalRequestDataSample.capture(RequestStatus.SUCCESS);
+
+	MessageBusUtil.sendMessage(DestinationNames.MONITORING, portalRequestDataSample);
+
+	DataSampleThreadLocal.addDataSample(portalRequestDataSample);
+}
+
+List<DataSample> dataSamplesMonitoring = DataSampleThreadLocal.getDataSamples();
+User currentUser = themeDisplay.getUser();
+long userlogId = currentUser.getUserId();
+if(!currentUser.getDefaultUser()){
+	userlogId = (Long)session.getAttribute("userlogId");
+}
+	
+
+if(PropsValues.MONITORING_SHOW_PER_REQUEST_DATA_SAMPLE){
+	
+	for (DataSample dataSample : dataSamplesMonitoring) {
+		if(dataSample instanceof PortletRequestDataSample){
+			PortletRequestDataSample prds = (PortletRequestDataSample) dataSample;
+						
+			Message message = new Message();
+			message.put("companyId", company.getCompanyId());
+			message.put("portletId", prds.getPortletId());
+			message.put("guest", currentUser.getDefaultUser());
+			message.put("userId", currentUser.getUserId());
+			message.put("userlogId", userlogId);
+			message.put("access", new Date());
+
+			MessageBusUtil.sendMessage("tracking/portlethit", message);
+			
+		}
+	}
+}
+
+%>
+<hr/>
+<c:if test="<%= PropsValues.MONITORING_SHOW_PER_REQUEST_DATA_SAMPLE %>">
+<table border="1">
+	<thead>
+		<tr>
+			<td>Name</td>
+			<td>Namespace</td>
+			<td>Description</td>
+			<td>Duration</td>
+			<td>User</td>
+			<td>Status</td>
+			<td>URL/DisplayName</td>
+			<td>Timeout/Portlet Id</td>
+			<td>Attributes</td>
+			<td>Type</td>
+		</tr>
+	</thead>
+	<%
+	
+	for (DataSample dataSample : dataSamplesMonitoring) {
+%>	<tr>
+		<td><%=shorten(dataSample.getName()) %></td>
+		<td><%=shorten(dataSample.getNamespace()) %></td>
+		<td><%=shorten(dataSample.getDescription()) %></td>
+		<td align="right"><%=dataSample.getDuration() %></td>
+		<td><%=shorten(dataSample.getUser()) %></td>
+		<td><%=shorten(dataSample.getRequestStatus()) %></td>
+<%      if(dataSample instanceof PortalRequestDataSample){ 
+			PortalRequestDataSample prds = (PortalRequestDataSample) dataSample;%>
+			<td><%=shorten(prds.getRequestURL()) %></td>
+			<td><%=prds.getTimeout() %></td>
+			<td><% Map<String, String> attributes = prds.getAttributes();
+			if(attributes != null) { %>
+				<ul>
+				<%
+				Set<String> keys = attributes.keySet();
+				for(String theKey: keys) {%>
+					<li><%=shorten(theKey) %>: 
+					<%=shorten(attributes.get(theKey)) %></li>
+				<%} %>
+				</ul>
+		  <% } %>
+		     </td>
+		     <td></td>
+	 <% } %>
+<%      if(dataSample instanceof PortletRequestDataSample){ 
+			PortletRequestDataSample prds = (PortletRequestDataSample) dataSample;%>
+			<td><%=shorten(prds.getDisplayName()) %></td>
+			<td><%=shorten(prds.getPortletId()) %></td>
+			<td><% Map<String, String> attributes = prds.getAttributes();
+			if(attributes != null) { %>
+				<ul>
+				<%
+				Set<String> keys = attributes.keySet();
+				for(String theKey: keys) {%>
+					<li><%=shorten(theKey) %>: 
+					<%=shorten(attributes.get(theKey)) %></li>
+				<%} %>
+				</ul>
+		  <% } %>
+		     &nbsp;</td>
+			 <td><%=shorten(prds.getRequestType()) %></td>
+	 <% } %>
+	 </tr>
+<% } %>	
+</table>
+</c:if>
+
+<%!
+	public String shorten(Object val) {
+		String value= (val==null ? "null" : val.toString());
+		if(value.startsWith("com.liferay.monitoring")) {
+			value = wrap(value, value.replace("com.liferay.monitoring", "c.l.m"));
+		} else if(value.startsWith("http")) {
+			value = wrap(value, "..." + value.substring(value.lastIndexOf('/')));
+		} else if(value.startsWith("/html/common/themes/")) {
+			value = wrap(value, value.replace("/html/common/themes/", "/h/c/t/"));
+		}
+		
+		return value;
+	}
+
+	public String wrap(String title, String value) {
+		return "<span title=\"" + title + "\"><i>" + value + "</i></span>";
+	}
+
+%>
+
+
+ 

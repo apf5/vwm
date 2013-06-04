@@ -112,6 +112,13 @@ public class PortletHitLocalServiceClp implements PortletHitLocalService {
 		_methodName17 = "setBeanIdentifier";
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
+
+		_methodName19 = "addPortletHit";
+
+		_methodParameterTypes19 = new String[] {
+				"long", "java.lang.String", "boolean", "long", "long",
+				"java.util.Date"
+			};
 	}
 
 	public com.liferay.consistent.tracking.model.PortletHit addPortletHit(
@@ -640,6 +647,48 @@ public class PortletHitLocalServiceClp implements PortletHitLocalService {
 		throw new UnsupportedOperationException();
 	}
 
+	public com.liferay.consistent.tracking.model.PortletHit addPortletHit(
+		long companyId, java.lang.String portletId, boolean guest, long userId,
+		long userlogId, java.util.Date access)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19,
+					new Object[] {
+						companyId,
+						
+					ClpSerializer.translateInput(portletId),
+						
+					guest,
+						
+					userId,
+						
+					userlogId,
+						
+					ClpSerializer.translateInput(access)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.consistent.tracking.model.PortletHit)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -677,4 +726,6 @@ public class PortletHitLocalServiceClp implements PortletHitLocalService {
 	private String[] _methodParameterTypes16;
 	private String _methodName17;
 	private String[] _methodParameterTypes17;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
 }

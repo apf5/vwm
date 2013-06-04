@@ -14,7 +14,14 @@
 
 package com.liferay.consistent.tracking.service.impl;
 
+import com.liferay.consistent.tracking.NoSuchUserlogException;
+import com.liferay.consistent.tracking.model.Userlog;
 import com.liferay.consistent.tracking.service.base.UserlogLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.SystemException;
+
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The implementation of the userlog local service.
@@ -36,4 +43,58 @@ public class UserlogLocalServiceImpl extends UserlogLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.liferay.consistent.tracking.service.UserlogLocalServiceUtil} to access the userlog local service.
 	 */
+	
+	public Userlog addUserlog(
+			long companyId, long userId, String userName,
+			String serverName, int serverPort,
+			String remoteHost, String remoteAddress, 
+			long osId, String osManufacturer, 
+			long browserId, String browserVersion,
+			String sessionId, Date accessDate) throws SystemException{
+		
+		Userlog userlog = userlogPersistence.create(
+				counterLocalService.increment(
+						Userlog.class.getName()));
+		
+		userlog.setCompanyId(companyId);
+		userlog.setUserId(userId);
+		userlog.setUserName(userName);
+		
+		userlog.setServerName(serverName);
+		userlog.setServerPort(serverPort);
+		userlog.setRemoteHost(remoteHost);
+		userlog.setRemoteAddress(remoteAddress);
+		
+		userlog.setOsId(osId);
+		userlog.setOsManufacturer(osManufacturer);
+		
+		userlog.setBrowserId(browserId);
+		userlog.setBrowserVersion(browserVersion);
+		
+		userlog.setSessionId(sessionId);
+		userlog.setTimeSlapse(-1);
+		userlog.setAccessDate(accessDate.getTime());
+				
+		return userlogPersistence.update(userlog, false);
+		
+	}
+	
+	public  Userlog updateTimeSlapse(long userlogId) throws SystemException{
+		
+		Date now = new Date();
+		
+		Userlog userlog = null;
+		
+		try {
+			userlog = userlogPersistence.findByPrimaryKey(userlogId);
+			long accessDate = userlog.getAccessDate();
+			userlog.setTimeSlapse(now.getTime() - accessDate);
+			userlogPersistence.update(userlog, false);
+		} catch (NoSuchUserlogException e) {
+			Logger.getLogger(UserlogLocalServiceImpl.class.getName()).log(Level.SEVERE, null, e);
+		}
+		        
+		return userlog;
+		
+	}
 }

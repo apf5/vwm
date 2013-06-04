@@ -114,6 +114,12 @@ public class OrganizationHitLocalServiceClp
 		_methodName17 = "setBeanIdentifier";
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
+
+		_methodName19 = "addOrganizationHit";
+
+		_methodParameterTypes19 = new String[] {
+				"long", "long", "boolean", "java.util.Date"
+			};
 	}
 
 	public com.liferay.consistent.tracking.model.OrganizationHit addOrganizationHit(
@@ -646,6 +652,44 @@ public class OrganizationHitLocalServiceClp
 		throw new UnsupportedOperationException();
 	}
 
+	public com.liferay.consistent.tracking.model.OrganizationHit addOrganizationHit(
+		long companyId, long organizationId, boolean guest,
+		java.util.Date access)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19,
+					new Object[] {
+						companyId,
+						
+					organizationId,
+						
+					guest,
+						
+					ClpSerializer.translateInput(access)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.consistent.tracking.model.OrganizationHit)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -683,4 +727,6 @@ public class OrganizationHitLocalServiceClp
 	private String[] _methodParameterTypes16;
 	private String _methodName17;
 	private String[] _methodParameterTypes17;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
 }

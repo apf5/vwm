@@ -2,7 +2,37 @@
 <!DOCTYPE hook PUBLIC "-//Liferay//DTD Hook 6.1.0//EN" "http://www.liferay.com/dtd/liferay-hook_6_1_0.dtd">
 
 <hook>
-	<language-properties>
-		content/Language-ext.properties
-	</language-properties>
+
+    <portal-properties>portal.properties</portal-properties>
+    <language-properties>
+    	content/Language-ext.properties
+    </language-properties>
+    <custom-jsp-dir>/META-INF/custom_jsps</custom-jsp-dir>
+    
+    <!-- <servlet-filter>
+		<servlet-filter-name>PortalTrackingFilter</servlet-filter-name>
+		<servlet-filter-impl>com.liferay.consistent.tracking.hook.filter.PortalTrackingFilter</servlet-filter-impl>
+	</servlet-filter>
+	<servlet-filter-mapping>
+		<servlet-filter-name>PortalTrackingFilter</servlet-filter-name>
+		<before-filter>SSO Open SSO Filter</before-filter>
+		<url-pattern>/group/*</url-pattern>
+		<url-pattern>/user/*</url-pattern>
+		<url-pattern>/web/*</url-pattern>
+		<url-pattern>*.jsp</url-pattern>
+	</servlet-filter-mapping> -->
+	
+	<servlet-filter>
+		<servlet-filter-name>DocumentsTrackingFilter</servlet-filter-name>
+		<servlet-filter-impl>com.liferay.consistent.tracking.hook.filter.DocumentsTrackingFilter</servlet-filter-impl>
+	</servlet-filter>
+	<servlet-filter-mapping>
+		<servlet-filter-name>DocumentsTrackingFilter</servlet-filter-name>
+		<after-filter>Secure Main Servlet Filter</after-filter>
+		<url-pattern>/*/documents/*</url-pattern>
+		<url-pattern>/c/document_library/*</url-pattern>
+	</servlet-filter-mapping>
+	
+	
+       	
 </hook>

@@ -33,7 +33,7 @@ public class BrowsinglogCacheModel implements CacheModel<Browsinglog>,
 	Serializable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(33);
 
 		sb.append("{browsinglogId=");
 		sb.append(browsinglogId);
@@ -41,6 +41,14 @@ public class BrowsinglogCacheModel implements CacheModel<Browsinglog>,
 		sb.append(companyId);
 		sb.append(", userlogId=");
 		sb.append(userlogId);
+		sb.append(", clientHost=");
+		sb.append(clientHost);
+		sb.append(", clientAddr=");
+		sb.append(clientAddr);
+		sb.append(", serverName=");
+		sb.append(serverName);
+		sb.append(", serverPort=");
+		sb.append(serverPort);
 		sb.append(", userAgent=");
 		sb.append(userAgent);
 		sb.append(", url=");
@@ -70,6 +78,29 @@ public class BrowsinglogCacheModel implements CacheModel<Browsinglog>,
 		browsinglogImpl.setBrowsinglogId(browsinglogId);
 		browsinglogImpl.setCompanyId(companyId);
 		browsinglogImpl.setUserlogId(userlogId);
+
+		if (clientHost == null) {
+			browsinglogImpl.setClientHost(StringPool.BLANK);
+		}
+		else {
+			browsinglogImpl.setClientHost(clientHost);
+		}
+
+		if (clientAddr == null) {
+			browsinglogImpl.setClientAddr(StringPool.BLANK);
+		}
+		else {
+			browsinglogImpl.setClientAddr(clientAddr);
+		}
+
+		if (serverName == null) {
+			browsinglogImpl.setServerName(StringPool.BLANK);
+		}
+		else {
+			browsinglogImpl.setServerName(serverName);
+		}
+
+		browsinglogImpl.setServerPort(serverPort);
 
 		if (userAgent == null) {
 			browsinglogImpl.setUserAgent(StringPool.BLANK);
@@ -108,6 +139,10 @@ public class BrowsinglogCacheModel implements CacheModel<Browsinglog>,
 	public long browsinglogId;
 	public long companyId;
 	public long userlogId;
+	public String clientHost;
+	public String clientAddr;
+	public String serverName;
+	public int serverPort;
 	public String userAgent;
 	public String url;
 	public long plId;

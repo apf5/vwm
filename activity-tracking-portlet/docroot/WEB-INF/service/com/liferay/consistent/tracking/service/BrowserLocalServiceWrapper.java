@@ -266,6 +266,12 @@ public class BrowserLocalServiceWrapper implements BrowserLocalService,
 		return _browserLocalService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public com.liferay.consistent.tracking.model.Browser getBrowser(
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _browserLocalService.getBrowser(name);
+	}
+
 	/**
 	 * @deprecated Renamed to {@link #getWrappedService}
 	 */

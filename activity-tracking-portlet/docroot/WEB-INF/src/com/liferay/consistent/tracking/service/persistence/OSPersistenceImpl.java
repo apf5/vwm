@@ -78,34 +78,15 @@ public class OSPersistenceImpl extends BasePersistenceImpl<OS>
 		".List1";
 	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION = FINDER_CLASS_NAME_ENTITY +
 		".List2";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_NAME = new FinderPath(OSModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FETCH_BY_NAME = new FinderPath(OSModelImpl.ENTITY_CACHE_ENABLED,
 			OSModelImpl.FINDER_CACHE_ENABLED, OSImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByName",
-			new String[] {
-				String.class.getName(),
-				
-			"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_NAME = new FinderPath(OSModelImpl.ENTITY_CACHE_ENABLED,
-			OSModelImpl.FINDER_CACHE_ENABLED, OSImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByName",
+			FINDER_CLASS_NAME_ENTITY, "fetchByName",
 			new String[] { String.class.getName() },
 			OSModelImpl.NAME_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_NAME = new FinderPath(OSModelImpl.ENTITY_CACHE_ENABLED,
 			OSModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByName",
 			new String[] { String.class.getName() });
-	public static final FinderPath FINDER_PATH_FETCH_BY_N_V = new FinderPath(OSModelImpl.ENTITY_CACHE_ENABLED,
-			OSModelImpl.FINDER_CACHE_ENABLED, OSImpl.class,
-			FINDER_CLASS_NAME_ENTITY, "fetchByN_V",
-			new String[] { String.class.getName(), String.class.getName() },
-			OSModelImpl.NAME_COLUMN_BITMASK |
-			OSModelImpl.VERSION_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_N_V = new FinderPath(OSModelImpl.ENTITY_CACHE_ENABLED,
-			OSModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByN_V",
-			new String[] { String.class.getName(), String.class.getName() });
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(OSModelImpl.ENTITY_CACHE_ENABLED,
 			OSModelImpl.FINDER_CACHE_ENABLED, OSImpl.class,
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
@@ -125,8 +106,8 @@ public class OSPersistenceImpl extends BasePersistenceImpl<OS>
 		EntityCacheUtil.putResult(OSModelImpl.ENTITY_CACHE_ENABLED,
 			OSImpl.class, os.getPrimaryKey(), os);
 
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_V,
-			new Object[] { os.getName(), os.getVersion() }, os);
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME,
+			new Object[] { os.getName() }, os);
 
 		os.resetOriginalValues();
 	}
@@ -200,8 +181,8 @@ public class OSPersistenceImpl extends BasePersistenceImpl<OS>
 	}
 
 	protected void clearUniqueFindersCache(OS os) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_V,
-			new Object[] { os.getName(), os.getVersion() });
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_NAME,
+			new Object[] { os.getName() });
 	}
 
 	/**
@@ -325,45 +306,24 @@ public class OSPersistenceImpl extends BasePersistenceImpl<OS>
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
 
-		else {
-			if ((osModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_NAME.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] { osModelImpl.getOriginalName() };
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_NAME, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_NAME,
-					args);
-
-				args = new Object[] { osModelImpl.getName() };
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_NAME, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_NAME,
-					args);
-			}
-		}
-
 		EntityCacheUtil.putResult(OSModelImpl.ENTITY_CACHE_ENABLED,
 			OSImpl.class, os.getPrimaryKey(), os);
 
 		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_V,
-				new Object[] { os.getName(), os.getVersion() }, os);
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME,
+				new Object[] { os.getName() }, os);
 		}
 		else {
 			if ((osModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_N_V.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						osModelImpl.getOriginalName(),
-						
-						osModelImpl.getOriginalVersion()
-					};
+					FINDER_PATH_FETCH_BY_NAME.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] { osModelImpl.getOriginalName() };
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_N_V, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_NAME, args);
 
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_V, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_NAME, args);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_V,
-					new Object[] { os.getName(), os.getVersion() }, os);
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME,
+					new Object[] { os.getName() }, os);
 			}
 		}
 
@@ -382,7 +342,6 @@ public class OSPersistenceImpl extends BasePersistenceImpl<OS>
 
 		osImpl.setOsId(os.getOsId());
 		osImpl.setName(os.getName());
-		osImpl.setVersion(os.getVersion());
 
 		return osImpl;
 	}
@@ -485,86 +444,76 @@ public class OSPersistenceImpl extends BasePersistenceImpl<OS>
 	}
 
 	/**
-	 * Returns all the o ses where name = &#63;.
+	 * Returns the o s where name = &#63; or throws a {@link com.liferay.consistent.tracking.NoSuchOSException} if it could not be found.
 	 *
 	 * @param name the name
-	 * @return the matching o ses
+	 * @return the matching o s
+	 * @throws com.liferay.consistent.tracking.NoSuchOSException if a matching o s could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<OS> findByName(String name) throws SystemException {
-		return findByName(name, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public OS findByName(String name) throws NoSuchOSException, SystemException {
+		OS os = fetchByName(name);
+
+		if (os == null) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("name=");
+			msg.append(name);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchOSException(msg.toString());
+		}
+
+		return os;
 	}
 
 	/**
-	 * Returns a range of all the o ses where name = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
+	 * Returns the o s where name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
 	 * @param name the name
-	 * @param start the lower bound of the range of o ses
-	 * @param end the upper bound of the range of o ses (not inclusive)
-	 * @return the range of matching o ses
+	 * @return the matching o s, or <code>null</code> if a matching o s could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<OS> findByName(String name, int start, int end)
+	public OS fetchByName(String name) throws SystemException {
+		return fetchByName(name, true);
+	}
+
+	/**
+	 * Returns the o s where name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param name the name
+	 * @param retrieveFromCache whether to use the finder cache
+	 * @return the matching o s, or <code>null</code> if a matching o s could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public OS fetchByName(String name, boolean retrieveFromCache)
 		throws SystemException {
-		return findByName(name, start, end, null);
-	}
+		Object[] finderArgs = new Object[] { name };
 
-	/**
-	 * Returns an ordered range of all the o ses where name = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
-	 *
-	 * @param name the name
-	 * @param start the lower bound of the range of o ses
-	 * @param end the upper bound of the range of o ses (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching o ses
-	 * @throws SystemException if a system exception occurred
-	 */
-	public List<OS> findByName(String name, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
-		FinderPath finderPath = null;
-		Object[] finderArgs = null;
+		Object result = null;
 
-		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_NAME;
-			finderArgs = new Object[] { name };
-		}
-		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_NAME;
-			finderArgs = new Object[] { name, start, end, orderByComparator };
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_NAME,
+					finderArgs, this);
 		}
 
-		List<OS> list = (List<OS>)FinderCacheUtil.getResult(finderPath,
-				finderArgs, this);
+		if (result instanceof OS) {
+			OS os = (OS)result;
 
-		if ((list != null) && !list.isEmpty()) {
-			for (OS os : list) {
-				if (!Validator.equals(name, os.getName())) {
-					list = null;
-
-					break;
-				}
+			if (!Validator.equals(name, os.getName())) {
+				result = null;
 			}
 		}
 
-		if (list == null) {
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
 
 			query.append(_SQL_SELECT_OS_WHERE);
 
@@ -580,413 +529,6 @@ public class OSPersistenceImpl extends BasePersistenceImpl<OS>
 				}
 			}
 
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(OSModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (name != null) {
-					qPos.add(name);
-				}
-
-				list = (List<OS>)QueryUtil.list(q, getDialect(), start, end);
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					FinderCacheUtil.removeResult(finderPath, finderArgs);
-				}
-				else {
-					cacheResult(list);
-
-					FinderCacheUtil.putResult(finderPath, finderArgs, list);
-				}
-
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	/**
-	 * Returns the first o s in the ordered set where name = &#63;.
-	 *
-	 * @param name the name
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching o s
-	 * @throws com.liferay.consistent.tracking.NoSuchOSException if a matching o s could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public OS findByName_First(String name, OrderByComparator orderByComparator)
-		throws NoSuchOSException, SystemException {
-		OS os = fetchByName_First(name, orderByComparator);
-
-		if (os != null) {
-			return os;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("name=");
-		msg.append(name);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchOSException(msg.toString());
-	}
-
-	/**
-	 * Returns the first o s in the ordered set where name = &#63;.
-	 *
-	 * @param name the name
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching o s, or <code>null</code> if a matching o s could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public OS fetchByName_First(String name, OrderByComparator orderByComparator)
-		throws SystemException {
-		List<OS> list = findByName(name, 0, 1, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last o s in the ordered set where name = &#63;.
-	 *
-	 * @param name the name
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching o s
-	 * @throws com.liferay.consistent.tracking.NoSuchOSException if a matching o s could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public OS findByName_Last(String name, OrderByComparator orderByComparator)
-		throws NoSuchOSException, SystemException {
-		OS os = fetchByName_Last(name, orderByComparator);
-
-		if (os != null) {
-			return os;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("name=");
-		msg.append(name);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchOSException(msg.toString());
-	}
-
-	/**
-	 * Returns the last o s in the ordered set where name = &#63;.
-	 *
-	 * @param name the name
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching o s, or <code>null</code> if a matching o s could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public OS fetchByName_Last(String name, OrderByComparator orderByComparator)
-		throws SystemException {
-		int count = countByName(name);
-
-		List<OS> list = findByName(name, count - 1, count, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the o ses before and after the current o s in the ordered set where name = &#63;.
-	 *
-	 * @param osId the primary key of the current o s
-	 * @param name the name
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next o s
-	 * @throws com.liferay.consistent.tracking.NoSuchOSException if a o s with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public OS[] findByName_PrevAndNext(long osId, String name,
-		OrderByComparator orderByComparator)
-		throws NoSuchOSException, SystemException {
-		OS os = findByPrimaryKey(osId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			OS[] array = new OSImpl[3];
-
-			array[0] = getByName_PrevAndNext(session, os, name,
-					orderByComparator, true);
-
-			array[1] = os;
-
-			array[2] = getByName_PrevAndNext(session, os, name,
-					orderByComparator, false);
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected OS getByName_PrevAndNext(Session session, OS os, String name,
-		OrderByComparator orderByComparator, boolean previous) {
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(6 +
-					(orderByComparator.getOrderByFields().length * 6));
-		}
-		else {
-			query = new StringBundler(3);
-		}
-
-		query.append(_SQL_SELECT_OS_WHERE);
-
-		if (name == null) {
-			query.append(_FINDER_COLUMN_NAME_NAME_1);
-		}
-		else {
-			if (name.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_NAME_NAME_3);
-			}
-			else {
-				query.append(_FINDER_COLUMN_NAME_NAME_2);
-			}
-		}
-
-		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
-
-			if (orderByConditionFields.length > 0) {
-				query.append(WHERE_AND);
-			}
-
-			for (int i = 0; i < orderByConditionFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByConditionFields[i]);
-
-				if ((i + 1) < orderByConditionFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN_HAS_NEXT);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN);
-					}
-				}
-			}
-
-			query.append(ORDER_BY_CLAUSE);
-
-			String[] orderByFields = orderByComparator.getOrderByFields();
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC_HAS_NEXT);
-					}
-					else {
-						query.append(ORDER_BY_DESC_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC);
-					}
-					else {
-						query.append(ORDER_BY_DESC);
-					}
-				}
-			}
-		}
-
-		else {
-			query.append(OSModelImpl.ORDER_BY_JPQL);
-		}
-
-		String sql = query.toString();
-
-		Query q = session.createQuery(sql);
-
-		q.setFirstResult(0);
-		q.setMaxResults(2);
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		if (name != null) {
-			qPos.add(name);
-		}
-
-		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(os);
-
-			for (Object value : values) {
-				qPos.add(value);
-			}
-		}
-
-		List<OS> list = q.list();
-
-		if (list.size() == 2) {
-			return list.get(1);
-		}
-		else {
-			return null;
-		}
-	}
-
-	/**
-	 * Returns the o s where name = &#63; and version = &#63; or throws a {@link com.liferay.consistent.tracking.NoSuchOSException} if it could not be found.
-	 *
-	 * @param name the name
-	 * @param version the version
-	 * @return the matching o s
-	 * @throws com.liferay.consistent.tracking.NoSuchOSException if a matching o s could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public OS findByN_V(String name, String version)
-		throws NoSuchOSException, SystemException {
-		OS os = fetchByN_V(name, version);
-
-		if (os == null) {
-			StringBundler msg = new StringBundler(6);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("name=");
-			msg.append(name);
-
-			msg.append(", version=");
-			msg.append(version);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchOSException(msg.toString());
-		}
-
-		return os;
-	}
-
-	/**
-	 * Returns the o s where name = &#63; and version = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param name the name
-	 * @param version the version
-	 * @return the matching o s, or <code>null</code> if a matching o s could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public OS fetchByN_V(String name, String version) throws SystemException {
-		return fetchByN_V(name, version, true);
-	}
-
-	/**
-	 * Returns the o s where name = &#63; and version = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param name the name
-	 * @param version the version
-	 * @param retrieveFromCache whether to use the finder cache
-	 * @return the matching o s, or <code>null</code> if a matching o s could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public OS fetchByN_V(String name, String version, boolean retrieveFromCache)
-		throws SystemException {
-		Object[] finderArgs = new Object[] { name, version };
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_N_V,
-					finderArgs, this);
-		}
-
-		if (result instanceof OS) {
-			OS os = (OS)result;
-
-			if (!Validator.equals(name, os.getName()) ||
-					!Validator.equals(version, os.getVersion())) {
-				result = null;
-			}
-		}
-
-		if (result == null) {
-			StringBundler query = new StringBundler(4);
-
-			query.append(_SQL_SELECT_OS_WHERE);
-
-			if (name == null) {
-				query.append(_FINDER_COLUMN_N_V_NAME_1);
-			}
-			else {
-				if (name.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_N_V_NAME_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_N_V_NAME_2);
-				}
-			}
-
-			if (version == null) {
-				query.append(_FINDER_COLUMN_N_V_VERSION_1);
-			}
-			else {
-				if (version.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_N_V_VERSION_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_N_V_VERSION_2);
-				}
-			}
-
 			query.append(OSModelImpl.ORDER_BY_JPQL);
 
 			String sql = query.toString();
@@ -1002,10 +544,6 @@ public class OSPersistenceImpl extends BasePersistenceImpl<OS>
 
 				if (name != null) {
 					qPos.add(name);
-				}
-
-				if (version != null) {
-					qPos.add(version);
 				}
 
 				List<OS> list = q.list();
@@ -1015,7 +553,7 @@ public class OSPersistenceImpl extends BasePersistenceImpl<OS>
 				OS os = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_V,
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME,
 						finderArgs, list);
 				}
 				else {
@@ -1023,10 +561,8 @@ public class OSPersistenceImpl extends BasePersistenceImpl<OS>
 
 					cacheResult(os);
 
-					if ((os.getName() == null) || !os.getName().equals(name) ||
-							(os.getVersion() == null) ||
-							!os.getVersion().equals(version)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_V,
+					if ((os.getName() == null) || !os.getName().equals(name)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME,
 							finderArgs, os);
 					}
 				}
@@ -1038,7 +574,7 @@ public class OSPersistenceImpl extends BasePersistenceImpl<OS>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_V,
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_NAME,
 						finderArgs);
 				}
 
@@ -1169,28 +705,15 @@ public class OSPersistenceImpl extends BasePersistenceImpl<OS>
 	}
 
 	/**
-	 * Removes all the o ses where name = &#63; from the database.
+	 * Removes the o s where name = &#63; from the database.
 	 *
 	 * @param name the name
-	 * @throws SystemException if a system exception occurred
-	 */
-	public void removeByName(String name) throws SystemException {
-		for (OS os : findByName(name)) {
-			remove(os);
-		}
-	}
-
-	/**
-	 * Removes the o s where name = &#63; and version = &#63; from the database.
-	 *
-	 * @param name the name
-	 * @param version the version
 	 * @return the o s that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
-	public OS removeByN_V(String name, String version)
+	public OS removeByName(String name)
 		throws NoSuchOSException, SystemException {
-		OS os = findByN_V(name, version);
+		OS os = findByName(name);
 
 		return remove(os);
 	}
@@ -1263,89 +786,6 @@ public class OSPersistenceImpl extends BasePersistenceImpl<OS>
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_NAME,
 					finderArgs, count);
-
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	/**
-	 * Returns the number of o ses where name = &#63; and version = &#63;.
-	 *
-	 * @param name the name
-	 * @param version the version
-	 * @return the number of matching o ses
-	 * @throws SystemException if a system exception occurred
-	 */
-	public int countByN_V(String name, String version)
-		throws SystemException {
-		Object[] finderArgs = new Object[] { name, version };
-
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_N_V,
-				finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_COUNT_OS_WHERE);
-
-			if (name == null) {
-				query.append(_FINDER_COLUMN_N_V_NAME_1);
-			}
-			else {
-				if (name.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_N_V_NAME_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_N_V_NAME_2);
-				}
-			}
-
-			if (version == null) {
-				query.append(_FINDER_COLUMN_N_V_VERSION_1);
-			}
-			else {
-				if (version.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_N_V_VERSION_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_N_V_VERSION_2);
-				}
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (name != null) {
-					qPos.add(name);
-				}
-
-				if (version != null) {
-					qPos.add(version);
-				}
-
-				count = (Long)q.uniqueResult();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (count == null) {
-					count = Long.valueOf(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_N_V, finderArgs,
-					count);
 
 				closeSession(session);
 			}
@@ -1462,12 +902,6 @@ public class OSPersistenceImpl extends BasePersistenceImpl<OS>
 	private static final String _FINDER_COLUMN_NAME_NAME_1 = "os.name IS NULL";
 	private static final String _FINDER_COLUMN_NAME_NAME_2 = "os.name = ?";
 	private static final String _FINDER_COLUMN_NAME_NAME_3 = "(os.name IS NULL OR os.name = ?)";
-	private static final String _FINDER_COLUMN_N_V_NAME_1 = "os.name IS NULL AND ";
-	private static final String _FINDER_COLUMN_N_V_NAME_2 = "os.name = ? AND ";
-	private static final String _FINDER_COLUMN_N_V_NAME_3 = "(os.name IS NULL OR os.name = ?) AND ";
-	private static final String _FINDER_COLUMN_N_V_VERSION_1 = "os.version IS NULL";
-	private static final String _FINDER_COLUMN_N_V_VERSION_2 = "os.version = ?";
-	private static final String _FINDER_COLUMN_N_V_VERSION_3 = "(os.version IS NULL OR os.version = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "os.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No OS exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No OS exists with the key {";

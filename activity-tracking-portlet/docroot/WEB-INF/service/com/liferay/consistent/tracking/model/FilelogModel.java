@@ -14,6 +14,7 @@
 
 package com.liferay.consistent.tracking.model;
 
+import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.service.ServiceContext;
@@ -132,6 +133,21 @@ public interface FilelogModel extends BaseModel<Filelog> {
 	 * @param fileId the file ID of this filelog
 	 */
 	public void setFileId(long fileId);
+
+	/**
+	 * Returns the file version of this filelog.
+	 *
+	 * @return the file version of this filelog
+	 */
+	@AutoEscape
+	public String getFileVersion();
+
+	/**
+	 * Sets the file version of this filelog.
+	 *
+	 * @param fileVersion the file version of this filelog
+	 */
+	public void setFileVersion(String fileVersion);
 
 	/**
 	 * Returns the access date of this filelog.

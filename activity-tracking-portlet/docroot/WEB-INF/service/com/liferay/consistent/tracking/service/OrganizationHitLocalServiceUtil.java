@@ -273,6 +273,14 @@ public class OrganizationHitLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static com.liferay.consistent.tracking.model.OrganizationHit addOrganizationHit(
+		long companyId, long organizationId, boolean guest,
+		java.util.Date access)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addOrganizationHit(companyId, organizationId, guest, access);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

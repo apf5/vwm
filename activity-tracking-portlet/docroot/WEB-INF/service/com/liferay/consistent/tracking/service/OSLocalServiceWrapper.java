@@ -262,6 +262,11 @@ public class OSLocalServiceWrapper implements OSLocalService,
 		return _osLocalService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public com.liferay.consistent.tracking.model.OS getOS(java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _osLocalService.getOS(name);
+	}
+
 	/**
 	 * @deprecated Renamed to {@link #getWrappedService}
 	 */

@@ -38,7 +38,9 @@ public class UserlogSoap implements Serializable {
 		soapModel.setRemoteHost(model.getRemoteHost());
 		soapModel.setRemoteAddress(model.getRemoteAddress());
 		soapModel.setOsId(model.getOsId());
+		soapModel.setOsManufacturer(model.getOsManufacturer());
 		soapModel.setBrowserId(model.getBrowserId());
+		soapModel.setBrowserVersion(model.getBrowserVersion());
 		soapModel.setSessionId(model.getSessionId());
 		soapModel.setAccessDate(model.getAccessDate());
 		soapModel.setTimeSlapse(model.getTimeSlapse());
@@ -166,12 +168,28 @@ public class UserlogSoap implements Serializable {
 		_osId = osId;
 	}
 
+	public String getOsManufacturer() {
+		return _osManufacturer;
+	}
+
+	public void setOsManufacturer(String osManufacturer) {
+		_osManufacturer = osManufacturer;
+	}
+
 	public long getBrowserId() {
 		return _browserId;
 	}
 
 	public void setBrowserId(long browserId) {
 		_browserId = browserId;
+	}
+
+	public String getBrowserVersion() {
+		return _browserVersion;
+	}
+
+	public void setBrowserVersion(String browserVersion) {
+		_browserVersion = browserVersion;
 	}
 
 	public String getSessionId() {
@@ -207,7 +225,9 @@ public class UserlogSoap implements Serializable {
 	private String _remoteHost;
 	private String _remoteAddress;
 	private long _osId;
+	private String _osManufacturer;
 	private long _browserId;
+	private String _browserVersion;
 	private String _sessionId;
 	private long _accessDate;
 	private long _timeSlapse;

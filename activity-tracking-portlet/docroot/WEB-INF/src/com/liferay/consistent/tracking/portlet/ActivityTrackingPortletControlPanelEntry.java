@@ -13,7 +13,7 @@ public class ActivityTrackingPortletControlPanelEntry extends BaseControlPanelEn
     @Override
     public boolean isVisible(PermissionChecker permissionChecker, Portlet portlet)
             throws Exception {
-        return false;
+        return permissionChecker.isCompanyAdmin();
     }
 
 }

@@ -432,6 +432,7 @@ public class FilelogPersistenceImpl extends BasePersistenceImpl<Filelog>
 		filelogImpl.setGuest(filelog.isGuest());
 		filelogImpl.setUserlogId(filelog.getUserlogId());
 		filelogImpl.setFileId(filelog.getFileId());
+		filelogImpl.setFileVersion(filelog.getFileVersion());
 		filelogImpl.setAccessDate(filelog.getAccessDate());
 		filelogImpl.setElapseLoad(filelog.getElapseLoad());
 		filelogImpl.setTrafic(filelog.isTrafic());

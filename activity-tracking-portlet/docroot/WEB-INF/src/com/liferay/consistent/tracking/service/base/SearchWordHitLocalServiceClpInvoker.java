@@ -104,13 +104,19 @@ public class SearchWordHitLocalServiceClpInvoker {
 				"com.liferay.consistent.tracking.model.SearchWordHit", "boolean"
 			};
 
-		_methodName88 = "getBeanIdentifier";
+		_methodName92 = "getBeanIdentifier";
 
-		_methodParameterTypes88 = new String[] {  };
+		_methodParameterTypes92 = new String[] {  };
 
-		_methodName89 = "setBeanIdentifier";
+		_methodName93 = "setBeanIdentifier";
 
-		_methodParameterTypes89 = new String[] { "java.lang.String" };
+		_methodParameterTypes93 = new String[] { "java.lang.String" };
+
+		_methodName98 = "addSearchWordHit";
+
+		_methodParameterTypes98 = new String[] {
+				"long", "long", "boolean", "java.util.Date"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -202,14 +208,22 @@ public class SearchWordHitLocalServiceClpInvoker {
 				((Boolean)arguments[1]).booleanValue());
 		}
 
-		if (_methodName88.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes88, parameterTypes)) {
+		if (_methodName92.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes92, parameterTypes)) {
 			return SearchWordHitLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName89.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes89, parameterTypes)) {
+		if (_methodName93.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes93, parameterTypes)) {
 			SearchWordHitLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
+		}
+
+		if (_methodName98.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes98, parameterTypes)) {
+			return SearchWordHitLocalServiceUtil.addSearchWordHit(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(),
+				((Boolean)arguments[2]).booleanValue(),
+				(java.util.Date)arguments[3]);
 		}
 
 		throw new UnsupportedOperationException();
@@ -247,8 +261,10 @@ public class SearchWordHitLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName88;
-	private String[] _methodParameterTypes88;
-	private String _methodName89;
-	private String[] _methodParameterTypes89;
+	private String _methodName92;
+	private String[] _methodParameterTypes92;
+	private String _methodName93;
+	private String[] _methodParameterTypes93;
+	private String _methodName98;
+	private String[] _methodParameterTypes98;
 }

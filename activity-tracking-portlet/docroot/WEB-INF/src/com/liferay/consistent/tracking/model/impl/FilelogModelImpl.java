@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
@@ -62,12 +63,13 @@ public class FilelogModelImpl extends BaseModelImpl<Filelog>
 			{ "guest", Types.BOOLEAN },
 			{ "userlogId", Types.BIGINT },
 			{ "fileId", Types.BIGINT },
+			{ "fileVersion", Types.VARCHAR },
 			{ "accessDate", Types.BIGINT },
 			{ "elapseLoad", Types.BIGINT },
 			{ "trafic", Types.BOOLEAN },
 			{ "status", Types.BOOLEAN }
 		};
-	public static final String TABLE_SQL_CREATE = "create table CONSIS_TRACK_Filelog (FilelogId LONG not null primary key,companyId LONG,guest BOOLEAN,userlogId LONG,fileId LONG,accessDate LONG,elapseLoad LONG,trafic BOOLEAN,status BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table CONSIS_TRACK_Filelog (FilelogId LONG not null primary key,companyId LONG,guest BOOLEAN,userlogId LONG,fileId LONG,fileVersion VARCHAR(75) null,accessDate LONG,elapseLoad LONG,trafic BOOLEAN,status BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table CONSIS_TRACK_Filelog";
 	public static final String ORDER_BY_JPQL = " ORDER BY filelog.accessDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CONSIS_TRACK_Filelog.accessDate DESC";
@@ -125,6 +127,7 @@ public class FilelogModelImpl extends BaseModelImpl<Filelog>
 		attributes.put("guest", getGuest());
 		attributes.put("userlogId", getUserlogId());
 		attributes.put("fileId", getFileId());
+		attributes.put("fileVersion", getFileVersion());
 		attributes.put("accessDate", getAccessDate());
 		attributes.put("elapseLoad", getElapseLoad());
 		attributes.put("trafic", getTrafic());
@@ -163,6 +166,12 @@ public class FilelogModelImpl extends BaseModelImpl<Filelog>
 
 		if (fileId != null) {
 			setFileId(fileId);
+		}
+
+		String fileVersion = (String)attributes.get("fileVersion");
+
+		if (fileVersion != null) {
+			setFileVersion(fileVersion);
 		}
 
 		Long accessDate = (Long)attributes.get("accessDate");
@@ -270,6 +279,19 @@ public class FilelogModelImpl extends BaseModelImpl<Filelog>
 		_fileId = fileId;
 	}
 
+	public String getFileVersion() {
+		if (_fileVersion == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _fileVersion;
+		}
+	}
+
+	public void setFileVersion(String fileVersion) {
+		_fileVersion = fileVersion;
+	}
+
 	public long getAccessDate() {
 		return _accessDate;
 	}
@@ -349,6 +371,7 @@ public class FilelogModelImpl extends BaseModelImpl<Filelog>
 		filelogImpl.setGuest(getGuest());
 		filelogImpl.setUserlogId(getUserlogId());
 		filelogImpl.setFileId(getFileId());
+		filelogImpl.setFileVersion(getFileVersion());
 		filelogImpl.setAccessDate(getAccessDate());
 		filelogImpl.setElapseLoad(getElapseLoad());
 		filelogImpl.setTrafic(getTrafic());
@@ -444,6 +467,14 @@ public class FilelogModelImpl extends BaseModelImpl<Filelog>
 
 		filelogCacheModel.fileId = getFileId();
 
+		filelogCacheModel.fileVersion = getFileVersion();
+
+		String fileVersion = filelogCacheModel.fileVersion;
+
+		if ((fileVersion != null) && (fileVersion.length() == 0)) {
+			filelogCacheModel.fileVersion = null;
+		}
+
 		filelogCacheModel.accessDate = getAccessDate();
 
 		filelogCacheModel.elapseLoad = getElapseLoad();
@@ -457,7 +488,7 @@ public class FilelogModelImpl extends BaseModelImpl<Filelog>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{FilelogId=");
 		sb.append(getFilelogId());
@@ -469,6 +500,8 @@ public class FilelogModelImpl extends BaseModelImpl<Filelog>
 		sb.append(getUserlogId());
 		sb.append(", fileId=");
 		sb.append(getFileId());
+		sb.append(", fileVersion=");
+		sb.append(getFileVersion());
 		sb.append(", accessDate=");
 		sb.append(getAccessDate());
 		sb.append(", elapseLoad=");
@@ -483,7 +516,7 @@ public class FilelogModelImpl extends BaseModelImpl<Filelog>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.consistent.tracking.model.Filelog");
@@ -508,6 +541,10 @@ public class FilelogModelImpl extends BaseModelImpl<Filelog>
 		sb.append(
 			"<column><column-name>fileId</column-name><column-value><![CDATA[");
 		sb.append(getFileId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>fileVersion</column-name><column-value><![CDATA[");
+		sb.append(getFileVersion());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>accessDate</column-name><column-value><![CDATA[");
@@ -546,6 +583,7 @@ public class FilelogModelImpl extends BaseModelImpl<Filelog>
 	private long _originalUserlogId;
 	private boolean _setOriginalUserlogId;
 	private long _fileId;
+	private String _fileVersion;
 	private long _accessDate;
 	private long _elapseLoad;
 	private boolean _trafic;

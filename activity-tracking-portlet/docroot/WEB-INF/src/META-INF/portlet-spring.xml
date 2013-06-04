@@ -25,6 +25,8 @@
 	<bean id="com.liferay.consistent.tracking.service.persistence.SiteHitPersistence" class="com.liferay.consistent.tracking.service.persistence.SiteHitPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.consistent.tracking.service.TrackEventLocalService" class="com.liferay.consistent.tracking.service.impl.TrackEventLocalServiceImpl" />
 	<bean id="com.liferay.consistent.tracking.service.persistence.TrackEventPersistence" class="com.liferay.consistent.tracking.service.persistence.TrackEventPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.consistent.tracking.service.TrackingLocalService" class="com.liferay.consistent.tracking.service.impl.TrackingLocalServiceImpl" />
+	<bean id="com.liferay.consistent.tracking.service.TrackingService" class="com.liferay.consistent.tracking.service.impl.TrackingServiceImpl" />
 	<bean id="com.liferay.consistent.tracking.service.UserlogLocalService" class="com.liferay.consistent.tracking.service.impl.UserlogLocalServiceImpl" />
 	<bean id="com.liferay.consistent.tracking.service.persistence.UserlogPersistence" class="com.liferay.consistent.tracking.service.persistence.UserlogPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.consistent.tracking.service.WordLocalService" class="com.liferay.consistent.tracking.service.impl.WordLocalServiceImpl" />

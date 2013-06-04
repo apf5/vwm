@@ -204,6 +204,21 @@ public interface UserlogModel extends BaseModel<Userlog> {
 	public void setOsId(long osId);
 
 	/**
+	 * Returns the os manufacturer of this userlog.
+	 *
+	 * @return the os manufacturer of this userlog
+	 */
+	@AutoEscape
+	public String getOsManufacturer();
+
+	/**
+	 * Sets the os manufacturer of this userlog.
+	 *
+	 * @param osManufacturer the os manufacturer of this userlog
+	 */
+	public void setOsManufacturer(String osManufacturer);
+
+	/**
 	 * Returns the browser ID of this userlog.
 	 *
 	 * @return the browser ID of this userlog
@@ -216,6 +231,21 @@ public interface UserlogModel extends BaseModel<Userlog> {
 	 * @param browserId the browser ID of this userlog
 	 */
 	public void setBrowserId(long browserId);
+
+	/**
+	 * Returns the browser version of this userlog.
+	 *
+	 * @return the browser version of this userlog
+	 */
+	@AutoEscape
+	public String getBrowserVersion();
+
+	/**
+	 * Sets the browser version of this userlog.
+	 *
+	 * @param browserVersion the browser version of this userlog
+	 */
+	public void setBrowserVersion(String browserVersion);
 
 	/**
 	 * Returns the session ID of this userlog.

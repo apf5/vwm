@@ -61,6 +61,10 @@ public class BrowsinglogModelImpl extends BaseModelImpl<Browsinglog>
 			{ "browsinglogId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userlogId", Types.BIGINT },
+			{ "clientHost", Types.VARCHAR },
+			{ "clientAddr", Types.VARCHAR },
+			{ "serverName", Types.VARCHAR },
+			{ "serverPort", Types.INTEGER },
 			{ "userAgent", Types.VARCHAR },
 			{ "url", Types.VARCHAR },
 			{ "plId", Types.BIGINT },
@@ -71,7 +75,7 @@ public class BrowsinglogModelImpl extends BaseModelImpl<Browsinglog>
 			{ "uploadSize", Types.BIGINT },
 			{ "downloadSize", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table CONSIS_TRACK_Browsinglog (browsinglogId LONG not null primary key,companyId LONG,userlogId LONG,userAgent VARCHAR(75) null,url VARCHAR(75) null,plId LONG,accessName VARCHAR(75) null,accessFound BOOLEAN,accessDate LONG,elapseLoad LONG,uploadSize LONG,downloadSize LONG)";
+	public static final String TABLE_SQL_CREATE = "create table CONSIS_TRACK_Browsinglog (browsinglogId LONG not null primary key,companyId LONG,userlogId LONG,clientHost VARCHAR(75) null,clientAddr VARCHAR(75) null,serverName VARCHAR(75) null,serverPort INTEGER,userAgent VARCHAR(255) null,url VARCHAR(255) null,plId LONG,accessName VARCHAR(75) null,accessFound BOOLEAN,accessDate LONG,elapseLoad LONG,uploadSize LONG,downloadSize LONG)";
 	public static final String TABLE_SQL_DROP = "drop table CONSIS_TRACK_Browsinglog";
 	public static final String ORDER_BY_JPQL = " ORDER BY browsinglog.accessDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CONSIS_TRACK_Browsinglog.accessDate DESC";
@@ -126,6 +130,10 @@ public class BrowsinglogModelImpl extends BaseModelImpl<Browsinglog>
 		attributes.put("browsinglogId", getBrowsinglogId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userlogId", getUserlogId());
+		attributes.put("clientHost", getClientHost());
+		attributes.put("clientAddr", getClientAddr());
+		attributes.put("serverName", getServerName());
+		attributes.put("serverPort", getServerPort());
 		attributes.put("userAgent", getUserAgent());
 		attributes.put("url", getUrl());
 		attributes.put("plId", getPlId());
@@ -157,6 +165,30 @@ public class BrowsinglogModelImpl extends BaseModelImpl<Browsinglog>
 
 		if (userlogId != null) {
 			setUserlogId(userlogId);
+		}
+
+		String clientHost = (String)attributes.get("clientHost");
+
+		if (clientHost != null) {
+			setClientHost(clientHost);
+		}
+
+		String clientAddr = (String)attributes.get("clientAddr");
+
+		if (clientAddr != null) {
+			setClientAddr(clientAddr);
+		}
+
+		String serverName = (String)attributes.get("serverName");
+
+		if (serverName != null) {
+			setServerName(serverName);
+		}
+
+		Integer serverPort = (Integer)attributes.get("serverPort");
+
+		if (serverPort != null) {
+			setServerPort(serverPort);
 		}
 
 		String userAgent = (String)attributes.get("userAgent");
@@ -260,6 +292,53 @@ public class BrowsinglogModelImpl extends BaseModelImpl<Browsinglog>
 
 	public long getOriginalUserlogId() {
 		return _originalUserlogId;
+	}
+
+	public String getClientHost() {
+		if (_clientHost == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _clientHost;
+		}
+	}
+
+	public void setClientHost(String clientHost) {
+		_clientHost = clientHost;
+	}
+
+	public String getClientAddr() {
+		if (_clientAddr == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _clientAddr;
+		}
+	}
+
+	public void setClientAddr(String clientAddr) {
+		_clientAddr = clientAddr;
+	}
+
+	public String getServerName() {
+		if (_serverName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _serverName;
+		}
+	}
+
+	public void setServerName(String serverName) {
+		_serverName = serverName;
+	}
+
+	public int getServerPort() {
+		return _serverPort;
+	}
+
+	public void setServerPort(int serverPort) {
+		_serverPort = serverPort;
 	}
 
 	public String getUserAgent() {
@@ -390,6 +469,10 @@ public class BrowsinglogModelImpl extends BaseModelImpl<Browsinglog>
 		browsinglogImpl.setBrowsinglogId(getBrowsinglogId());
 		browsinglogImpl.setCompanyId(getCompanyId());
 		browsinglogImpl.setUserlogId(getUserlogId());
+		browsinglogImpl.setClientHost(getClientHost());
+		browsinglogImpl.setClientAddr(getClientAddr());
+		browsinglogImpl.setServerName(getServerName());
+		browsinglogImpl.setServerPort(getServerPort());
 		browsinglogImpl.setUserAgent(getUserAgent());
 		browsinglogImpl.setUrl(getUrl());
 		browsinglogImpl.setPlId(getPlId());
@@ -482,6 +565,32 @@ public class BrowsinglogModelImpl extends BaseModelImpl<Browsinglog>
 
 		browsinglogCacheModel.userlogId = getUserlogId();
 
+		browsinglogCacheModel.clientHost = getClientHost();
+
+		String clientHost = browsinglogCacheModel.clientHost;
+
+		if ((clientHost != null) && (clientHost.length() == 0)) {
+			browsinglogCacheModel.clientHost = null;
+		}
+
+		browsinglogCacheModel.clientAddr = getClientAddr();
+
+		String clientAddr = browsinglogCacheModel.clientAddr;
+
+		if ((clientAddr != null) && (clientAddr.length() == 0)) {
+			browsinglogCacheModel.clientAddr = null;
+		}
+
+		browsinglogCacheModel.serverName = getServerName();
+
+		String serverName = browsinglogCacheModel.serverName;
+
+		if ((serverName != null) && (serverName.length() == 0)) {
+			browsinglogCacheModel.serverName = null;
+		}
+
+		browsinglogCacheModel.serverPort = getServerPort();
+
 		browsinglogCacheModel.userAgent = getUserAgent();
 
 		String userAgent = browsinglogCacheModel.userAgent;
@@ -523,7 +632,7 @@ public class BrowsinglogModelImpl extends BaseModelImpl<Browsinglog>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(33);
 
 		sb.append("{browsinglogId=");
 		sb.append(getBrowsinglogId());
@@ -531,6 +640,14 @@ public class BrowsinglogModelImpl extends BaseModelImpl<Browsinglog>
 		sb.append(getCompanyId());
 		sb.append(", userlogId=");
 		sb.append(getUserlogId());
+		sb.append(", clientHost=");
+		sb.append(getClientHost());
+		sb.append(", clientAddr=");
+		sb.append(getClientAddr());
+		sb.append(", serverName=");
+		sb.append(getServerName());
+		sb.append(", serverPort=");
+		sb.append(getServerPort());
 		sb.append(", userAgent=");
 		sb.append(getUserAgent());
 		sb.append(", url=");
@@ -555,7 +672,7 @@ public class BrowsinglogModelImpl extends BaseModelImpl<Browsinglog>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(40);
+		StringBundler sb = new StringBundler(52);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.consistent.tracking.model.Browsinglog");
@@ -572,6 +689,22 @@ public class BrowsinglogModelImpl extends BaseModelImpl<Browsinglog>
 		sb.append(
 			"<column><column-name>userlogId</column-name><column-value><![CDATA[");
 		sb.append(getUserlogId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>clientHost</column-name><column-value><![CDATA[");
+		sb.append(getClientHost());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>clientAddr</column-name><column-value><![CDATA[");
+		sb.append(getClientAddr());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>serverName</column-name><column-value><![CDATA[");
+		sb.append(getServerName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>serverPort</column-name><column-value><![CDATA[");
+		sb.append(getServerPort());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userAgent</column-name><column-value><![CDATA[");
@@ -626,6 +759,10 @@ public class BrowsinglogModelImpl extends BaseModelImpl<Browsinglog>
 	private long _userlogId;
 	private long _originalUserlogId;
 	private boolean _setOriginalUserlogId;
+	private String _clientHost;
+	private String _clientAddr;
+	private String _serverName;
+	private int _serverPort;
 	private String _userAgent;
 	private String _url;
 	private long _plId;

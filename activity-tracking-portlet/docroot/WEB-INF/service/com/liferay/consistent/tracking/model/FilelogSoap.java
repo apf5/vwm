@@ -34,6 +34,7 @@ public class FilelogSoap implements Serializable {
 		soapModel.setGuest(model.getGuest());
 		soapModel.setUserlogId(model.getUserlogId());
 		soapModel.setFileId(model.getFileId());
+		soapModel.setFileVersion(model.getFileVersion());
 		soapModel.setAccessDate(model.getAccessDate());
 		soapModel.setElapseLoad(model.getElapseLoad());
 		soapModel.setTrafic(model.getTrafic());
@@ -134,6 +135,14 @@ public class FilelogSoap implements Serializable {
 		_fileId = fileId;
 	}
 
+	public String getFileVersion() {
+		return _fileVersion;
+	}
+
+	public void setFileVersion(String fileVersion) {
+		_fileVersion = fileVersion;
+	}
+
 	public long getAccessDate() {
 		return _accessDate;
 	}
@@ -179,6 +188,7 @@ public class FilelogSoap implements Serializable {
 	private boolean _guest;
 	private long _userlogId;
 	private long _fileId;
+	private String _fileVersion;
 	private long _accessDate;
 	private long _elapseLoad;
 	private boolean _trafic;

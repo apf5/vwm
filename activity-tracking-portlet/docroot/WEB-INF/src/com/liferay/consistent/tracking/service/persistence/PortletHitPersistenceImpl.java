@@ -98,6 +98,25 @@ public class PortletHitPersistenceImpl extends BasePersistenceImpl<PortletHit>
 			PortletHitModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCompanyId",
 			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_C_S = new FinderPath(PortletHitModelImpl.ENTITY_CACHE_ENABLED,
+			PortletHitModelImpl.FINDER_CACHE_ENABLED, PortletHitImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByC_S",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_S = new FinderPath(PortletHitModelImpl.ENTITY_CACHE_ENABLED,
+			PortletHitModelImpl.FINDER_CACHE_ENABLED, PortletHitImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_S",
+			new String[] { Long.class.getName(), Long.class.getName() },
+			PortletHitModelImpl.COMPANYID_COLUMN_BITMASK |
+			PortletHitModelImpl.USERLOGID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_S = new FinderPath(PortletHitModelImpl.ENTITY_CACHE_ENABLED,
+			PortletHitModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_S",
+			new String[] { Long.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_C_G = new FinderPath(PortletHitModelImpl.ENTITY_CACHE_ENABLED,
 			PortletHitModelImpl.FINDER_CACHE_ENABLED, PortletHitImpl.class,
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByC_G",
@@ -402,6 +421,27 @@ public class PortletHitPersistenceImpl extends BasePersistenceImpl<PortletHit>
 				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYID,
 					args);
 				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
+					args);
+			}
+
+			if ((portletHitModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_S.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(portletHitModelImpl.getOriginalCompanyId()),
+						Long.valueOf(portletHitModelImpl.getOriginalUserlogId())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_S, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_S,
+					args);
+
+				args = new Object[] {
+						Long.valueOf(portletHitModelImpl.getCompanyId()),
+						Long.valueOf(portletHitModelImpl.getUserlogId())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_S, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_S,
 					args);
 			}
 
@@ -966,6 +1006,417 @@ public class PortletHitPersistenceImpl extends BasePersistenceImpl<PortletHit>
 		QueryPos qPos = QueryPos.getInstance(q);
 
 		qPos.add(companyId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(portletHit);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<PortletHit> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Returns all the portlet hits where companyId = &#63; and userlogId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param userlogId the userlog ID
+	 * @return the matching portlet hits
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<PortletHit> findByC_S(long companyId, long userlogId)
+		throws SystemException {
+		return findByC_S(companyId, userlogId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the portlet hits where companyId = &#63; and userlogId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param userlogId the userlog ID
+	 * @param start the lower bound of the range of portlet hits
+	 * @param end the upper bound of the range of portlet hits (not inclusive)
+	 * @return the range of matching portlet hits
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<PortletHit> findByC_S(long companyId, long userlogId,
+		int start, int end) throws SystemException {
+		return findByC_S(companyId, userlogId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the portlet hits where companyId = &#63; and userlogId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param userlogId the userlog ID
+	 * @param start the lower bound of the range of portlet hits
+	 * @param end the upper bound of the range of portlet hits (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching portlet hits
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<PortletHit> findByC_S(long companyId, long userlogId,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_S;
+			finderArgs = new Object[] { companyId, userlogId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_C_S;
+			finderArgs = new Object[] {
+					companyId, userlogId,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<PortletHit> list = (List<PortletHit>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (PortletHit portletHit : list) {
+				if ((companyId != portletHit.getCompanyId()) ||
+						(userlogId != portletHit.getUserlogId())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_PORTLETHIT_WHERE);
+
+			query.append(_FINDER_COLUMN_C_S_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_S_USERLOGID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(PortletHitModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(userlogId);
+
+				list = (List<PortletHit>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					FinderCacheUtil.removeResult(finderPath, finderArgs);
+				}
+				else {
+					cacheResult(list);
+
+					FinderCacheUtil.putResult(finderPath, finderArgs, list);
+				}
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first portlet hit in the ordered set where companyId = &#63; and userlogId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param userlogId the userlog ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching portlet hit
+	 * @throws com.liferay.consistent.tracking.NoSuchPortletHitException if a matching portlet hit could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public PortletHit findByC_S_First(long companyId, long userlogId,
+		OrderByComparator orderByComparator)
+		throws NoSuchPortletHitException, SystemException {
+		PortletHit portletHit = fetchByC_S_First(companyId, userlogId,
+				orderByComparator);
+
+		if (portletHit != null) {
+			return portletHit;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("companyId=");
+		msg.append(companyId);
+
+		msg.append(", userlogId=");
+		msg.append(userlogId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchPortletHitException(msg.toString());
+	}
+
+	/**
+	 * Returns the first portlet hit in the ordered set where companyId = &#63; and userlogId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param userlogId the userlog ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching portlet hit, or <code>null</code> if a matching portlet hit could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public PortletHit fetchByC_S_First(long companyId, long userlogId,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<PortletHit> list = findByC_S(companyId, userlogId, 0, 1,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last portlet hit in the ordered set where companyId = &#63; and userlogId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param userlogId the userlog ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching portlet hit
+	 * @throws com.liferay.consistent.tracking.NoSuchPortletHitException if a matching portlet hit could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public PortletHit findByC_S_Last(long companyId, long userlogId,
+		OrderByComparator orderByComparator)
+		throws NoSuchPortletHitException, SystemException {
+		PortletHit portletHit = fetchByC_S_Last(companyId, userlogId,
+				orderByComparator);
+
+		if (portletHit != null) {
+			return portletHit;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("companyId=");
+		msg.append(companyId);
+
+		msg.append(", userlogId=");
+		msg.append(userlogId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchPortletHitException(msg.toString());
+	}
+
+	/**
+	 * Returns the last portlet hit in the ordered set where companyId = &#63; and userlogId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param userlogId the userlog ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching portlet hit, or <code>null</code> if a matching portlet hit could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public PortletHit fetchByC_S_Last(long companyId, long userlogId,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByC_S(companyId, userlogId);
+
+		List<PortletHit> list = findByC_S(companyId, userlogId, count - 1,
+				count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the portlet hits before and after the current portlet hit in the ordered set where companyId = &#63; and userlogId = &#63;.
+	 *
+	 * @param hitId the primary key of the current portlet hit
+	 * @param companyId the company ID
+	 * @param userlogId the userlog ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next portlet hit
+	 * @throws com.liferay.consistent.tracking.NoSuchPortletHitException if a portlet hit with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public PortletHit[] findByC_S_PrevAndNext(long hitId, long companyId,
+		long userlogId, OrderByComparator orderByComparator)
+		throws NoSuchPortletHitException, SystemException {
+		PortletHit portletHit = findByPrimaryKey(hitId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			PortletHit[] array = new PortletHitImpl[3];
+
+			array[0] = getByC_S_PrevAndNext(session, portletHit, companyId,
+					userlogId, orderByComparator, true);
+
+			array[1] = portletHit;
+
+			array[2] = getByC_S_PrevAndNext(session, portletHit, companyId,
+					userlogId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected PortletHit getByC_S_PrevAndNext(Session session,
+		PortletHit portletHit, long companyId, long userlogId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_PORTLETHIT_WHERE);
+
+		query.append(_FINDER_COLUMN_C_S_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_C_S_USERLOGID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		else {
+			query.append(PortletHitModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		qPos.add(userlogId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(portletHit);
@@ -2443,6 +2894,20 @@ public class PortletHitPersistenceImpl extends BasePersistenceImpl<PortletHit>
 	}
 
 	/**
+	 * Removes all the portlet hits where companyId = &#63; and userlogId = &#63; from the database.
+	 *
+	 * @param companyId the company ID
+	 * @param userlogId the userlog ID
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByC_S(long companyId, long userlogId)
+		throws SystemException {
+		for (PortletHit portletHit : findByC_S(companyId, userlogId)) {
+			remove(portletHit);
+		}
+	}
+
+	/**
 	 * Removes all the portlet hits where companyId = &#63; and guest = &#63; from the database.
 	 *
 	 * @param companyId the company ID
@@ -2542,6 +3007,65 @@ public class PortletHitPersistenceImpl extends BasePersistenceImpl<PortletHit>
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COMPANYID,
 					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Returns the number of portlet hits where companyId = &#63; and userlogId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param userlogId the userlog ID
+	 * @return the number of matching portlet hits
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByC_S(long companyId, long userlogId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { companyId, userlogId };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_S,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_PORTLETHIT_WHERE);
+
+			query.append(_FINDER_COLUMN_C_S_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_S_USERLOGID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(userlogId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_S, finderArgs,
+					count);
 
 				closeSession(session);
 			}
@@ -2867,6 +3391,8 @@ public class PortletHitPersistenceImpl extends BasePersistenceImpl<PortletHit>
 	private static final String _SQL_COUNT_PORTLETHIT = "SELECT COUNT(portletHit) FROM PortletHit portletHit";
 	private static final String _SQL_COUNT_PORTLETHIT_WHERE = "SELECT COUNT(portletHit) FROM PortletHit portletHit WHERE ";
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "portletHit.companyId = ?";
+	private static final String _FINDER_COLUMN_C_S_COMPANYID_2 = "portletHit.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_S_USERLOGID_2 = "portletHit.userlogId = ?";
 	private static final String _FINDER_COLUMN_C_G_COMPANYID_2 = "portletHit.companyId = ? AND ";
 	private static final String _FINDER_COLUMN_C_G_GUEST_2 = "portletHit.guest = ?";
 	private static final String _FINDER_COLUMN_C_P_G_COMPANYID_2 = "portletHit.companyId = ? AND ";

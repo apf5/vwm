@@ -333,6 +333,157 @@ public class PortletHitUtil {
 	}
 
 	/**
+	* Returns all the portlet hits where companyId = &#63; and userlogId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param userlogId the userlog ID
+	* @return the matching portlet hits
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.consistent.tracking.model.PortletHit> findByC_S(
+		long companyId, long userlogId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByC_S(companyId, userlogId);
+	}
+
+	/**
+	* Returns a range of all the portlet hits where companyId = &#63; and userlogId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param userlogId the userlog ID
+	* @param start the lower bound of the range of portlet hits
+	* @param end the upper bound of the range of portlet hits (not inclusive)
+	* @return the range of matching portlet hits
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.consistent.tracking.model.PortletHit> findByC_S(
+		long companyId, long userlogId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByC_S(companyId, userlogId, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the portlet hits where companyId = &#63; and userlogId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param userlogId the userlog ID
+	* @param start the lower bound of the range of portlet hits
+	* @param end the upper bound of the range of portlet hits (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching portlet hits
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.consistent.tracking.model.PortletHit> findByC_S(
+		long companyId, long userlogId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByC_S(companyId, userlogId, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the first portlet hit in the ordered set where companyId = &#63; and userlogId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param userlogId the userlog ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching portlet hit
+	* @throws com.liferay.consistent.tracking.NoSuchPortletHitException if a matching portlet hit could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.consistent.tracking.model.PortletHit findByC_S_First(
+		long companyId, long userlogId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.consistent.tracking.NoSuchPortletHitException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByC_S_First(companyId, userlogId, orderByComparator);
+	}
+
+	/**
+	* Returns the first portlet hit in the ordered set where companyId = &#63; and userlogId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param userlogId the userlog ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching portlet hit, or <code>null</code> if a matching portlet hit could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.consistent.tracking.model.PortletHit fetchByC_S_First(
+		long companyId, long userlogId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByC_S_First(companyId, userlogId, orderByComparator);
+	}
+
+	/**
+	* Returns the last portlet hit in the ordered set where companyId = &#63; and userlogId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param userlogId the userlog ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching portlet hit
+	* @throws com.liferay.consistent.tracking.NoSuchPortletHitException if a matching portlet hit could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.consistent.tracking.model.PortletHit findByC_S_Last(
+		long companyId, long userlogId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.consistent.tracking.NoSuchPortletHitException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByC_S_Last(companyId, userlogId, orderByComparator);
+	}
+
+	/**
+	* Returns the last portlet hit in the ordered set where companyId = &#63; and userlogId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param userlogId the userlog ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching portlet hit, or <code>null</code> if a matching portlet hit could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.consistent.tracking.model.PortletHit fetchByC_S_Last(
+		long companyId, long userlogId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByC_S_Last(companyId, userlogId, orderByComparator);
+	}
+
+	/**
+	* Returns the portlet hits before and after the current portlet hit in the ordered set where companyId = &#63; and userlogId = &#63;.
+	*
+	* @param hitId the primary key of the current portlet hit
+	* @param companyId the company ID
+	* @param userlogId the userlog ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next portlet hit
+	* @throws com.liferay.consistent.tracking.NoSuchPortletHitException if a portlet hit with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.consistent.tracking.model.PortletHit[] findByC_S_PrevAndNext(
+		long hitId, long companyId, long userlogId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.consistent.tracking.NoSuchPortletHitException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByC_S_PrevAndNext(hitId, companyId, userlogId,
+			orderByComparator);
+	}
+
+	/**
 	* Returns all the portlet hits where companyId = &#63; and guest = &#63;.
 	*
 	* @param companyId the company ID
@@ -873,6 +1024,18 @@ public class PortletHitUtil {
 	}
 
 	/**
+	* Removes all the portlet hits where companyId = &#63; and userlogId = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param userlogId the userlog ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByC_S(long companyId, long userlogId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByC_S(companyId, userlogId);
+	}
+
+	/**
 	* Removes all the portlet hits where companyId = &#63; and guest = &#63; from the database.
 	*
 	* @param companyId the company ID
@@ -932,6 +1095,19 @@ public class PortletHitUtil {
 	public static int countByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByCompanyId(companyId);
+	}
+
+	/**
+	* Returns the number of portlet hits where companyId = &#63; and userlogId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param userlogId the userlog ID
+	* @return the number of matching portlet hits
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByC_S(long companyId, long userlogId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByC_S(companyId, userlogId);
 	}
 
 	/**

@@ -32,14 +32,12 @@ import java.io.Serializable;
 public class BrowserCacheModel implements CacheModel<Browser>, Serializable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(5);
 
 		sb.append("{browserId=");
 		sb.append(browserId);
 		sb.append(", name=");
 		sb.append(name);
-		sb.append(", version=");
-		sb.append(version);
 		sb.append("}");
 
 		return sb.toString();
@@ -57,13 +55,6 @@ public class BrowserCacheModel implements CacheModel<Browser>, Serializable {
 			browserImpl.setName(name);
 		}
 
-		if (version == null) {
-			browserImpl.setVersion(StringPool.BLANK);
-		}
-		else {
-			browserImpl.setVersion(version);
-		}
-
 		browserImpl.resetOriginalValues();
 
 		return browserImpl;
@@ -71,5 +62,4 @@ public class BrowserCacheModel implements CacheModel<Browser>, Serializable {
 
 	public long browserId;
 	public String name;
-	public String version;
 }

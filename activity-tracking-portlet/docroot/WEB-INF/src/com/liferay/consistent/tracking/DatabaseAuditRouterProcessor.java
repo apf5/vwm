@@ -14,7 +14,7 @@
 
 package com.liferay.consistent.tracking;
 
-import com.liferay.consistent.tracking.service.TrackEventLocalServiceUtil;
+
 import com.liferay.portal.kernel.audit.AuditMessage;
 import com.liferay.portal.kernel.audit.AuditMessageProcessor;
 import com.liferay.portal.kernel.log.Log;
@@ -35,9 +35,11 @@ public class DatabaseAuditRouterProcessor implements AuditMessageProcessor {
 	}
 
 	protected void doProcess(AuditMessage auditMessage) throws Exception {
-		TrackEventLocalServiceUtil.addAuditMessage(auditMessage);
-		//auditMessage.setAdditionalInfo(null);
-		//System.out.println(auditMessage.toJSONObject());
+		//TrackEventLocalServiceUtil.addAuditMessage(auditMessage);
+		
+		auditMessage.setAdditionalInfo(null);
+		
+		//System.out.println("event: "+auditMessage.getEventType()+" data: "+auditMessage.toJSONObject());
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

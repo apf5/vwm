@@ -17,6 +17,7 @@ package com.liferay.consistent.tracking.model.impl;
 import com.liferay.consistent.tracking.model.Filelog;
 
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CacheModel;
 
 import java.io.Serializable;
@@ -31,7 +32,7 @@ import java.io.Serializable;
 public class FilelogCacheModel implements CacheModel<Filelog>, Serializable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{FilelogId=");
 		sb.append(FilelogId);
@@ -43,6 +44,8 @@ public class FilelogCacheModel implements CacheModel<Filelog>, Serializable {
 		sb.append(userlogId);
 		sb.append(", fileId=");
 		sb.append(fileId);
+		sb.append(", fileVersion=");
+		sb.append(fileVersion);
 		sb.append(", accessDate=");
 		sb.append(accessDate);
 		sb.append(", elapseLoad=");
@@ -64,6 +67,14 @@ public class FilelogCacheModel implements CacheModel<Filelog>, Serializable {
 		filelogImpl.setGuest(guest);
 		filelogImpl.setUserlogId(userlogId);
 		filelogImpl.setFileId(fileId);
+
+		if (fileVersion == null) {
+			filelogImpl.setFileVersion(StringPool.BLANK);
+		}
+		else {
+			filelogImpl.setFileVersion(fileVersion);
+		}
+
 		filelogImpl.setAccessDate(accessDate);
 		filelogImpl.setElapseLoad(elapseLoad);
 		filelogImpl.setTrafic(trafic);
@@ -79,6 +90,7 @@ public class FilelogCacheModel implements CacheModel<Filelog>, Serializable {
 	public boolean guest;
 	public long userlogId;
 	public long fileId;
+	public String fileVersion;
 	public long accessDate;
 	public long elapseLoad;
 	public boolean trafic;

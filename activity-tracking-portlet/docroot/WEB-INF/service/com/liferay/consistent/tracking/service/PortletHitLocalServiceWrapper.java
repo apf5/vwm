@@ -268,6 +268,14 @@ public class PortletHitLocalServiceWrapper implements PortletHitLocalService,
 			arguments);
 	}
 
+	public com.liferay.consistent.tracking.model.PortletHit addPortletHit(
+		long companyId, java.lang.String portletId, boolean guest, long userId,
+		long userlogId, java.util.Date access)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _portletHitLocalService.addPortletHit(companyId, portletId,
+			guest, userId, userlogId, access);
+	}
+
 	/**
 	 * @deprecated Renamed to {@link #getWrappedService}
 	 */

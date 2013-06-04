@@ -185,185 +185,45 @@ public class OSUtil {
 	}
 
 	/**
-	* Returns all the o ses where name = &#63;.
+	* Returns the o s where name = &#63; or throws a {@link com.liferay.consistent.tracking.NoSuchOSException} if it could not be found.
 	*
 	* @param name the name
-	* @return the matching o ses
-	* @throws SystemException if a system exception occurred
-	*/
-	public static java.util.List<com.liferay.consistent.tracking.model.OS> findByName(
-		java.lang.String name)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByName(name);
-	}
-
-	/**
-	* Returns a range of all the o ses where name = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param name the name
-	* @param start the lower bound of the range of o ses
-	* @param end the upper bound of the range of o ses (not inclusive)
-	* @return the range of matching o ses
-	* @throws SystemException if a system exception occurred
-	*/
-	public static java.util.List<com.liferay.consistent.tracking.model.OS> findByName(
-		java.lang.String name, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByName(name, start, end);
-	}
-
-	/**
-	* Returns an ordered range of all the o ses where name = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param name the name
-	* @param start the lower bound of the range of o ses
-	* @param end the upper bound of the range of o ses (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching o ses
-	* @throws SystemException if a system exception occurred
-	*/
-	public static java.util.List<com.liferay.consistent.tracking.model.OS> findByName(
-		java.lang.String name, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByName(name, start, end, orderByComparator);
-	}
-
-	/**
-	* Returns the first o s in the ordered set where name = &#63;.
-	*
-	* @param name the name
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching o s
-	* @throws com.liferay.consistent.tracking.NoSuchOSException if a matching o s could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.consistent.tracking.model.OS findByName_First(
-		java.lang.String name,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.consistent.tracking.NoSuchOSException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByName_First(name, orderByComparator);
-	}
-
-	/**
-	* Returns the first o s in the ordered set where name = &#63;.
-	*
-	* @param name the name
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching o s, or <code>null</code> if a matching o s could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.consistent.tracking.model.OS fetchByName_First(
-		java.lang.String name,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByName_First(name, orderByComparator);
-	}
-
-	/**
-	* Returns the last o s in the ordered set where name = &#63;.
-	*
-	* @param name the name
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching o s
-	* @throws com.liferay.consistent.tracking.NoSuchOSException if a matching o s could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.consistent.tracking.model.OS findByName_Last(
-		java.lang.String name,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.consistent.tracking.NoSuchOSException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByName_Last(name, orderByComparator);
-	}
-
-	/**
-	* Returns the last o s in the ordered set where name = &#63;.
-	*
-	* @param name the name
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching o s, or <code>null</code> if a matching o s could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.consistent.tracking.model.OS fetchByName_Last(
-		java.lang.String name,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByName_Last(name, orderByComparator);
-	}
-
-	/**
-	* Returns the o ses before and after the current o s in the ordered set where name = &#63;.
-	*
-	* @param osId the primary key of the current o s
-	* @param name the name
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next o s
-	* @throws com.liferay.consistent.tracking.NoSuchOSException if a o s with the primary key could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.consistent.tracking.model.OS[] findByName_PrevAndNext(
-		long osId, java.lang.String name,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.consistent.tracking.NoSuchOSException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .findByName_PrevAndNext(osId, name, orderByComparator);
-	}
-
-	/**
-	* Returns the o s where name = &#63; and version = &#63; or throws a {@link com.liferay.consistent.tracking.NoSuchOSException} if it could not be found.
-	*
-	* @param name the name
-	* @param version the version
 	* @return the matching o s
 	* @throws com.liferay.consistent.tracking.NoSuchOSException if a matching o s could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.consistent.tracking.model.OS findByN_V(
-		java.lang.String name, java.lang.String version)
+	public static com.liferay.consistent.tracking.model.OS findByName(
+		java.lang.String name)
 		throws com.liferay.consistent.tracking.NoSuchOSException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByN_V(name, version);
+		return getPersistence().findByName(name);
 	}
 
 	/**
-	* Returns the o s where name = &#63; and version = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the o s where name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
 	* @param name the name
-	* @param version the version
 	* @return the matching o s, or <code>null</code> if a matching o s could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.consistent.tracking.model.OS fetchByN_V(
-		java.lang.String name, java.lang.String version)
+	public static com.liferay.consistent.tracking.model.OS fetchByName(
+		java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByN_V(name, version);
+		return getPersistence().fetchByName(name);
 	}
 
 	/**
-	* Returns the o s where name = &#63; and version = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the o s where name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param name the name
-	* @param version the version
 	* @param retrieveFromCache whether to use the finder cache
 	* @return the matching o s, or <code>null</code> if a matching o s could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.consistent.tracking.model.OS fetchByN_V(
-		java.lang.String name, java.lang.String version,
-		boolean retrieveFromCache)
+	public static com.liferay.consistent.tracking.model.OS fetchByName(
+		java.lang.String name, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByN_V(name, version, retrieveFromCache);
+		return getPersistence().fetchByName(name, retrieveFromCache);
 	}
 
 	/**
@@ -416,29 +276,17 @@ public class OSUtil {
 	}
 
 	/**
-	* Removes all the o ses where name = &#63; from the database.
+	* Removes the o s where name = &#63; from the database.
 	*
 	* @param name the name
-	* @throws SystemException if a system exception occurred
-	*/
-	public static void removeByName(java.lang.String name)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeByName(name);
-	}
-
-	/**
-	* Removes the o s where name = &#63; and version = &#63; from the database.
-	*
-	* @param name the name
-	* @param version the version
 	* @return the o s that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.consistent.tracking.model.OS removeByN_V(
-		java.lang.String name, java.lang.String version)
+	public static com.liferay.consistent.tracking.model.OS removeByName(
+		java.lang.String name)
 		throws com.liferay.consistent.tracking.NoSuchOSException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().removeByN_V(name, version);
+		return getPersistence().removeByName(name);
 	}
 
 	/**
@@ -461,19 +309,6 @@ public class OSUtil {
 	public static int countByName(java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByName(name);
-	}
-
-	/**
-	* Returns the number of o ses where name = &#63; and version = &#63;.
-	*
-	* @param name the name
-	* @param version the version
-	* @return the number of matching o ses
-	* @throws SystemException if a system exception occurred
-	*/
-	public static int countByN_V(java.lang.String name, java.lang.String version)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByN_V(name, version);
 	}
 
 	/**

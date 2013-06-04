@@ -266,6 +266,28 @@ public class FilelogLocalServiceWrapper implements FilelogLocalService,
 		return _filelogLocalService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public com.liferay.consistent.tracking.model.Filelog addFilelogDownload(
+		long companyId, long fileId, java.lang.String fileVersion,
+		boolean guest, long userlogId, java.util.Date access)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _filelogLocalService.addFilelogDownload(companyId, fileId,
+			fileVersion, guest, userlogId, access);
+	}
+
+	public com.liferay.consistent.tracking.model.Filelog updateElapseFilelog(
+		long filelogId, long elapseLoad)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _filelogLocalService.updateElapseFilelog(filelogId, elapseLoad);
+	}
+
+	public com.liferay.consistent.tracking.model.Filelog addFilelogUpload(
+		long companyId, long fileId, java.lang.String fileVersion,
+		boolean guest, long userlogId, long elapseLoad, java.util.Date access)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _filelogLocalService.addFilelogUpload(companyId, fileId,
+			fileVersion, guest, userlogId, elapseLoad, access);
+	}
+
 	/**
 	 * @deprecated Renamed to {@link #getWrappedService}
 	 */

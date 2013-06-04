@@ -69,6 +69,7 @@ public class FilelogClp extends BaseModelImpl<Filelog> implements Filelog {
 		attributes.put("guest", getGuest());
 		attributes.put("userlogId", getUserlogId());
 		attributes.put("fileId", getFileId());
+		attributes.put("fileVersion", getFileVersion());
 		attributes.put("accessDate", getAccessDate());
 		attributes.put("elapseLoad", getElapseLoad());
 		attributes.put("trafic", getTrafic());
@@ -107,6 +108,12 @@ public class FilelogClp extends BaseModelImpl<Filelog> implements Filelog {
 
 		if (fileId != null) {
 			setFileId(fileId);
+		}
+
+		String fileVersion = (String)attributes.get("fileVersion");
+
+		if (fileVersion != null) {
+			setFileVersion(fileVersion);
 		}
 
 		Long accessDate = (Long)attributes.get("accessDate");
@@ -176,6 +183,14 @@ public class FilelogClp extends BaseModelImpl<Filelog> implements Filelog {
 
 	public void setFileId(long fileId) {
 		_fileId = fileId;
+	}
+
+	public String getFileVersion() {
+		return _fileVersion;
+	}
+
+	public void setFileVersion(String fileVersion) {
+		_fileVersion = fileVersion;
 	}
 
 	public long getAccessDate() {
@@ -250,6 +265,7 @@ public class FilelogClp extends BaseModelImpl<Filelog> implements Filelog {
 		clone.setGuest(getGuest());
 		clone.setUserlogId(getUserlogId());
 		clone.setFileId(getFileId());
+		clone.setFileVersion(getFileVersion());
 		clone.setAccessDate(getAccessDate());
 		clone.setElapseLoad(getElapseLoad());
 		clone.setTrafic(getTrafic());
@@ -312,7 +328,7 @@ public class FilelogClp extends BaseModelImpl<Filelog> implements Filelog {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{FilelogId=");
 		sb.append(getFilelogId());
@@ -324,6 +340,8 @@ public class FilelogClp extends BaseModelImpl<Filelog> implements Filelog {
 		sb.append(getUserlogId());
 		sb.append(", fileId=");
 		sb.append(getFileId());
+		sb.append(", fileVersion=");
+		sb.append(getFileVersion());
 		sb.append(", accessDate=");
 		sb.append(getAccessDate());
 		sb.append(", elapseLoad=");
@@ -338,7 +356,7 @@ public class FilelogClp extends BaseModelImpl<Filelog> implements Filelog {
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.consistent.tracking.model.Filelog");
@@ -363,6 +381,10 @@ public class FilelogClp extends BaseModelImpl<Filelog> implements Filelog {
 		sb.append(
 			"<column><column-name>fileId</column-name><column-value><![CDATA[");
 		sb.append(getFileId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>fileVersion</column-name><column-value><![CDATA[");
+		sb.append(getFileVersion());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>accessDate</column-name><column-value><![CDATA[");
@@ -391,6 +413,7 @@ public class FilelogClp extends BaseModelImpl<Filelog> implements Filelog {
 	private boolean _guest;
 	private long _userlogId;
 	private long _fileId;
+	private String _fileVersion;
 	private long _accessDate;
 	private long _elapseLoad;
 	private boolean _trafic;

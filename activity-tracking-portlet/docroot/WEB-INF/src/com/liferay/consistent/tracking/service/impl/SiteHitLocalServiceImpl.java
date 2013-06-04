@@ -14,7 +14,12 @@
 
 package com.liferay.consistent.tracking.service.impl;
 
+import com.liferay.consistent.tracking.model.SiteHit;
 import com.liferay.consistent.tracking.service.base.SiteHitLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.SystemException;
+
+
+import java.util.Date;
 
 /**
  * The implementation of the site hit local service.
@@ -36,4 +41,18 @@ public class SiteHitLocalServiceImpl extends SiteHitLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.liferay.consistent.tracking.service.SiteHitLocalServiceUtil} to access the site hit local service.
 	 */
+	
+	public SiteHit addSiteHit(long companyId,long siteId,boolean guest,Date access) throws SystemException{
+		SiteHit siteHit =
+				siteHitPersistence.create(
+				counterLocalService.increment(
+						SiteHit.class.getName()));
+		siteHit.setCompanyId(companyId);
+		siteHit.setSiteId(siteId);
+		siteHit.setGuest(guest);
+		siteHit.setAccessDate(access.getTime());
+		
+		return siteHitPersistence.update(siteHit, false);
+	}
+	
 }

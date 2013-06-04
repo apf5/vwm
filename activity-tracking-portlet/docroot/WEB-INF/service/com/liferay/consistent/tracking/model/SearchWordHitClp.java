@@ -191,15 +191,17 @@ public class SearchWordHitClp extends BaseModelImpl<SearchWordHit>
 	public int compareTo(SearchWordHit searchWordHit) {
 		int value = 0;
 
-		if (getWordId() < searchWordHit.getWordId()) {
+		if (getAccessDate() < searchWordHit.getAccessDate()) {
 			value = -1;
 		}
-		else if (getWordId() > searchWordHit.getWordId()) {
+		else if (getAccessDate() > searchWordHit.getAccessDate()) {
 			value = 1;
 		}
 		else {
 			value = 0;
 		}
+
+		value = value * -1;
 
 		if (value != 0) {
 			return value;

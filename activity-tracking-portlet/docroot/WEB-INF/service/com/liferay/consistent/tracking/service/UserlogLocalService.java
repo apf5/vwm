@@ -246,4 +246,17 @@ public interface UserlogLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	public com.liferay.consistent.tracking.model.Userlog addUserlog(
+		long companyId, long userId, java.lang.String userName,
+		java.lang.String serverName, int serverPort,
+		java.lang.String remoteHost, java.lang.String remoteAddress, long osId,
+		java.lang.String osManufacturer, long browserId,
+		java.lang.String browserVersion, java.lang.String sessionId,
+		java.util.Date accessDate)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.consistent.tracking.model.Userlog updateTimeSlapse(
+		long userlogId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

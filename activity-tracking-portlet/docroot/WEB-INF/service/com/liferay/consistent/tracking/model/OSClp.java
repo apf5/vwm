@@ -66,7 +66,6 @@ public class OSClp extends BaseModelImpl<OS> implements OS {
 
 		attributes.put("osId", getOsId());
 		attributes.put("name", getName());
-		attributes.put("version", getVersion());
 
 		return attributes;
 	}
@@ -84,12 +83,6 @@ public class OSClp extends BaseModelImpl<OS> implements OS {
 		if (name != null) {
 			setName(name);
 		}
-
-		String version = (String)attributes.get("version");
-
-		if (version != null) {
-			setVersion(version);
-		}
 	}
 
 	public long getOsId() {
@@ -106,14 +99,6 @@ public class OSClp extends BaseModelImpl<OS> implements OS {
 
 	public void setName(String name) {
 		_name = name;
-	}
-
-	public String getVersion() {
-		return _version;
-	}
-
-	public void setVersion(String version) {
-		_version = version;
 	}
 
 	public BaseModel<?> getOSRemoteModel() {
@@ -145,7 +130,6 @@ public class OSClp extends BaseModelImpl<OS> implements OS {
 
 		clone.setOsId(getOsId());
 		clone.setName(getName());
-		clone.setVersion(getVersion());
 
 		return clone;
 	}
@@ -194,21 +178,19 @@ public class OSClp extends BaseModelImpl<OS> implements OS {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(5);
 
 		sb.append("{osId=");
 		sb.append(getOsId());
 		sb.append(", name=");
 		sb.append(getName());
-		sb.append(", version=");
-		sb.append(getVersion());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(10);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.consistent.tracking.model.OS");
@@ -222,10 +204,6 @@ public class OSClp extends BaseModelImpl<OS> implements OS {
 			"<column><column-name>name</column-name><column-value><![CDATA[");
 		sb.append(getName());
 		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>version</column-name><column-value><![CDATA[");
-		sb.append(getVersion());
-		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -234,6 +212,5 @@ public class OSClp extends BaseModelImpl<OS> implements OS {
 
 	private long _osId;
 	private String _name;
-	private String _version;
 	private BaseModel<?> _osRemoteModel;
 }

@@ -53,7 +53,9 @@ public class UserlogWrapper implements Userlog, ModelWrapper<Userlog> {
 		attributes.put("remoteHost", getRemoteHost());
 		attributes.put("remoteAddress", getRemoteAddress());
 		attributes.put("osId", getOsId());
+		attributes.put("osManufacturer", getOsManufacturer());
 		attributes.put("browserId", getBrowserId());
+		attributes.put("browserVersion", getBrowserVersion());
 		attributes.put("sessionId", getSessionId());
 		attributes.put("accessDate", getAccessDate());
 		attributes.put("timeSlapse", getTimeSlapse());
@@ -116,10 +118,22 @@ public class UserlogWrapper implements Userlog, ModelWrapper<Userlog> {
 			setOsId(osId);
 		}
 
+		String osManufacturer = (String)attributes.get("osManufacturer");
+
+		if (osManufacturer != null) {
+			setOsManufacturer(osManufacturer);
+		}
+
 		Long browserId = (Long)attributes.get("browserId");
 
 		if (browserId != null) {
 			setBrowserId(browserId);
+		}
+
+		String browserVersion = (String)attributes.get("browserVersion");
+
+		if (browserVersion != null) {
+			setBrowserVersion(browserVersion);
 		}
 
 		String sessionId = (String)attributes.get("sessionId");
@@ -342,6 +356,24 @@ public class UserlogWrapper implements Userlog, ModelWrapper<Userlog> {
 	}
 
 	/**
+	* Returns the os manufacturer of this userlog.
+	*
+	* @return the os manufacturer of this userlog
+	*/
+	public java.lang.String getOsManufacturer() {
+		return _userlog.getOsManufacturer();
+	}
+
+	/**
+	* Sets the os manufacturer of this userlog.
+	*
+	* @param osManufacturer the os manufacturer of this userlog
+	*/
+	public void setOsManufacturer(java.lang.String osManufacturer) {
+		_userlog.setOsManufacturer(osManufacturer);
+	}
+
+	/**
 	* Returns the browser ID of this userlog.
 	*
 	* @return the browser ID of this userlog
@@ -357,6 +389,24 @@ public class UserlogWrapper implements Userlog, ModelWrapper<Userlog> {
 	*/
 	public void setBrowserId(long browserId) {
 		_userlog.setBrowserId(browserId);
+	}
+
+	/**
+	* Returns the browser version of this userlog.
+	*
+	* @return the browser version of this userlog
+	*/
+	public java.lang.String getBrowserVersion() {
+		return _userlog.getBrowserVersion();
+	}
+
+	/**
+	* Sets the browser version of this userlog.
+	*
+	* @param browserVersion the browser version of this userlog
+	*/
+	public void setBrowserVersion(java.lang.String browserVersion) {
+		_userlog.setBrowserVersion(browserVersion);
 	}
 
 	/**

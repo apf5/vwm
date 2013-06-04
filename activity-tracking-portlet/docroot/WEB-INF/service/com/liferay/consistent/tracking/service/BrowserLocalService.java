@@ -246,4 +246,9 @@ public interface BrowserLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.consistent.tracking.model.Browser getBrowser(
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

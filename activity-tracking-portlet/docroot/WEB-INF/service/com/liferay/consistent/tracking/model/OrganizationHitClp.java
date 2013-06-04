@@ -192,15 +192,17 @@ public class OrganizationHitClp extends BaseModelImpl<OrganizationHit>
 	public int compareTo(OrganizationHit organizationHit) {
 		int value = 0;
 
-		if (getOrganizationId() < organizationHit.getOrganizationId()) {
+		if (getAccessDate() < organizationHit.getAccessDate()) {
 			value = -1;
 		}
-		else if (getOrganizationId() > organizationHit.getOrganizationId()) {
+		else if (getAccessDate() > organizationHit.getAccessDate()) {
 			value = 1;
 		}
 		else {
 			value = 0;
 		}
+
+		value = value * -1;
 
 		if (value != 0) {
 			return value;

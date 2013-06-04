@@ -271,6 +271,13 @@ public class SearchPhraseHitLocalServiceWrapper
 			arguments);
 	}
 
+	public com.liferay.consistent.tracking.model.SearchPhraseHit addSearchPhraseHit(
+		long companyId, long phraseId, boolean guest, java.util.Date access)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _searchPhraseHitLocalService.addSearchPhraseHit(companyId,
+			phraseId, guest, access);
+	}
+
 	/**
 	 * @deprecated Renamed to {@link #getWrappedService}
 	 */

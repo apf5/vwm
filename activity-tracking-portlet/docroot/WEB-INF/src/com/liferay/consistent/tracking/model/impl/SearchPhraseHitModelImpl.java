@@ -65,8 +65,8 @@ public class SearchPhraseHitModelImpl extends BaseModelImpl<SearchPhraseHit>
 		};
 	public static final String TABLE_SQL_CREATE = "create table CONSIS_TRACK_SearchPhraseHit (hitId LONG not null primary key,companyId LONG,phraseId LONG,guest BOOLEAN,accessDate LONG)";
 	public static final String TABLE_SQL_DROP = "drop table CONSIS_TRACK_SearchPhraseHit";
-	public static final String ORDER_BY_JPQL = " ORDER BY searchPhraseHit.phraseId ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY CONSIS_TRACK_SearchPhraseHit.phraseId ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY searchPhraseHit.accessDate DESC";
+	public static final String ORDER_BY_SQL = " ORDER BY CONSIS_TRACK_SearchPhraseHit.accessDate DESC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -191,7 +191,7 @@ public class SearchPhraseHitModelImpl extends BaseModelImpl<SearchPhraseHit>
 	}
 
 	public void setPhraseId(long phraseId) {
-		_columnBitmask = -1L;
+		_columnBitmask |= PHRASEID_COLUMN_BITMASK;
 
 		if (!_setOriginalPhraseId) {
 			_setOriginalPhraseId = true;
@@ -235,6 +235,8 @@ public class SearchPhraseHitModelImpl extends BaseModelImpl<SearchPhraseHit>
 	}
 
 	public void setAccessDate(long accessDate) {
+		_columnBitmask = -1L;
+
 		_accessDate = accessDate;
 	}
 
@@ -284,15 +286,17 @@ public class SearchPhraseHitModelImpl extends BaseModelImpl<SearchPhraseHit>
 	public int compareTo(SearchPhraseHit searchPhraseHit) {
 		int value = 0;
 
-		if (getPhraseId() < searchPhraseHit.getPhraseId()) {
+		if (getAccessDate() < searchPhraseHit.getAccessDate()) {
 			value = -1;
 		}
-		else if (getPhraseId() > searchPhraseHit.getPhraseId()) {
+		else if (getAccessDate() > searchPhraseHit.getAccessDate()) {
 			value = 1;
 		}
 		else {
 			value = 0;
 		}
+
+		value = value * -1;
 
 		if (value != 0) {
 			return value;

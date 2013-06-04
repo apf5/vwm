@@ -104,13 +104,26 @@ public class UserlogLocalServiceClpInvoker {
 				"com.liferay.consistent.tracking.model.Userlog", "boolean"
 			};
 
-		_methodName88 = "getBeanIdentifier";
+		_methodName92 = "getBeanIdentifier";
 
-		_methodParameterTypes88 = new String[] {  };
+		_methodParameterTypes92 = new String[] {  };
 
-		_methodName89 = "setBeanIdentifier";
+		_methodName93 = "setBeanIdentifier";
 
-		_methodParameterTypes89 = new String[] { "java.lang.String" };
+		_methodParameterTypes93 = new String[] { "java.lang.String" };
+
+		_methodName98 = "addUserlog";
+
+		_methodParameterTypes98 = new String[] {
+				"long", "long", "java.lang.String", "java.lang.String", "int",
+				"java.lang.String", "java.lang.String", "long",
+				"java.lang.String", "long", "java.lang.String",
+				"java.lang.String", "java.util.Date"
+			};
+
+		_methodName99 = "updateTimeSlapse";
+
+		_methodParameterTypes99 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -202,14 +215,33 @@ public class UserlogLocalServiceClpInvoker {
 				((Boolean)arguments[1]).booleanValue());
 		}
 
-		if (_methodName88.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes88, parameterTypes)) {
+		if (_methodName92.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes92, parameterTypes)) {
 			return UserlogLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName89.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes89, parameterTypes)) {
+		if (_methodName93.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes93, parameterTypes)) {
 			UserlogLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
+		}
+
+		if (_methodName98.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes98, parameterTypes)) {
+			return UserlogLocalServiceUtil.addUserlog(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(),
+				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
+				((Integer)arguments[4]).intValue(),
+				(java.lang.String)arguments[5], (java.lang.String)arguments[6],
+				((Long)arguments[7]).longValue(),
+				(java.lang.String)arguments[8],
+				((Long)arguments[9]).longValue(),
+				(java.lang.String)arguments[10],
+				(java.lang.String)arguments[11], (java.util.Date)arguments[12]);
+		}
+
+		if (_methodName99.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes99, parameterTypes)) {
+			return UserlogLocalServiceUtil.updateTimeSlapse(((Long)arguments[0]).longValue());
 		}
 
 		throw new UnsupportedOperationException();
@@ -247,8 +279,12 @@ public class UserlogLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName88;
-	private String[] _methodParameterTypes88;
-	private String _methodName89;
-	private String[] _methodParameterTypes89;
+	private String _methodName92;
+	private String[] _methodParameterTypes92;
+	private String _methodName93;
+	private String[] _methodParameterTypes93;
+	private String _methodName98;
+	private String[] _methodParameterTypes98;
+	private String _methodName99;
+	private String[] _methodParameterTypes99;
 }

@@ -14,7 +14,11 @@
 
 package com.liferay.consistent.tracking.service.impl;
 
+import com.liferay.consistent.tracking.model.PortletHit;
 import com.liferay.consistent.tracking.service.base.PortletHitLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.SystemException;
+
+import java.util.Date;
 
 /**
  * The implementation of the portlet hit local service.
@@ -36,4 +40,28 @@ public class PortletHitLocalServiceImpl extends PortletHitLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.liferay.consistent.tracking.service.PortletHitLocalServiceUtil} to access the portlet hit local service.
 	 */
+	
+	public PortletHit addPortletHit(long companyId,String portletId, boolean guest, long userId, long userlogId, Date access) throws SystemException{
+		
+		PortletHit portletHit = 
+				portletHitPersistence.create(
+						counterLocalService.increment(
+								PortletHit.class.getName()));
+		
+		portletHit.setCompanyId(companyId);
+		portletHit.setPortletId(portletId);
+		portletHit.setGuest(guest);
+		if (guest) {
+			portletHit.setUserId(-1);
+			portletHit.setUserlogId(-1);
+			
+		} else {
+			portletHit.setUserId(userId);
+			portletHit.setUserlogId(userlogId);
+		}
+		portletHit.setAccessDate(access.getTime());
+				
+		return portletHitPersistence.update(portletHit, false);
+	}
+	
 }

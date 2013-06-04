@@ -246,4 +246,18 @@ public interface FilelogLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	public com.liferay.consistent.tracking.model.Filelog addFilelogDownload(
+		long companyId, long fileId, java.lang.String fileVersion,
+		boolean guest, long userlogId, java.util.Date access)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.consistent.tracking.model.Filelog updateElapseFilelog(
+		long filelogId, long elapseLoad)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.consistent.tracking.model.Filelog addFilelogUpload(
+		long companyId, long fileId, java.lang.String fileVersion,
+		boolean guest, long userlogId, long elapseLoad, java.util.Date access)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

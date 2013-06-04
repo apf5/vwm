@@ -14,7 +14,12 @@
 
 package com.liferay.consistent.tracking.service.impl;
 
+
+import com.liferay.consistent.tracking.model.OrganizationHit;
 import com.liferay.consistent.tracking.service.base.OrganizationHitLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.SystemException;
+
+import java.util.Date;
 
 /**
  * The implementation of the organization hit local service.
@@ -37,4 +42,17 @@ public class OrganizationHitLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link com.liferay.consistent.tracking.service.OrganizationHitLocalServiceUtil} to access the organization hit local service.
 	 */
+	
+	public OrganizationHit addOrganizationHit(long companyId,long organizationId,boolean guest,Date access) throws SystemException{
+		OrganizationHit organizationHit =
+				organizationHitPersistence.create(
+				counterLocalService.increment(
+						OrganizationHit.class.getName()));
+		organizationHit.setCompanyId(companyId);
+		organizationHit.setOrganizationId(organizationId);
+		organizationHit.setGuest(guest);
+		organizationHit.setAccessDate(access.getTime());
+		
+		return organizationHitPersistence.update(organizationHit, false);
+	}
 }

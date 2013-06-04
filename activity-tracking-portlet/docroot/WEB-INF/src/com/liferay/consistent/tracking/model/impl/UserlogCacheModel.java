@@ -32,7 +32,7 @@ import java.io.Serializable;
 public class UserlogCacheModel implements CacheModel<Userlog>, Serializable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("{userlogId=");
 		sb.append(userlogId);
@@ -52,8 +52,12 @@ public class UserlogCacheModel implements CacheModel<Userlog>, Serializable {
 		sb.append(remoteAddress);
 		sb.append(", osId=");
 		sb.append(osId);
+		sb.append(", osManufacturer=");
+		sb.append(osManufacturer);
 		sb.append(", browserId=");
 		sb.append(browserId);
+		sb.append(", browserVersion=");
+		sb.append(browserVersion);
 		sb.append(", sessionId=");
 		sb.append(sessionId);
 		sb.append(", accessDate=");
@@ -103,7 +107,22 @@ public class UserlogCacheModel implements CacheModel<Userlog>, Serializable {
 		}
 
 		userlogImpl.setOsId(osId);
+
+		if (osManufacturer == null) {
+			userlogImpl.setOsManufacturer(StringPool.BLANK);
+		}
+		else {
+			userlogImpl.setOsManufacturer(osManufacturer);
+		}
+
 		userlogImpl.setBrowserId(browserId);
+
+		if (browserVersion == null) {
+			userlogImpl.setBrowserVersion(StringPool.BLANK);
+		}
+		else {
+			userlogImpl.setBrowserVersion(browserVersion);
+		}
 
 		if (sessionId == null) {
 			userlogImpl.setSessionId(StringPool.BLANK);
@@ -129,7 +148,9 @@ public class UserlogCacheModel implements CacheModel<Userlog>, Serializable {
 	public String remoteHost;
 	public String remoteAddress;
 	public long osId;
+	public String osManufacturer;
 	public long browserId;
+	public String browserVersion;
 	public String sessionId;
 	public long accessDate;
 	public long timeSlapse;

@@ -46,7 +46,6 @@ public class BrowserWrapper implements Browser, ModelWrapper<Browser> {
 
 		attributes.put("browserId", getBrowserId());
 		attributes.put("name", getName());
-		attributes.put("version", getVersion());
 
 		return attributes;
 	}
@@ -62,12 +61,6 @@ public class BrowserWrapper implements Browser, ModelWrapper<Browser> {
 
 		if (name != null) {
 			setName(name);
-		}
-
-		String version = (String)attributes.get("version");
-
-		if (version != null) {
-			setVersion(version);
 		}
 	}
 
@@ -123,24 +116,6 @@ public class BrowserWrapper implements Browser, ModelWrapper<Browser> {
 	*/
 	public void setName(java.lang.String name) {
 		_browser.setName(name);
-	}
-
-	/**
-	* Returns the version of this browser.
-	*
-	* @return the version of this browser
-	*/
-	public java.lang.String getVersion() {
-		return _browser.getVersion();
-	}
-
-	/**
-	* Sets the version of this browser.
-	*
-	* @param version the version of this browser
-	*/
-	public void setVersion(java.lang.String version) {
-		_browser.setVersion(version);
 	}
 
 	public boolean isNew() {

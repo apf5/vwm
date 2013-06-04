@@ -69,12 +69,14 @@ public class UserlogModelImpl extends BaseModelImpl<Userlog>
 			{ "remoteHost", Types.VARCHAR },
 			{ "remoteAddress", Types.VARCHAR },
 			{ "osId", Types.BIGINT },
+			{ "osManufacturer", Types.VARCHAR },
 			{ "browserId", Types.BIGINT },
+			{ "browserVersion", Types.VARCHAR },
 			{ "sessionId", Types.VARCHAR },
 			{ "accessDate", Types.BIGINT },
 			{ "timeSlapse", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table CONSIS_TRACK_Userlog (userlogId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,serverName VARCHAR(75) null,serverPort INTEGER,remoteHost VARCHAR(75) null,remoteAddress VARCHAR(75) null,osId LONG,browserId LONG,sessionId VARCHAR(75) null,accessDate LONG,timeSlapse LONG)";
+	public static final String TABLE_SQL_CREATE = "create table CONSIS_TRACK_Userlog (userlogId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(200) null,serverName VARCHAR(255) null,serverPort INTEGER,remoteHost VARCHAR(255) null,remoteAddress VARCHAR(75) null,osId LONG,osManufacturer VARCHAR(75) null,browserId LONG,browserVersion VARCHAR(75) null,sessionId VARCHAR(75) null,accessDate LONG,timeSlapse LONG)";
 	public static final String TABLE_SQL_DROP = "drop table CONSIS_TRACK_Userlog";
 	public static final String ORDER_BY_JPQL = " ORDER BY userlog.accessDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CONSIS_TRACK_Userlog.accessDate DESC";
@@ -90,7 +92,12 @@ public class UserlogModelImpl extends BaseModelImpl<Userlog>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.liferay.consistent.tracking.model.Userlog"),
 			true);
-	public static long COMPANYID_COLUMN_BITMASK = 1L;
+	public static long BROWSERID_COLUMN_BITMASK = 1L;
+	public static long BROWSERVERSION_COLUMN_BITMASK = 2L;
+	public static long COMPANYID_COLUMN_BITMASK = 4L;
+	public static long OSID_COLUMN_BITMASK = 8L;
+	public static long OSMANUFACTURER_COLUMN_BITMASK = 16L;
+	public static long USERID_COLUMN_BITMASK = 32L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.com.liferay.consistent.tracking.model.Userlog"));
 
@@ -134,7 +141,9 @@ public class UserlogModelImpl extends BaseModelImpl<Userlog>
 		attributes.put("remoteHost", getRemoteHost());
 		attributes.put("remoteAddress", getRemoteAddress());
 		attributes.put("osId", getOsId());
+		attributes.put("osManufacturer", getOsManufacturer());
 		attributes.put("browserId", getBrowserId());
+		attributes.put("browserVersion", getBrowserVersion());
 		attributes.put("sessionId", getSessionId());
 		attributes.put("accessDate", getAccessDate());
 		attributes.put("timeSlapse", getTimeSlapse());
@@ -198,10 +207,22 @@ public class UserlogModelImpl extends BaseModelImpl<Userlog>
 			setOsId(osId);
 		}
 
+		String osManufacturer = (String)attributes.get("osManufacturer");
+
+		if (osManufacturer != null) {
+			setOsManufacturer(osManufacturer);
+		}
+
 		Long browserId = (Long)attributes.get("browserId");
 
 		if (browserId != null) {
 			setBrowserId(browserId);
+		}
+
+		String browserVersion = (String)attributes.get("browserVersion");
+
+		if (browserVersion != null) {
+			setBrowserVersion(browserVersion);
 		}
 
 		String sessionId = (String)attributes.get("sessionId");
@@ -256,6 +277,14 @@ public class UserlogModelImpl extends BaseModelImpl<Userlog>
 	}
 
 	public void setUserId(long userId) {
+		_columnBitmask |= USERID_COLUMN_BITMASK;
+
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
+
+			_originalUserId = _userId;
+		}
+
 		_userId = userId;
 	}
 
@@ -265,6 +294,10 @@ public class UserlogModelImpl extends BaseModelImpl<Userlog>
 
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	public String getUserName() {
@@ -332,7 +365,42 @@ public class UserlogModelImpl extends BaseModelImpl<Userlog>
 	}
 
 	public void setOsId(long osId) {
+		_columnBitmask |= OSID_COLUMN_BITMASK;
+
+		if (!_setOriginalOsId) {
+			_setOriginalOsId = true;
+
+			_originalOsId = _osId;
+		}
+
 		_osId = osId;
+	}
+
+	public long getOriginalOsId() {
+		return _originalOsId;
+	}
+
+	public String getOsManufacturer() {
+		if (_osManufacturer == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _osManufacturer;
+		}
+	}
+
+	public void setOsManufacturer(String osManufacturer) {
+		_columnBitmask |= OSMANUFACTURER_COLUMN_BITMASK;
+
+		if (_originalOsManufacturer == null) {
+			_originalOsManufacturer = _osManufacturer;
+		}
+
+		_osManufacturer = osManufacturer;
+	}
+
+	public String getOriginalOsManufacturer() {
+		return GetterUtil.getString(_originalOsManufacturer);
 	}
 
 	public long getBrowserId() {
@@ -340,7 +408,42 @@ public class UserlogModelImpl extends BaseModelImpl<Userlog>
 	}
 
 	public void setBrowserId(long browserId) {
+		_columnBitmask |= BROWSERID_COLUMN_BITMASK;
+
+		if (!_setOriginalBrowserId) {
+			_setOriginalBrowserId = true;
+
+			_originalBrowserId = _browserId;
+		}
+
 		_browserId = browserId;
+	}
+
+	public long getOriginalBrowserId() {
+		return _originalBrowserId;
+	}
+
+	public String getBrowserVersion() {
+		if (_browserVersion == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _browserVersion;
+		}
+	}
+
+	public void setBrowserVersion(String browserVersion) {
+		_columnBitmask |= BROWSERVERSION_COLUMN_BITMASK;
+
+		if (_originalBrowserVersion == null) {
+			_originalBrowserVersion = _browserVersion;
+		}
+
+		_browserVersion = browserVersion;
+	}
+
+	public String getOriginalBrowserVersion() {
+		return GetterUtil.getString(_originalBrowserVersion);
 	}
 
 	public String getSessionId() {
@@ -415,7 +518,9 @@ public class UserlogModelImpl extends BaseModelImpl<Userlog>
 		userlogImpl.setRemoteHost(getRemoteHost());
 		userlogImpl.setRemoteAddress(getRemoteAddress());
 		userlogImpl.setOsId(getOsId());
+		userlogImpl.setOsManufacturer(getOsManufacturer());
 		userlogImpl.setBrowserId(getBrowserId());
+		userlogImpl.setBrowserVersion(getBrowserVersion());
 		userlogImpl.setSessionId(getSessionId());
 		userlogImpl.setAccessDate(getAccessDate());
 		userlogImpl.setTimeSlapse(getTimeSlapse());
@@ -485,6 +590,22 @@ public class UserlogModelImpl extends BaseModelImpl<Userlog>
 
 		userlogModelImpl._setOriginalCompanyId = false;
 
+		userlogModelImpl._originalUserId = userlogModelImpl._userId;
+
+		userlogModelImpl._setOriginalUserId = false;
+
+		userlogModelImpl._originalOsId = userlogModelImpl._osId;
+
+		userlogModelImpl._setOriginalOsId = false;
+
+		userlogModelImpl._originalOsManufacturer = userlogModelImpl._osManufacturer;
+
+		userlogModelImpl._originalBrowserId = userlogModelImpl._browserId;
+
+		userlogModelImpl._setOriginalBrowserId = false;
+
+		userlogModelImpl._originalBrowserVersion = userlogModelImpl._browserVersion;
+
 		userlogModelImpl._columnBitmask = 0;
 	}
 
@@ -534,7 +655,23 @@ public class UserlogModelImpl extends BaseModelImpl<Userlog>
 
 		userlogCacheModel.osId = getOsId();
 
+		userlogCacheModel.osManufacturer = getOsManufacturer();
+
+		String osManufacturer = userlogCacheModel.osManufacturer;
+
+		if ((osManufacturer != null) && (osManufacturer.length() == 0)) {
+			userlogCacheModel.osManufacturer = null;
+		}
+
 		userlogCacheModel.browserId = getBrowserId();
+
+		userlogCacheModel.browserVersion = getBrowserVersion();
+
+		String browserVersion = userlogCacheModel.browserVersion;
+
+		if ((browserVersion != null) && (browserVersion.length() == 0)) {
+			userlogCacheModel.browserVersion = null;
+		}
 
 		userlogCacheModel.sessionId = getSessionId();
 
@@ -553,7 +690,7 @@ public class UserlogModelImpl extends BaseModelImpl<Userlog>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("{userlogId=");
 		sb.append(getUserlogId());
@@ -573,8 +710,12 @@ public class UserlogModelImpl extends BaseModelImpl<Userlog>
 		sb.append(getRemoteAddress());
 		sb.append(", osId=");
 		sb.append(getOsId());
+		sb.append(", osManufacturer=");
+		sb.append(getOsManufacturer());
 		sb.append(", browserId=");
 		sb.append(getBrowserId());
+		sb.append(", browserVersion=");
+		sb.append(getBrowserVersion());
 		sb.append(", sessionId=");
 		sb.append(getSessionId());
 		sb.append(", accessDate=");
@@ -587,7 +728,7 @@ public class UserlogModelImpl extends BaseModelImpl<Userlog>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.consistent.tracking.model.Userlog");
@@ -630,8 +771,16 @@ public class UserlogModelImpl extends BaseModelImpl<Userlog>
 		sb.append(getOsId());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>osManufacturer</column-name><column-value><![CDATA[");
+		sb.append(getOsManufacturer());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>browserId</column-name><column-value><![CDATA[");
 		sb.append(getBrowserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>browserVersion</column-name><column-value><![CDATA[");
+		sb.append(getBrowserVersion());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sessionId</column-name><column-value><![CDATA[");
@@ -661,13 +810,23 @@ public class UserlogModelImpl extends BaseModelImpl<Userlog>
 	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userUuid;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private String _userName;
 	private String _serverName;
 	private int _serverPort;
 	private String _remoteHost;
 	private String _remoteAddress;
 	private long _osId;
+	private long _originalOsId;
+	private boolean _setOriginalOsId;
+	private String _osManufacturer;
+	private String _originalOsManufacturer;
 	private long _browserId;
+	private long _originalBrowserId;
+	private boolean _setOriginalBrowserId;
+	private String _browserVersion;
+	private String _originalBrowserVersion;
 	private String _sessionId;
 	private long _accessDate;
 	private long _timeSlapse;

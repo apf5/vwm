@@ -269,6 +269,12 @@ public class OSLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static com.liferay.consistent.tracking.model.OS getOS(
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getOS(name);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

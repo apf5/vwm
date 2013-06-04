@@ -100,6 +100,65 @@ public interface BrowsinglogModel extends BaseModel<Browsinglog> {
 	public void setUserlogId(long userlogId);
 
 	/**
+	 * Returns the client host of this browsinglog.
+	 *
+	 * @return the client host of this browsinglog
+	 */
+	@AutoEscape
+	public String getClientHost();
+
+	/**
+	 * Sets the client host of this browsinglog.
+	 *
+	 * @param clientHost the client host of this browsinglog
+	 */
+	public void setClientHost(String clientHost);
+
+	/**
+	 * Returns the client addr of this browsinglog.
+	 *
+	 * @return the client addr of this browsinglog
+	 */
+	@AutoEscape
+	public String getClientAddr();
+
+	/**
+	 * Sets the client addr of this browsinglog.
+	 *
+	 * @param clientAddr the client addr of this browsinglog
+	 */
+	public void setClientAddr(String clientAddr);
+
+	/**
+	 * Returns the server name of this browsinglog.
+	 *
+	 * @return the server name of this browsinglog
+	 */
+	@AutoEscape
+	public String getServerName();
+
+	/**
+	 * Sets the server name of this browsinglog.
+	 *
+	 * @param serverName the server name of this browsinglog
+	 */
+	public void setServerName(String serverName);
+
+	/**
+	 * Returns the server port of this browsinglog.
+	 *
+	 * @return the server port of this browsinglog
+	 */
+	public int getServerPort();
+
+	/**
+	 * Sets the server port of this browsinglog.
+	 *
+	 * @param serverPort the server port of this browsinglog
+	 */
+	public void setServerPort(int serverPort);
+
+	/**
 	 * Returns the user agent of this browsinglog.
 	 *
 	 * @return the user agent of this browsinglog

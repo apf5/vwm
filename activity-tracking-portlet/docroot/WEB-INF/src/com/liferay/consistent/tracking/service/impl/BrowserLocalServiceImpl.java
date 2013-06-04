@@ -14,7 +14,10 @@
 
 package com.liferay.consistent.tracking.service.impl;
 
+import com.liferay.consistent.tracking.NoSuchBrowserException;
+import com.liferay.consistent.tracking.model.Browser;
 import com.liferay.consistent.tracking.service.base.BrowserLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The implementation of the browser local service.
@@ -36,4 +39,22 @@ public class BrowserLocalServiceImpl extends BrowserLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.liferay.consistent.tracking.service.BrowserLocalServiceUtil} to access the browser local service.
 	 */
+	
+	public Browser getBrowser(String name)
+			throws SystemException{
+		Browser browser = null;
+		
+		try {
+			
+			browser = browserPersistence.findByName(name);
+			
+		} catch (NoSuchBrowserException e) {
+			browser = browserPersistence.create(counterLocalService.increment(
+					Browser.class.getName()));
+			browser.setName(name);
+			browserPersistence.update(browser, false);
+		}
+			
+		return browser;
+	}
 }

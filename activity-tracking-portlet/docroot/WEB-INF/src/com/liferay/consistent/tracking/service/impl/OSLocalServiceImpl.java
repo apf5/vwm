@@ -14,7 +14,10 @@
 
 package com.liferay.consistent.tracking.service.impl;
 
+import com.liferay.consistent.tracking.NoSuchOSException;
+import com.liferay.consistent.tracking.model.OS;
 import com.liferay.consistent.tracking.service.base.OSLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The implementation of the o s local service.
@@ -36,4 +39,23 @@ public class OSLocalServiceImpl extends OSLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.liferay.consistent.tracking.service.OSLocalServiceUtil} to access the o s local service.
 	 */
+	
+	public OS getOS(String name)
+			throws SystemException{
+		OS os = null;
+		
+		try {
+			
+			os = osPersistence.findByName(name);
+			
+		} catch (NoSuchOSException e) {
+			os = osPersistence.create(counterLocalService.increment(
+					OS.class.getName()));
+			os.setName(name);
+			osPersistence.update(os, false);
+		}
+			
+			
+		return os;
+	}
 }

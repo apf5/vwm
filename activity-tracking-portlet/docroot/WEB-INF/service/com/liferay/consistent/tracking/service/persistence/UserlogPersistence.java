@@ -221,6 +221,886 @@ public interface UserlogPersistence extends BasePersistence<Userlog> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Returns all the userlogs where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @return the matching userlogs
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.consistent.tracking.model.Userlog> findByUserId(
+		long userId) throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the userlogs where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param start the lower bound of the range of userlogs
+	* @param end the upper bound of the range of userlogs (not inclusive)
+	* @return the range of matching userlogs
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.consistent.tracking.model.Userlog> findByUserId(
+		long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the userlogs where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param start the lower bound of the range of userlogs
+	* @param end the upper bound of the range of userlogs (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching userlogs
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.consistent.tracking.model.Userlog> findByUserId(
+		long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first userlog in the ordered set where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching userlog
+	* @throws com.liferay.consistent.tracking.NoSuchUserlogException if a matching userlog could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog findByUserId_First(
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.consistent.tracking.NoSuchUserlogException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first userlog in the ordered set where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching userlog, or <code>null</code> if a matching userlog could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog fetchByUserId_First(
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last userlog in the ordered set where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching userlog
+	* @throws com.liferay.consistent.tracking.NoSuchUserlogException if a matching userlog could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog findByUserId_Last(
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.consistent.tracking.NoSuchUserlogException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last userlog in the ordered set where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching userlog, or <code>null</code> if a matching userlog could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog fetchByUserId_Last(
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the userlogs before and after the current userlog in the ordered set where userId = &#63;.
+	*
+	* @param userlogId the primary key of the current userlog
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next userlog
+	* @throws com.liferay.consistent.tracking.NoSuchUserlogException if a userlog with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog[] findByUserId_PrevAndNext(
+		long userlogId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.consistent.tracking.NoSuchUserlogException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns all the userlogs where companyId = &#63; and osId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param osId the os ID
+	* @return the matching userlogs
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.consistent.tracking.model.Userlog> findByOSId(
+		long companyId, long osId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the userlogs where companyId = &#63; and osId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param osId the os ID
+	* @param start the lower bound of the range of userlogs
+	* @param end the upper bound of the range of userlogs (not inclusive)
+	* @return the range of matching userlogs
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.consistent.tracking.model.Userlog> findByOSId(
+		long companyId, long osId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the userlogs where companyId = &#63; and osId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param osId the os ID
+	* @param start the lower bound of the range of userlogs
+	* @param end the upper bound of the range of userlogs (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching userlogs
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.consistent.tracking.model.Userlog> findByOSId(
+		long companyId, long osId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first userlog in the ordered set where companyId = &#63; and osId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param osId the os ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching userlog
+	* @throws com.liferay.consistent.tracking.NoSuchUserlogException if a matching userlog could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog findByOSId_First(
+		long companyId, long osId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.consistent.tracking.NoSuchUserlogException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first userlog in the ordered set where companyId = &#63; and osId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param osId the os ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching userlog, or <code>null</code> if a matching userlog could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog fetchByOSId_First(
+		long companyId, long osId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last userlog in the ordered set where companyId = &#63; and osId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param osId the os ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching userlog
+	* @throws com.liferay.consistent.tracking.NoSuchUserlogException if a matching userlog could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog findByOSId_Last(
+		long companyId, long osId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.consistent.tracking.NoSuchUserlogException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last userlog in the ordered set where companyId = &#63; and osId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param osId the os ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching userlog, or <code>null</code> if a matching userlog could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog fetchByOSId_Last(
+		long companyId, long osId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the userlogs before and after the current userlog in the ordered set where companyId = &#63; and osId = &#63;.
+	*
+	* @param userlogId the primary key of the current userlog
+	* @param companyId the company ID
+	* @param osId the os ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next userlog
+	* @throws com.liferay.consistent.tracking.NoSuchUserlogException if a userlog with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog[] findByOSId_PrevAndNext(
+		long userlogId, long companyId, long osId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.consistent.tracking.NoSuchUserlogException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns all the userlogs where companyId = &#63; and osManufacturer = &#63;.
+	*
+	* @param companyId the company ID
+	* @param osManufacturer the os manufacturer
+	* @return the matching userlogs
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.consistent.tracking.model.Userlog> findByOS_Manufacturer(
+		long companyId, java.lang.String osManufacturer)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the userlogs where companyId = &#63; and osManufacturer = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param osManufacturer the os manufacturer
+	* @param start the lower bound of the range of userlogs
+	* @param end the upper bound of the range of userlogs (not inclusive)
+	* @return the range of matching userlogs
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.consistent.tracking.model.Userlog> findByOS_Manufacturer(
+		long companyId, java.lang.String osManufacturer, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the userlogs where companyId = &#63; and osManufacturer = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param osManufacturer the os manufacturer
+	* @param start the lower bound of the range of userlogs
+	* @param end the upper bound of the range of userlogs (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching userlogs
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.consistent.tracking.model.Userlog> findByOS_Manufacturer(
+		long companyId, java.lang.String osManufacturer, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first userlog in the ordered set where companyId = &#63; and osManufacturer = &#63;.
+	*
+	* @param companyId the company ID
+	* @param osManufacturer the os manufacturer
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching userlog
+	* @throws com.liferay.consistent.tracking.NoSuchUserlogException if a matching userlog could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog findByOS_Manufacturer_First(
+		long companyId, java.lang.String osManufacturer,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.consistent.tracking.NoSuchUserlogException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first userlog in the ordered set where companyId = &#63; and osManufacturer = &#63;.
+	*
+	* @param companyId the company ID
+	* @param osManufacturer the os manufacturer
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching userlog, or <code>null</code> if a matching userlog could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog fetchByOS_Manufacturer_First(
+		long companyId, java.lang.String osManufacturer,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last userlog in the ordered set where companyId = &#63; and osManufacturer = &#63;.
+	*
+	* @param companyId the company ID
+	* @param osManufacturer the os manufacturer
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching userlog
+	* @throws com.liferay.consistent.tracking.NoSuchUserlogException if a matching userlog could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog findByOS_Manufacturer_Last(
+		long companyId, java.lang.String osManufacturer,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.consistent.tracking.NoSuchUserlogException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last userlog in the ordered set where companyId = &#63; and osManufacturer = &#63;.
+	*
+	* @param companyId the company ID
+	* @param osManufacturer the os manufacturer
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching userlog, or <code>null</code> if a matching userlog could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog fetchByOS_Manufacturer_Last(
+		long companyId, java.lang.String osManufacturer,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the userlogs before and after the current userlog in the ordered set where companyId = &#63; and osManufacturer = &#63;.
+	*
+	* @param userlogId the primary key of the current userlog
+	* @param companyId the company ID
+	* @param osManufacturer the os manufacturer
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next userlog
+	* @throws com.liferay.consistent.tracking.NoSuchUserlogException if a userlog with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog[] findByOS_Manufacturer_PrevAndNext(
+		long userlogId, long companyId, java.lang.String osManufacturer,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.consistent.tracking.NoSuchUserlogException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns all the userlogs where companyId = &#63; and browserId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param browserId the browser ID
+	* @return the matching userlogs
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.consistent.tracking.model.Userlog> findByBrowserId(
+		long companyId, long browserId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the userlogs where companyId = &#63; and browserId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param browserId the browser ID
+	* @param start the lower bound of the range of userlogs
+	* @param end the upper bound of the range of userlogs (not inclusive)
+	* @return the range of matching userlogs
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.consistent.tracking.model.Userlog> findByBrowserId(
+		long companyId, long browserId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the userlogs where companyId = &#63; and browserId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param browserId the browser ID
+	* @param start the lower bound of the range of userlogs
+	* @param end the upper bound of the range of userlogs (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching userlogs
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.consistent.tracking.model.Userlog> findByBrowserId(
+		long companyId, long browserId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first userlog in the ordered set where companyId = &#63; and browserId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param browserId the browser ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching userlog
+	* @throws com.liferay.consistent.tracking.NoSuchUserlogException if a matching userlog could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog findByBrowserId_First(
+		long companyId, long browserId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.consistent.tracking.NoSuchUserlogException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first userlog in the ordered set where companyId = &#63; and browserId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param browserId the browser ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching userlog, or <code>null</code> if a matching userlog could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog fetchByBrowserId_First(
+		long companyId, long browserId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last userlog in the ordered set where companyId = &#63; and browserId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param browserId the browser ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching userlog
+	* @throws com.liferay.consistent.tracking.NoSuchUserlogException if a matching userlog could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog findByBrowserId_Last(
+		long companyId, long browserId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.consistent.tracking.NoSuchUserlogException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last userlog in the ordered set where companyId = &#63; and browserId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param browserId the browser ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching userlog, or <code>null</code> if a matching userlog could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog fetchByBrowserId_Last(
+		long companyId, long browserId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the userlogs before and after the current userlog in the ordered set where companyId = &#63; and browserId = &#63;.
+	*
+	* @param userlogId the primary key of the current userlog
+	* @param companyId the company ID
+	* @param browserId the browser ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next userlog
+	* @throws com.liferay.consistent.tracking.NoSuchUserlogException if a userlog with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog[] findByBrowserId_PrevAndNext(
+		long userlogId, long companyId, long browserId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.consistent.tracking.NoSuchUserlogException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns all the userlogs where browserId = &#63; and browserVersion = &#63;.
+	*
+	* @param browserId the browser ID
+	* @param browserVersion the browser version
+	* @return the matching userlogs
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.consistent.tracking.model.Userlog> findByBrowser_N_V(
+		long browserId, java.lang.String browserVersion)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the userlogs where browserId = &#63; and browserVersion = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param browserId the browser ID
+	* @param browserVersion the browser version
+	* @param start the lower bound of the range of userlogs
+	* @param end the upper bound of the range of userlogs (not inclusive)
+	* @return the range of matching userlogs
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.consistent.tracking.model.Userlog> findByBrowser_N_V(
+		long browserId, java.lang.String browserVersion, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the userlogs where browserId = &#63; and browserVersion = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param browserId the browser ID
+	* @param browserVersion the browser version
+	* @param start the lower bound of the range of userlogs
+	* @param end the upper bound of the range of userlogs (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching userlogs
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.consistent.tracking.model.Userlog> findByBrowser_N_V(
+		long browserId, java.lang.String browserVersion, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first userlog in the ordered set where browserId = &#63; and browserVersion = &#63;.
+	*
+	* @param browserId the browser ID
+	* @param browserVersion the browser version
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching userlog
+	* @throws com.liferay.consistent.tracking.NoSuchUserlogException if a matching userlog could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog findByBrowser_N_V_First(
+		long browserId, java.lang.String browserVersion,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.consistent.tracking.NoSuchUserlogException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first userlog in the ordered set where browserId = &#63; and browserVersion = &#63;.
+	*
+	* @param browserId the browser ID
+	* @param browserVersion the browser version
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching userlog, or <code>null</code> if a matching userlog could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog fetchByBrowser_N_V_First(
+		long browserId, java.lang.String browserVersion,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last userlog in the ordered set where browserId = &#63; and browserVersion = &#63;.
+	*
+	* @param browserId the browser ID
+	* @param browserVersion the browser version
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching userlog
+	* @throws com.liferay.consistent.tracking.NoSuchUserlogException if a matching userlog could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog findByBrowser_N_V_Last(
+		long browserId, java.lang.String browserVersion,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.consistent.tracking.NoSuchUserlogException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last userlog in the ordered set where browserId = &#63; and browserVersion = &#63;.
+	*
+	* @param browserId the browser ID
+	* @param browserVersion the browser version
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching userlog, or <code>null</code> if a matching userlog could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog fetchByBrowser_N_V_Last(
+		long browserId, java.lang.String browserVersion,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the userlogs before and after the current userlog in the ordered set where browserId = &#63; and browserVersion = &#63;.
+	*
+	* @param userlogId the primary key of the current userlog
+	* @param browserId the browser ID
+	* @param browserVersion the browser version
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next userlog
+	* @throws com.liferay.consistent.tracking.NoSuchUserlogException if a userlog with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog[] findByBrowser_N_V_PrevAndNext(
+		long userlogId, long browserId, java.lang.String browserVersion,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.consistent.tracking.NoSuchUserlogException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns all the userlogs where osId = &#63; and userId = &#63;.
+	*
+	* @param osId the os ID
+	* @param userId the user ID
+	* @return the matching userlogs
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.consistent.tracking.model.Userlog> findByOS_U(
+		long osId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the userlogs where osId = &#63; and userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param osId the os ID
+	* @param userId the user ID
+	* @param start the lower bound of the range of userlogs
+	* @param end the upper bound of the range of userlogs (not inclusive)
+	* @return the range of matching userlogs
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.consistent.tracking.model.Userlog> findByOS_U(
+		long osId, long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the userlogs where osId = &#63; and userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param osId the os ID
+	* @param userId the user ID
+	* @param start the lower bound of the range of userlogs
+	* @param end the upper bound of the range of userlogs (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching userlogs
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.consistent.tracking.model.Userlog> findByOS_U(
+		long osId, long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first userlog in the ordered set where osId = &#63; and userId = &#63;.
+	*
+	* @param osId the os ID
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching userlog
+	* @throws com.liferay.consistent.tracking.NoSuchUserlogException if a matching userlog could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog findByOS_U_First(
+		long osId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.consistent.tracking.NoSuchUserlogException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first userlog in the ordered set where osId = &#63; and userId = &#63;.
+	*
+	* @param osId the os ID
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching userlog, or <code>null</code> if a matching userlog could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog fetchByOS_U_First(
+		long osId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last userlog in the ordered set where osId = &#63; and userId = &#63;.
+	*
+	* @param osId the os ID
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching userlog
+	* @throws com.liferay.consistent.tracking.NoSuchUserlogException if a matching userlog could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog findByOS_U_Last(
+		long osId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.consistent.tracking.NoSuchUserlogException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last userlog in the ordered set where osId = &#63; and userId = &#63;.
+	*
+	* @param osId the os ID
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching userlog, or <code>null</code> if a matching userlog could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog fetchByOS_U_Last(
+		long osId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the userlogs before and after the current userlog in the ordered set where osId = &#63; and userId = &#63;.
+	*
+	* @param userlogId the primary key of the current userlog
+	* @param osId the os ID
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next userlog
+	* @throws com.liferay.consistent.tracking.NoSuchUserlogException if a userlog with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog[] findByOS_U_PrevAndNext(
+		long userlogId, long osId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.consistent.tracking.NoSuchUserlogException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns all the userlogs where browserId = &#63; and userId = &#63;.
+	*
+	* @param browserId the browser ID
+	* @param userId the user ID
+	* @return the matching userlogs
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.consistent.tracking.model.Userlog> findByBrowser_U(
+		long browserId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the userlogs where browserId = &#63; and userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param browserId the browser ID
+	* @param userId the user ID
+	* @param start the lower bound of the range of userlogs
+	* @param end the upper bound of the range of userlogs (not inclusive)
+	* @return the range of matching userlogs
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.consistent.tracking.model.Userlog> findByBrowser_U(
+		long browserId, long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the userlogs where browserId = &#63; and userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param browserId the browser ID
+	* @param userId the user ID
+	* @param start the lower bound of the range of userlogs
+	* @param end the upper bound of the range of userlogs (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching userlogs
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.consistent.tracking.model.Userlog> findByBrowser_U(
+		long browserId, long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first userlog in the ordered set where browserId = &#63; and userId = &#63;.
+	*
+	* @param browserId the browser ID
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching userlog
+	* @throws com.liferay.consistent.tracking.NoSuchUserlogException if a matching userlog could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog findByBrowser_U_First(
+		long browserId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.consistent.tracking.NoSuchUserlogException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first userlog in the ordered set where browserId = &#63; and userId = &#63;.
+	*
+	* @param browserId the browser ID
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching userlog, or <code>null</code> if a matching userlog could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog fetchByBrowser_U_First(
+		long browserId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last userlog in the ordered set where browserId = &#63; and userId = &#63;.
+	*
+	* @param browserId the browser ID
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching userlog
+	* @throws com.liferay.consistent.tracking.NoSuchUserlogException if a matching userlog could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog findByBrowser_U_Last(
+		long browserId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.consistent.tracking.NoSuchUserlogException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last userlog in the ordered set where browserId = &#63; and userId = &#63;.
+	*
+	* @param browserId the browser ID
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching userlog, or <code>null</code> if a matching userlog could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog fetchByBrowser_U_Last(
+		long browserId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the userlogs before and after the current userlog in the ordered set where browserId = &#63; and userId = &#63;.
+	*
+	* @param userlogId the primary key of the current userlog
+	* @param browserId the browser ID
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next userlog
+	* @throws com.liferay.consistent.tracking.NoSuchUserlogException if a userlog with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.consistent.tracking.model.Userlog[] findByBrowser_U_PrevAndNext(
+		long userlogId, long browserId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.consistent.tracking.NoSuchUserlogException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Returns all the userlogs.
 	*
 	* @return the userlogs
@@ -273,6 +1153,77 @@ public interface UserlogPersistence extends BasePersistence<Userlog> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Removes all the userlogs where userId = &#63; from the database.
+	*
+	* @param userId the user ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByUserId(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes all the userlogs where companyId = &#63; and osId = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param osId the os ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByOSId(long companyId, long osId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes all the userlogs where companyId = &#63; and osManufacturer = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param osManufacturer the os manufacturer
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByOS_Manufacturer(long companyId,
+		java.lang.String osManufacturer)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes all the userlogs where companyId = &#63; and browserId = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param browserId the browser ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByBrowserId(long companyId, long browserId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes all the userlogs where browserId = &#63; and browserVersion = &#63; from the database.
+	*
+	* @param browserId the browser ID
+	* @param browserVersion the browser version
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByBrowser_N_V(long browserId,
+		java.lang.String browserVersion)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes all the userlogs where osId = &#63; and userId = &#63; from the database.
+	*
+	* @param osId the os ID
+	* @param userId the user ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByOS_U(long osId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes all the userlogs where browserId = &#63; and userId = &#63; from the database.
+	*
+	* @param browserId the browser ID
+	* @param userId the user ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByBrowser_U(long browserId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Removes all the userlogs from the database.
 	*
 	* @throws SystemException if a system exception occurred
@@ -288,6 +1239,84 @@ public interface UserlogPersistence extends BasePersistence<Userlog> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByCompanyId(long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of userlogs where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @return the number of matching userlogs
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByUserId(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of userlogs where companyId = &#63; and osId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param osId the os ID
+	* @return the number of matching userlogs
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByOSId(long companyId, long osId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of userlogs where companyId = &#63; and osManufacturer = &#63;.
+	*
+	* @param companyId the company ID
+	* @param osManufacturer the os manufacturer
+	* @return the number of matching userlogs
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByOS_Manufacturer(long companyId,
+		java.lang.String osManufacturer)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of userlogs where companyId = &#63; and browserId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param browserId the browser ID
+	* @return the number of matching userlogs
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByBrowserId(long companyId, long browserId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of userlogs where browserId = &#63; and browserVersion = &#63;.
+	*
+	* @param browserId the browser ID
+	* @param browserVersion the browser version
+	* @return the number of matching userlogs
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByBrowser_N_V(long browserId,
+		java.lang.String browserVersion)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of userlogs where osId = &#63; and userId = &#63;.
+	*
+	* @param osId the os ID
+	* @param userId the user ID
+	* @return the number of matching userlogs
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByOS_U(long osId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of userlogs where browserId = &#63; and userId = &#63;.
+	*
+	* @param browserId the browser ID
+	* @param userId the user ID
+	* @return the number of matching userlogs
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByBrowser_U(long browserId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

@@ -272,6 +272,12 @@ public class SiteHitLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static com.liferay.consistent.tracking.model.SiteHit addSiteHit(
+		long companyId, long siteId, boolean guest, java.util.Date access)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().addSiteHit(companyId, siteId, guest, access);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

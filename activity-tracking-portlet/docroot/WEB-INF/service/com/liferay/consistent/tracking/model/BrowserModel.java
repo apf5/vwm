@@ -86,21 +86,6 @@ public interface BrowserModel extends BaseModel<Browser> {
 	 */
 	public void setName(String name);
 
-	/**
-	 * Returns the version of this browser.
-	 *
-	 * @return the version of this browser
-	 */
-	@AutoEscape
-	public String getVersion();
-
-	/**
-	 * Sets the version of this browser.
-	 *
-	 * @param version the version of this browser
-	 */
-	public void setVersion(String version);
-
 	public boolean isNew();
 
 	public void setNew(boolean n);

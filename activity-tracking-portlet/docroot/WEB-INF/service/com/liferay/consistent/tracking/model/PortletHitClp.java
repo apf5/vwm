@@ -231,7 +231,17 @@ public class PortletHitClp extends BaseModelImpl<PortletHit>
 	public int compareTo(PortletHit portletHit) {
 		int value = 0;
 
-		value = getPortletId().compareTo(portletHit.getPortletId());
+		if (getAccessDate() < portletHit.getAccessDate()) {
+			value = -1;
+		}
+		else if (getAccessDate() > portletHit.getAccessDate()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
+
+		value = value * -1;
 
 		if (value != 0) {
 			return value;

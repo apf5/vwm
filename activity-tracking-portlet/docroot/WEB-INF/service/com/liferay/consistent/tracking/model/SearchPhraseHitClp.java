@@ -192,15 +192,17 @@ public class SearchPhraseHitClp extends BaseModelImpl<SearchPhraseHit>
 	public int compareTo(SearchPhraseHit searchPhraseHit) {
 		int value = 0;
 
-		if (getPhraseId() < searchPhraseHit.getPhraseId()) {
+		if (getAccessDate() < searchPhraseHit.getAccessDate()) {
 			value = -1;
 		}
-		else if (getPhraseId() > searchPhraseHit.getPhraseId()) {
+		else if (getAccessDate() > searchPhraseHit.getAccessDate()) {
 			value = 1;
 		}
 		else {
 			value = 0;
 		}
+
+		value = value * -1;
 
 		if (value != 0) {
 			return value;

@@ -59,10 +59,9 @@ public class BrowserModelImpl extends BaseModelImpl<Browser>
 	public static final String TABLE_NAME = "CONSIS_TRACK_Browser";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "browserId", Types.BIGINT },
-			{ "name", Types.VARCHAR },
-			{ "version", Types.VARCHAR }
+			{ "name", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table CONSIS_TRACK_Browser (browserId LONG not null primary key,name VARCHAR(75) null,version VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table CONSIS_TRACK_Browser (browserId LONG not null primary key,name VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table CONSIS_TRACK_Browser";
 	public static final String ORDER_BY_JPQL = " ORDER BY browser.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CONSIS_TRACK_Browser.name ASC";
@@ -79,7 +78,6 @@ public class BrowserModelImpl extends BaseModelImpl<Browser>
 				"value.object.column.bitmask.enabled.com.liferay.consistent.tracking.model.Browser"),
 			true);
 	public static long NAME_COLUMN_BITMASK = 1L;
-	public static long VERSION_COLUMN_BITMASK = 2L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.com.liferay.consistent.tracking.model.Browser"));
 
@@ -116,7 +114,6 @@ public class BrowserModelImpl extends BaseModelImpl<Browser>
 
 		attributes.put("browserId", getBrowserId());
 		attributes.put("name", getName());
-		attributes.put("version", getVersion());
 
 		return attributes;
 	}
@@ -133,12 +130,6 @@ public class BrowserModelImpl extends BaseModelImpl<Browser>
 
 		if (name != null) {
 			setName(name);
-		}
-
-		String version = (String)attributes.get("version");
-
-		if (version != null) {
-			setVersion(version);
 		}
 	}
 
@@ -171,29 +162,6 @@ public class BrowserModelImpl extends BaseModelImpl<Browser>
 
 	public String getOriginalName() {
 		return GetterUtil.getString(_originalName);
-	}
-
-	public String getVersion() {
-		if (_version == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _version;
-		}
-	}
-
-	public void setVersion(String version) {
-		_columnBitmask |= VERSION_COLUMN_BITMASK;
-
-		if (_originalVersion == null) {
-			_originalVersion = _version;
-		}
-
-		_version = version;
-	}
-
-	public String getOriginalVersion() {
-		return GetterUtil.getString(_originalVersion);
 	}
 
 	public long getColumnBitmask() {
@@ -230,7 +198,6 @@ public class BrowserModelImpl extends BaseModelImpl<Browser>
 
 		browserImpl.setBrowserId(getBrowserId());
 		browserImpl.setName(getName());
-		browserImpl.setVersion(getVersion());
 
 		browserImpl.resetOriginalValues();
 
@@ -285,8 +252,6 @@ public class BrowserModelImpl extends BaseModelImpl<Browser>
 
 		browserModelImpl._originalName = browserModelImpl._name;
 
-		browserModelImpl._originalVersion = browserModelImpl._version;
-
 		browserModelImpl._columnBitmask = 0;
 	}
 
@@ -304,34 +269,24 @@ public class BrowserModelImpl extends BaseModelImpl<Browser>
 			browserCacheModel.name = null;
 		}
 
-		browserCacheModel.version = getVersion();
-
-		String version = browserCacheModel.version;
-
-		if ((version != null) && (version.length() == 0)) {
-			browserCacheModel.version = null;
-		}
-
 		return browserCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(5);
 
 		sb.append("{browserId=");
 		sb.append(getBrowserId());
 		sb.append(", name=");
 		sb.append(getName());
-		sb.append(", version=");
-		sb.append(getVersion());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(10);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.consistent.tracking.model.Browser");
@@ -344,10 +299,6 @@ public class BrowserModelImpl extends BaseModelImpl<Browser>
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
 		sb.append(getName());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>version</column-name><column-value><![CDATA[");
-		sb.append(getVersion());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -362,8 +313,6 @@ public class BrowserModelImpl extends BaseModelImpl<Browser>
 	private long _browserId;
 	private String _name;
 	private String _originalName;
-	private String _version;
-	private String _originalVersion;
 	private long _columnBitmask;
 	private Browser _escapedModelProxy;
 }

@@ -27,6 +27,8 @@ import com.liferay.consistent.tracking.service.SearchPhraseHitLocalServiceUtil;
 import com.liferay.consistent.tracking.service.SearchWordHitLocalServiceUtil;
 import com.liferay.consistent.tracking.service.SiteHitLocalServiceUtil;
 import com.liferay.consistent.tracking.service.TrackEventLocalServiceUtil;
+import com.liferay.consistent.tracking.service.TrackingLocalServiceUtil;
+import com.liferay.consistent.tracking.service.TrackingServiceUtil;
 import com.liferay.consistent.tracking.service.UserlogLocalServiceUtil;
 import com.liferay.consistent.tracking.service.WordLocalServiceUtil;
 
@@ -72,6 +74,9 @@ public class ClpMessageListener extends BaseMessageListener {
 
 			TrackEventLocalServiceUtil.clearService();
 
+			TrackingLocalServiceUtil.clearService();
+
+			TrackingServiceUtil.clearService();
 			UserlogLocalServiceUtil.clearService();
 
 			WordLocalServiceUtil.clearService();

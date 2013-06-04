@@ -46,7 +46,6 @@ public class OSWrapper implements OS, ModelWrapper<OS> {
 
 		attributes.put("osId", getOsId());
 		attributes.put("name", getName());
-		attributes.put("version", getVersion());
 
 		return attributes;
 	}
@@ -62,12 +61,6 @@ public class OSWrapper implements OS, ModelWrapper<OS> {
 
 		if (name != null) {
 			setName(name);
-		}
-
-		String version = (String)attributes.get("version");
-
-		if (version != null) {
-			setVersion(version);
 		}
 	}
 
@@ -123,24 +116,6 @@ public class OSWrapper implements OS, ModelWrapper<OS> {
 	*/
 	public void setName(java.lang.String name) {
 		_os.setName(name);
-	}
-
-	/**
-	* Returns the version of this o s.
-	*
-	* @return the version of this o s
-	*/
-	public java.lang.String getVersion() {
-		return _os.getVersion();
-	}
-
-	/**
-	* Sets the version of this o s.
-	*
-	* @param version the version of this o s
-	*/
-	public void setVersion(java.lang.String version) {
-		_os.setVersion(version);
 	}
 
 	public boolean isNew() {

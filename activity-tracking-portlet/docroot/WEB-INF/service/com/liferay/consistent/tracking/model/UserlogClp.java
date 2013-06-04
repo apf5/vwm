@@ -74,7 +74,9 @@ public class UserlogClp extends BaseModelImpl<Userlog> implements Userlog {
 		attributes.put("remoteHost", getRemoteHost());
 		attributes.put("remoteAddress", getRemoteAddress());
 		attributes.put("osId", getOsId());
+		attributes.put("osManufacturer", getOsManufacturer());
 		attributes.put("browserId", getBrowserId());
+		attributes.put("browserVersion", getBrowserVersion());
 		attributes.put("sessionId", getSessionId());
 		attributes.put("accessDate", getAccessDate());
 		attributes.put("timeSlapse", getTimeSlapse());
@@ -138,10 +140,22 @@ public class UserlogClp extends BaseModelImpl<Userlog> implements Userlog {
 			setOsId(osId);
 		}
 
+		String osManufacturer = (String)attributes.get("osManufacturer");
+
+		if (osManufacturer != null) {
+			setOsManufacturer(osManufacturer);
+		}
+
 		Long browserId = (Long)attributes.get("browserId");
 
 		if (browserId != null) {
 			setBrowserId(browserId);
+		}
+
+		String browserVersion = (String)attributes.get("browserVersion");
+
+		if (browserVersion != null) {
+			setBrowserVersion(browserVersion);
 		}
 
 		String sessionId = (String)attributes.get("sessionId");
@@ -243,12 +257,28 @@ public class UserlogClp extends BaseModelImpl<Userlog> implements Userlog {
 		_osId = osId;
 	}
 
+	public String getOsManufacturer() {
+		return _osManufacturer;
+	}
+
+	public void setOsManufacturer(String osManufacturer) {
+		_osManufacturer = osManufacturer;
+	}
+
 	public long getBrowserId() {
 		return _browserId;
 	}
 
 	public void setBrowserId(long browserId) {
 		_browserId = browserId;
+	}
+
+	public String getBrowserVersion() {
+		return _browserVersion;
+	}
+
+	public void setBrowserVersion(String browserVersion) {
+		_browserVersion = browserVersion;
 	}
 
 	public String getSessionId() {
@@ -311,7 +341,9 @@ public class UserlogClp extends BaseModelImpl<Userlog> implements Userlog {
 		clone.setRemoteHost(getRemoteHost());
 		clone.setRemoteAddress(getRemoteAddress());
 		clone.setOsId(getOsId());
+		clone.setOsManufacturer(getOsManufacturer());
 		clone.setBrowserId(getBrowserId());
+		clone.setBrowserVersion(getBrowserVersion());
 		clone.setSessionId(getSessionId());
 		clone.setAccessDate(getAccessDate());
 		clone.setTimeSlapse(getTimeSlapse());
@@ -373,7 +405,7 @@ public class UserlogClp extends BaseModelImpl<Userlog> implements Userlog {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("{userlogId=");
 		sb.append(getUserlogId());
@@ -393,8 +425,12 @@ public class UserlogClp extends BaseModelImpl<Userlog> implements Userlog {
 		sb.append(getRemoteAddress());
 		sb.append(", osId=");
 		sb.append(getOsId());
+		sb.append(", osManufacturer=");
+		sb.append(getOsManufacturer());
 		sb.append(", browserId=");
 		sb.append(getBrowserId());
+		sb.append(", browserVersion=");
+		sb.append(getBrowserVersion());
 		sb.append(", sessionId=");
 		sb.append(getSessionId());
 		sb.append(", accessDate=");
@@ -407,7 +443,7 @@ public class UserlogClp extends BaseModelImpl<Userlog> implements Userlog {
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.consistent.tracking.model.Userlog");
@@ -450,8 +486,16 @@ public class UserlogClp extends BaseModelImpl<Userlog> implements Userlog {
 		sb.append(getOsId());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>osManufacturer</column-name><column-value><![CDATA[");
+		sb.append(getOsManufacturer());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>browserId</column-name><column-value><![CDATA[");
 		sb.append(getBrowserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>browserVersion</column-name><column-value><![CDATA[");
+		sb.append(getBrowserVersion());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sessionId</column-name><column-value><![CDATA[");
@@ -481,7 +525,9 @@ public class UserlogClp extends BaseModelImpl<Userlog> implements Userlog {
 	private String _remoteHost;
 	private String _remoteAddress;
 	private long _osId;
+	private String _osManufacturer;
 	private long _browserId;
+	private String _browserVersion;
 	private String _sessionId;
 	private long _accessDate;
 	private long _timeSlapse;

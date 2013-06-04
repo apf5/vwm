@@ -86,21 +86,6 @@ public interface OSModel extends BaseModel<OS> {
 	 */
 	public void setName(String name);
 
-	/**
-	 * Returns the version of this o s.
-	 *
-	 * @return the version of this o s
-	 */
-	@AutoEscape
-	public String getVersion();
-
-	/**
-	 * Sets the version of this o s.
-	 *
-	 * @param version the version of this o s
-	 */
-	public void setVersion(String version);
-
 	public boolean isNew();
 
 	public void setNew(boolean n);

@@ -16,6 +16,7 @@
 
 <%@ include file="/html/tracking/init.jsp" %>
 
+
 <liferay-ui:tabs
 	names="user-log,site-log,search-log,doc-log,Tab 3"
 	refresh="<%=false%>"

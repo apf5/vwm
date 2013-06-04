@@ -14,7 +14,10 @@
 
 package com.liferay.consistent.tracking.service.impl;
 
+import com.liferay.consistent.tracking.NoSuchPhraseException;
+import com.liferay.consistent.tracking.model.Phrase;
 import com.liferay.consistent.tracking.service.base.PhraseLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The implementation of the phrase local service.
@@ -36,4 +39,21 @@ public class PhraseLocalServiceImpl extends PhraseLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.liferay.consistent.tracking.service.PhraseLocalServiceUtil} to access the phrase local service.
 	 */
+	
+	public Phrase getPhrase(String phraseName)
+			throws SystemException{
+		Phrase phrase = null;
+		
+		try {
+			phrase = phrasePersistence.findByPhraseName(phraseName);
+		} catch (NoSuchPhraseException e) {
+			phrase = phrasePersistence.create(counterLocalService.increment(
+					Phrase.class.getName()));
+			phrase.setPhraseName(phraseName);
+			phrasePersistence.update(phrase, false);
+		}
+					
+		return phrase;
+	}
+	
 }

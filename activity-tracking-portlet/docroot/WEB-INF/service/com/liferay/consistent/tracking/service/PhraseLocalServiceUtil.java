@@ -273,6 +273,12 @@ public class PhraseLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static com.liferay.consistent.tracking.model.Phrase getPhrase(
+		java.lang.String phraseName)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getPhrase(phraseName);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

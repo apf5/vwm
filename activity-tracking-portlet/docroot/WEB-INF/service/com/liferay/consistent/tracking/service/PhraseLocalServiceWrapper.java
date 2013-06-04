@@ -265,6 +265,12 @@ public class PhraseLocalServiceWrapper implements PhraseLocalService,
 		return _phraseLocalService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public com.liferay.consistent.tracking.model.Phrase getPhrase(
+		java.lang.String phraseName)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _phraseLocalService.getPhrase(phraseName);
+	}
+
 	/**
 	 * @deprecated Renamed to {@link #getWrappedService}
 	 */

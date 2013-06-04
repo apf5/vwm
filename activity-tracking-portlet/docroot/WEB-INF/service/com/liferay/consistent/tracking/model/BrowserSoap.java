@@ -31,7 +31,6 @@ public class BrowserSoap implements Serializable {
 
 		soapModel.setBrowserId(model.getBrowserId());
 		soapModel.setName(model.getName());
-		soapModel.setVersion(model.getVersion());
 
 		return soapModel;
 	}
@@ -100,15 +99,6 @@ public class BrowserSoap implements Serializable {
 		_name = name;
 	}
 
-	public String getVersion() {
-		return _version;
-	}
-
-	public void setVersion(String version) {
-		_version = version;
-	}
-
 	private long _browserId;
 	private String _name;
-	private String _version;
 }

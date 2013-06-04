@@ -4,6 +4,10 @@
 	<author>Jorge Loayza Soloisolo</author>
 	<namespace>CONSIS_TRACK</namespace>
 	
+	<entity name="Tracking" local-service="true" tx-manager="false" >
+		
+	</entity>
+	
 	<entity name="PortletProperty" local-service="true" remote-service="false">
 
         <!-- PK fields -->
@@ -52,7 +56,7 @@
 		<!-- Other fields -->
 		
 		<column name="name" type="String" />
-		<column name="version" type="String" />
+		
 										
 		<!-- Order -->
 
@@ -62,15 +66,10 @@
 
 		<!-- Finder methods -->
 		
-		<finder name="Name" return-type="Collection" >
+		<finder name="Name" return-type="Browser" unique="true">
 			<finder-column name="name" />
 		</finder>
-		
-		<finder name="N_V" return-type="Browser" unique="true">
-			<finder-column name="name" />
-			<finder-column name="version"/>
-		</finder>
-		
+				
 	</entity>
 	
 	<entity local-service="true" remote-service="false" name="OS">
@@ -87,7 +86,7 @@
 		<!-- Other fields -->
 		
 		<column name="name" type="String" />
-		<column name="version" type="String" />
+		
 										
 		<!-- Order -->
 
@@ -97,18 +96,12 @@
 
 		<!-- Finder methods -->
 		
-		<finder name="Name" return-type="Collection" >
+		<finder name="Name" return-type="OS" unique="true">
 			<finder-column name="name" />
 		</finder>
-		
-		<finder name="N_V" return-type="OS" unique="true">
-			<finder-column name="name" />
-			<finder-column name="version"/>
-		</finder>
-
+				
 	</entity>
-
-	
+		
     <entity local-service="true" remote-service="false" name="Userlog">
 
 		<!-- PK fields -->
@@ -130,8 +123,13 @@
 		
 		<column name="remoteHost" type="String" />
 		<column name="remoteAddress" type="String" />
+		
 		<column name="osId" type="long" />
+		<column name="osManufacturer" type="String" />
+		
 		<column name="browserId" type="long" />
+		<column name="browserVersion" type="String" />
+		
 		<column name="sessionId" type="String" />
 		
 		<column name="accessDate" type="long" />
@@ -147,6 +145,40 @@
 		
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
+		</finder>
+		
+		<finder name="UserId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
+		
+		<finder name="OSId" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="osId" />
+		</finder>
+				
+		<finder name="OS_Manufacturer" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="osManufacturer" />
+		</finder>
+		
+		<finder name="BrowserId" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="browserId" />
+		</finder>
+		
+		<finder name="Browser_N_V" return-type="Collection">
+			<finder-column name="browserId" />
+			<finder-column name="browserVersion" />
+		</finder>
+		
+		<finder name="OS_U" return-type="Collection">
+			<finder-column name="osId" />
+			<finder-column name="userId" />
+		</finder>
+				
+		<finder name="Browser_U" return-type="Collection">
+			<finder-column name="browserId" />
+			<finder-column name="userId" />
 		</finder>
 		
 	</entity>
@@ -225,6 +257,10 @@
 		<!-- Other fields -->
 		
 		<column name="userlogId" type="long" />
+		<column name="clientHost" type="String" />
+		<column name="clientAddr" type="String" />
+		<column name="serverName" type="String" />
+		<column name="serverPort" type="int" />
 		<column name="userAgent" type="String" />
 		<column name="url" type="String" />
 		<column name="plId" type="long" />
@@ -271,6 +307,7 @@
 		<column name="guest" type="boolean" />
 		<column name="userlogId" type="long" />
 		<column name="fileId" type="long" />
+		<column name="fileVersion" type="String" />
 		<column name="accessDate" type="long" />
 		<column name="elapseLoad" type="long" />
 		<!-- true if download or false if upload -->
@@ -380,8 +417,8 @@
 										
 		<!-- Order -->
 
-		<order by="asc" >
-			<order-column name="wordId" />
+		<order by="desc" >
+			<order-column name="accessDate" />
 		</order>
 
 		<!-- Finder methods -->
@@ -425,8 +462,8 @@
 										
 		<!-- Order -->
 
-		<order by="asc" >
-			<order-column name="phraseId" />
+		<order by="desc" >
+			<order-column name="accessDate" />
 		</order>
 
 		<!-- Finder methods -->
@@ -472,8 +509,8 @@
 						
 		<!-- Order -->
 
-		<order by="asc" >
-			<order-column name="siteId" />
+		<order by="desc" >
+			<order-column name="accessDate" />
 		</order>
 
 		<!-- Finder methods -->
@@ -516,8 +553,8 @@
 					
 		<!-- Order -->
 
-		<order by="asc" >
-			<order-column name="organizationId" />
+		<order by="desc" >
+			<order-column name="accessDate" />
 		</order>
 
 		<!-- Finder methods -->
@@ -564,14 +601,19 @@
 										
 		<!-- Order -->
 
-		<order by="asc" >
-			<order-column name="portletId" />
+		<order by="desc" >
+			<order-column name="accessDate" />
 		</order>
 
 		<!-- Finder methods -->
 		
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
+		</finder>
+		
+		<finder name="C_S" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="userlogId" />
 		</finder>
 		
 		<finder name="C_G" return-type="Collection">

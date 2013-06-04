@@ -3,7 +3,7 @@
 	<display-name>activity-tracking-portlet</display-name>
 	<context-param>
 		<param-name>portalContextConfigLocation</param-name>
-		<param-value>/WEB-INF/classes/META-INF/tracking-spring.xml,/WEB-INF/classes/META-INF/messaging-spring.xml</param-value>
+		<param-value>/WEB-INF/classes/META-INF/tracking-spring.xml</param-value>
 	</context-param>
 	<jsp-config>
 		<taglib>

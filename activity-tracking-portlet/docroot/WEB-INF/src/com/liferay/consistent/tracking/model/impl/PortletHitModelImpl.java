@@ -70,8 +70,8 @@ public class PortletHitModelImpl extends BaseModelImpl<PortletHit>
 		};
 	public static final String TABLE_SQL_CREATE = "create table CONSIS_TRACK_PortletHit (hitId LONG not null primary key,companyId LONG,portletId VARCHAR(75) null,guest BOOLEAN,userId LONG,userlogId LONG,accessDate LONG)";
 	public static final String TABLE_SQL_DROP = "drop table CONSIS_TRACK_PortletHit";
-	public static final String ORDER_BY_JPQL = " ORDER BY portletHit.portletId ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY CONSIS_TRACK_PortletHit.portletId ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY portletHit.accessDate DESC";
+	public static final String ORDER_BY_SQL = " ORDER BY CONSIS_TRACK_PortletHit.accessDate DESC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -88,6 +88,7 @@ public class PortletHitModelImpl extends BaseModelImpl<PortletHit>
 	public static long GUEST_COLUMN_BITMASK = 2L;
 	public static long PORTLETID_COLUMN_BITMASK = 4L;
 	public static long USERID_COLUMN_BITMASK = 8L;
+	public static long USERLOGID_COLUMN_BITMASK = 16L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.com.liferay.consistent.tracking.model.PortletHit"));
 
@@ -216,7 +217,7 @@ public class PortletHitModelImpl extends BaseModelImpl<PortletHit>
 	}
 
 	public void setPortletId(String portletId) {
-		_columnBitmask = -1L;
+		_columnBitmask |= PORTLETID_COLUMN_BITMASK;
 
 		if (_originalPortletId == null) {
 			_originalPortletId = _portletId;
@@ -286,7 +287,19 @@ public class PortletHitModelImpl extends BaseModelImpl<PortletHit>
 	}
 
 	public void setUserlogId(long userlogId) {
+		_columnBitmask |= USERLOGID_COLUMN_BITMASK;
+
+		if (!_setOriginalUserlogId) {
+			_setOriginalUserlogId = true;
+
+			_originalUserlogId = _userlogId;
+		}
+
 		_userlogId = userlogId;
+	}
+
+	public long getOriginalUserlogId() {
+		return _originalUserlogId;
 	}
 
 	public long getAccessDate() {
@@ -294,6 +307,8 @@ public class PortletHitModelImpl extends BaseModelImpl<PortletHit>
 	}
 
 	public void setAccessDate(long accessDate) {
+		_columnBitmask = -1L;
+
 		_accessDate = accessDate;
 	}
 
@@ -345,7 +360,17 @@ public class PortletHitModelImpl extends BaseModelImpl<PortletHit>
 	public int compareTo(PortletHit portletHit) {
 		int value = 0;
 
-		value = getPortletId().compareTo(portletHit.getPortletId());
+		if (getAccessDate() < portletHit.getAccessDate()) {
+			value = -1;
+		}
+		else if (getAccessDate() > portletHit.getAccessDate()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
+
+		value = value * -1;
 
 		if (value != 0) {
 			return value;
@@ -401,6 +426,10 @@ public class PortletHitModelImpl extends BaseModelImpl<PortletHit>
 		portletHitModelImpl._originalUserId = portletHitModelImpl._userId;
 
 		portletHitModelImpl._setOriginalUserId = false;
+
+		portletHitModelImpl._originalUserlogId = portletHitModelImpl._userlogId;
+
+		portletHitModelImpl._setOriginalUserlogId = false;
 
 		portletHitModelImpl._columnBitmask = 0;
 	}
@@ -514,6 +543,8 @@ public class PortletHitModelImpl extends BaseModelImpl<PortletHit>
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
 	private long _userlogId;
+	private long _originalUserlogId;
+	private boolean _setOriginalUserlogId;
 	private long _accessDate;
 	private long _columnBitmask;
 	private PortletHit _escapedModelProxy;

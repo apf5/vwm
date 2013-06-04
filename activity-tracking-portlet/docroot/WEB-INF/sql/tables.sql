@@ -1,15 +1,18 @@
 create table CONSIS_TRACK_Browser (
 	browserId LONG not null primary key,
-	name VARCHAR(75) null,
-	version VARCHAR(75) null
+	name VARCHAR(75) null
 );
 
 create table CONSIS_TRACK_Browsinglog (
 	browsinglogId LONG not null primary key,
 	companyId LONG,
 	userlogId LONG,
-	userAgent VARCHAR(75) null,
-	url VARCHAR(75) null,
+	clientHost VARCHAR(75) null,
+	clientAddr VARCHAR(75) null,
+	serverName VARCHAR(75) null,
+	serverPort INTEGER,
+	userAgent VARCHAR(255) null,
+	url VARCHAR(255) null,
 	plId LONG,
 	accessName VARCHAR(75) null,
 	accessFound BOOLEAN,
@@ -25,6 +28,7 @@ create table CONSIS_TRACK_Filelog (
 	guest BOOLEAN,
 	userlogId LONG,
 	fileId LONG,
+	fileVersion VARCHAR(75) null,
 	accessDate LONG,
 	elapseLoad LONG,
 	trafic BOOLEAN,
@@ -33,8 +37,7 @@ create table CONSIS_TRACK_Filelog (
 
 create table CONSIS_TRACK_OS (
 	osId LONG not null primary key,
-	name VARCHAR(75) null,
-	version VARCHAR(75) null
+	name VARCHAR(75) null
 );
 
 create table CONSIS_TRACK_OrganizationHit (
@@ -47,7 +50,7 @@ create table CONSIS_TRACK_OrganizationHit (
 
 create table CONSIS_TRACK_Phrase (
 	phraseId LONG not null primary key,
-	phraseName VARCHAR(75) null
+	phraseName TEXT null
 );
 
 create table CONSIS_TRACK_PortletHit (
@@ -112,13 +115,15 @@ create table CONSIS_TRACK_Userlog (
 	userlogId LONG not null primary key,
 	companyId LONG,
 	userId LONG,
-	userName VARCHAR(75) null,
-	serverName VARCHAR(75) null,
+	userName VARCHAR(200) null,
+	serverName VARCHAR(255) null,
 	serverPort INTEGER,
-	remoteHost VARCHAR(75) null,
+	remoteHost VARCHAR(255) null,
 	remoteAddress VARCHAR(75) null,
 	osId LONG,
+	osManufacturer VARCHAR(75) null,
 	browserId LONG,
+	browserVersion VARCHAR(75) null,
 	sessionId VARCHAR(75) null,
 	accessDate LONG,
 	timeSlapse LONG

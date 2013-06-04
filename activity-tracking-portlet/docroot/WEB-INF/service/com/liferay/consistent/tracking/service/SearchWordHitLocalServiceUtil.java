@@ -273,6 +273,12 @@ public class SearchWordHitLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static com.liferay.consistent.tracking.model.SearchWordHit addSearchWordHit(
+		long companyId, long wordId, boolean guest, java.util.Date access)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().addSearchWordHit(companyId, wordId, guest, access);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

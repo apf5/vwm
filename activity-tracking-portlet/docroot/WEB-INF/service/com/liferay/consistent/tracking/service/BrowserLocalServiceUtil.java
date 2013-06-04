@@ -273,6 +273,12 @@ public class BrowserLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static com.liferay.consistent.tracking.model.Browser getBrowser(
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getBrowser(name);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

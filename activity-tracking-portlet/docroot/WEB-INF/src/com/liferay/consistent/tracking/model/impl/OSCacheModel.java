@@ -32,14 +32,12 @@ import java.io.Serializable;
 public class OSCacheModel implements CacheModel<OS>, Serializable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(5);
 
 		sb.append("{osId=");
 		sb.append(osId);
 		sb.append(", name=");
 		sb.append(name);
-		sb.append(", version=");
-		sb.append(version);
 		sb.append("}");
 
 		return sb.toString();
@@ -57,13 +55,6 @@ public class OSCacheModel implements CacheModel<OS>, Serializable {
 			osImpl.setName(name);
 		}
 
-		if (version == null) {
-			osImpl.setVersion(StringPool.BLANK);
-		}
-		else {
-			osImpl.setVersion(version);
-		}
-
 		osImpl.resetOriginalValues();
 
 		return osImpl;
@@ -71,5 +62,4 @@ public class OSCacheModel implements CacheModel<OS>, Serializable {
 
 	public long osId;
 	public String name;
-	public String version;
 }

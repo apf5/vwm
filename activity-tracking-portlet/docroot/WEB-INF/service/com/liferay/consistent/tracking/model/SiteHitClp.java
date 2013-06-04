@@ -189,15 +189,17 @@ public class SiteHitClp extends BaseModelImpl<SiteHit> implements SiteHit {
 	public int compareTo(SiteHit siteHit) {
 		int value = 0;
 
-		if (getSiteId() < siteHit.getSiteId()) {
+		if (getAccessDate() < siteHit.getAccessDate()) {
 			value = -1;
 		}
-		else if (getSiteId() > siteHit.getSiteId()) {
+		else if (getAccessDate() > siteHit.getAccessDate()) {
 			value = 1;
 		}
 		else {
 			value = 0;
 		}
+
+		value = value * -1;
 
 		if (value != 0) {
 			return value;

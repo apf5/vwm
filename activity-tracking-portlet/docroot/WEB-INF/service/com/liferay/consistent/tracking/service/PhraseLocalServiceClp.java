@@ -111,6 +111,10 @@ public class PhraseLocalServiceClp implements PhraseLocalService {
 		_methodName17 = "setBeanIdentifier";
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
+
+		_methodName19 = "getPhrase";
+
+		_methodParameterTypes19 = new String[] { "java.lang.String" };
 	}
 
 	public com.liferay.consistent.tracking.model.Phrase addPhrase(
@@ -638,6 +642,35 @@ public class PhraseLocalServiceClp implements PhraseLocalService {
 		throw new UnsupportedOperationException();
 	}
 
+	public com.liferay.consistent.tracking.model.Phrase getPhrase(
+		java.lang.String phraseName)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19,
+					new Object[] { ClpSerializer.translateInput(phraseName) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.consistent.tracking.model.Phrase)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -675,4 +708,6 @@ public class PhraseLocalServiceClp implements PhraseLocalService {
 	private String[] _methodParameterTypes16;
 	private String _methodName17;
 	private String[] _methodParameterTypes17;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
 }

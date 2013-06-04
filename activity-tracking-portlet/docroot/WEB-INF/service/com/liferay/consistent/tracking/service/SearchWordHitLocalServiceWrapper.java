@@ -270,6 +270,13 @@ public class SearchWordHitLocalServiceWrapper
 			arguments);
 	}
 
+	public com.liferay.consistent.tracking.model.SearchWordHit addSearchWordHit(
+		long companyId, long wordId, boolean guest, java.util.Date access)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _searchWordHitLocalService.addSearchWordHit(companyId, wordId,
+			guest, access);
+	}
+
 	/**
 	 * @deprecated Renamed to {@link #getWrappedService}
 	 */

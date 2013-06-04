@@ -244,4 +244,8 @@ public interface SiteHitLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	public com.liferay.consistent.tracking.model.SiteHit addSiteHit(
+		long companyId, long siteId, boolean guest, java.util.Date access)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

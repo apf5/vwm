@@ -65,8 +65,8 @@ public class OrganizationHitModelImpl extends BaseModelImpl<OrganizationHit>
 		};
 	public static final String TABLE_SQL_CREATE = "create table CONSIS_TRACK_OrganizationHit (hitId LONG not null primary key,companyId LONG,organizationId LONG,guest BOOLEAN,accessDate LONG)";
 	public static final String TABLE_SQL_DROP = "drop table CONSIS_TRACK_OrganizationHit";
-	public static final String ORDER_BY_JPQL = " ORDER BY organizationHit.organizationId ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY CONSIS_TRACK_OrganizationHit.organizationId ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY organizationHit.accessDate DESC";
+	public static final String ORDER_BY_SQL = " ORDER BY CONSIS_TRACK_OrganizationHit.accessDate DESC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -191,7 +191,7 @@ public class OrganizationHitModelImpl extends BaseModelImpl<OrganizationHit>
 	}
 
 	public void setOrganizationId(long organizationId) {
-		_columnBitmask = -1L;
+		_columnBitmask |= ORGANIZATIONID_COLUMN_BITMASK;
 
 		if (!_setOriginalOrganizationId) {
 			_setOriginalOrganizationId = true;
@@ -235,6 +235,8 @@ public class OrganizationHitModelImpl extends BaseModelImpl<OrganizationHit>
 	}
 
 	public void setAccessDate(long accessDate) {
+		_columnBitmask = -1L;
+
 		_accessDate = accessDate;
 	}
 
@@ -284,15 +286,17 @@ public class OrganizationHitModelImpl extends BaseModelImpl<OrganizationHit>
 	public int compareTo(OrganizationHit organizationHit) {
 		int value = 0;
 
-		if (getOrganizationId() < organizationHit.getOrganizationId()) {
+		if (getAccessDate() < organizationHit.getAccessDate()) {
 			value = -1;
 		}
-		else if (getOrganizationId() > organizationHit.getOrganizationId()) {
+		else if (getAccessDate() > organizationHit.getAccessDate()) {
 			value = 1;
 		}
 		else {
 			value = 0;
 		}
+
+		value = value * -1;
 
 		if (value != 0) {
 			return value;

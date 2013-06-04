@@ -32,6 +32,10 @@ public class BrowsinglogSoap implements Serializable {
 		soapModel.setBrowsinglogId(model.getBrowsinglogId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserlogId(model.getUserlogId());
+		soapModel.setClientHost(model.getClientHost());
+		soapModel.setClientAddr(model.getClientAddr());
+		soapModel.setServerName(model.getServerName());
+		soapModel.setServerPort(model.getServerPort());
 		soapModel.setUserAgent(model.getUserAgent());
 		soapModel.setUrl(model.getUrl());
 		soapModel.setPlId(model.getPlId());
@@ -117,6 +121,38 @@ public class BrowsinglogSoap implements Serializable {
 		_userlogId = userlogId;
 	}
 
+	public String getClientHost() {
+		return _clientHost;
+	}
+
+	public void setClientHost(String clientHost) {
+		_clientHost = clientHost;
+	}
+
+	public String getClientAddr() {
+		return _clientAddr;
+	}
+
+	public void setClientAddr(String clientAddr) {
+		_clientAddr = clientAddr;
+	}
+
+	public String getServerName() {
+		return _serverName;
+	}
+
+	public void setServerName(String serverName) {
+		_serverName = serverName;
+	}
+
+	public int getServerPort() {
+		return _serverPort;
+	}
+
+	public void setServerPort(int serverPort) {
+		_serverPort = serverPort;
+	}
+
 	public String getUserAgent() {
 		return _userAgent;
 	}
@@ -196,6 +232,10 @@ public class BrowsinglogSoap implements Serializable {
 	private long _browsinglogId;
 	private long _companyId;
 	private long _userlogId;
+	private String _clientHost;
+	private String _clientAddr;
+	private String _serverName;
+	private int _serverPort;
 	private String _userAgent;
 	private String _url;
 	private long _plId;

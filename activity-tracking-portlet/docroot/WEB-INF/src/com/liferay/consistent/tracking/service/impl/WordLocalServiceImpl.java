@@ -14,7 +14,10 @@
 
 package com.liferay.consistent.tracking.service.impl;
 
+import com.liferay.consistent.tracking.NoSuchWordException;
+import com.liferay.consistent.tracking.model.Word;
 import com.liferay.consistent.tracking.service.base.WordLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The implementation of the word local service.
@@ -36,4 +39,21 @@ public class WordLocalServiceImpl extends WordLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.liferay.consistent.tracking.service.WordLocalServiceUtil} to access the word local service.
 	 */
+	
+	public Word getWord(String wordName)
+			throws SystemException{
+		Word word = null;
+		
+		try {
+			word = wordPersistence.findByWordName(wordName);
+		} catch (NoSuchWordException e) {
+			word = wordPersistence.create(counterLocalService.increment(
+					Word.class.getName()));
+			word.setWordName(wordName);
+			wordPersistence.update(word, false);
+		}
+					
+		return word;
+	}
+	
 }

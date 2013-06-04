@@ -7,10 +7,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
 >
-
+	
 	<!-- Router -->
 
-	<bean id="com.liferay.portal.kernel.audit.AuditRouter" class="com.liferay.consistent.tracking.DefaultAuditRouter">
+	<bean id="default.AuditRouter" class="com.liferay.consistent.tracking.DefaultAuditRouter">
 		<!--<property name="auditMessageProcessors">
 			<map key-type="java.lang.String" value-type="java.util.List">
 				<entry key="VIEW">
@@ -25,7 +25,6 @@
 		<property name="globalAuditMessageProcessors">
 			<list value-type="com.liferay.portal.kernel.audit.AuditMessageProcessor">
 				<ref bean="com.liferay.consistent.tracking.DatabaseAuditRouterProcessor" />
-				<ref bean="com.liferay.consistent.tracking.LogAuditRouterProcessor" />
 			</list>
 		</property>
 		
@@ -34,15 +33,95 @@
 	<!-- Processors -->
 
 	<bean id="com.liferay.consistent.tracking.DatabaseAuditRouterProcessor" class="com.liferay.consistent.tracking.DatabaseAuditRouterProcessor" />
-	<bean id="com.liferay.consistent.tracking.LogAuditRouterProcessor" class="com.liferay.consistent.tracking.LogAuditRouterProcessor">
-		<property name="logMessageFormatter" ref="com.liferay.consistent.tracking.CSVLogMessageFormatter" />
-		<property name="outputToConsole" value="false" />
-	</bean>
+	
+	<!-- Listeners -->
 
-	<!-- Message formatters -->
-
-	<bean id="com.liferay.consistent.tracking.CSVLogMessageFormatter" class="com.liferay.consistent.tracking.CSVLogMessageFormatter">
-		<property name="columns" value="additionalInfo,className,classPK,clientHost,clientIP,companyId,eventType,message,serverName,serverPort,sessionID,timestamp,userId,userName" />
+	<bean id="messagelistener.tracknig" class="com.liferay.portal.kernel.messaging.proxy.ProxyMessageListener">
+		<property name="manager" ref="default.AuditRouter" />
 	</bean>
-	<bean id="com.liferay.consistent.tracking.JSONLogMessageFormatter" class="com.liferay.consistent.tracking.JSONLogMessageFormatter" />
+	
+	<!-- Portal tracking hit -->
+	
+	<bean id="messageListener.PortalHitListener"
+		class="com.liferay.consistent.tracking.messaging.listener.PortalHitListener" />
+		
+	<bean id="messageDestination.PortalHitDestination"
+			class="com.liferay.portal.kernel.messaging.ParallelDestination">
+			<property name="name" value="tracking/portalhit" />
+	</bean>
+	
+	<!-- Organization  tracking hit -->
+	
+	<bean id="messageListener.OrganizationHitListener"
+		class="com.liferay.consistent.tracking.messaging.listener.OrganizationHitListener" />
+		
+	<bean id="messageDestination.OrganizationHitDestination"
+			class="com.liferay.portal.kernel.messaging.ParallelDestination">
+			<property name="name" value="tracking/organizationhit" />
+	</bean>
+	
+	<!-- Portlet  tracking hit -->
+	
+	<bean id="messageListener.PortletHitListener"
+		class="com.liferay.consistent.tracking.messaging.listener.PortletHitListener" />
+		
+	<bean id="messageDestination.PortletHitDestination"
+			class="com.liferay.portal.kernel.messaging.ParallelDestination">
+			<property name="name" value="tracking/portlethit" />
+	</bean>
+	
+	
+	<!-- Search  tracking hit -->
+	
+	<bean id="messageListener.SearchHitListener"
+		class="com.liferay.consistent.tracking.messaging.listener.SearchHitListener" />
+		
+	<bean id="messageDestination.SearchHitDestination"
+			class="com.liferay.portal.kernel.messaging.ParallelDestination">
+			<property name="name" value="tracking/searchhit" />
+	</bean>
+	
+
+	<!-- Configurator -->
+
+	<bean id="messagingConfigurator" class="com.liferay.portal.kernel.messaging.config.PluginMessagingConfigurator">
+		<property name="messageListeners">
+			<map key-type="java.lang.String" value-type="java.util.List">
+				<entry key="liferay/audit">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="messagelistener.tracknig" />
+					</list>
+				</entry>
+				<entry key="tracking/portalhit">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="messageListener.PortalHitListener" />
+					</list>
+				</entry>
+				<entry key="tracking/organizationhit">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="messageListener.OrganizationHitListener" />
+					</list>
+				</entry>
+				<entry key="tracking/portlethit">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="messageListener.PortletHitListener" />
+					</list>
+				</entry>
+				<entry key="tracking/searchhit">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="messageListener.SearchHitListener" />
+					</list>
+				</entry>
+			</map>
+		</property>
+		<property name="destinations">
+			<list>
+				<ref bean="messageDestination.PortalHitDestination"/>
+				<ref bean="messageDestination.OrganizationHitDestination"/>
+				<ref bean="messageDestination.PortletHitDestination"/>
+				<ref bean="messageDestination.SearchHitDestination"/>
+			</list>
+		</property>
+	</bean>
+	
 </beans>

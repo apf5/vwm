@@ -104,13 +104,31 @@ public class FilelogLocalServiceClpInvoker {
 				"com.liferay.consistent.tracking.model.Filelog", "boolean"
 			};
 
-		_methodName88 = "getBeanIdentifier";
+		_methodName92 = "getBeanIdentifier";
 
-		_methodParameterTypes88 = new String[] {  };
+		_methodParameterTypes92 = new String[] {  };
 
-		_methodName89 = "setBeanIdentifier";
+		_methodName93 = "setBeanIdentifier";
 
-		_methodParameterTypes89 = new String[] { "java.lang.String" };
+		_methodParameterTypes93 = new String[] { "java.lang.String" };
+
+		_methodName98 = "addFilelogDownload";
+
+		_methodParameterTypes98 = new String[] {
+				"long", "long", "java.lang.String", "boolean", "long",
+				"java.util.Date"
+			};
+
+		_methodName99 = "updateElapseFilelog";
+
+		_methodParameterTypes99 = new String[] { "long", "long" };
+
+		_methodName100 = "addFilelogUpload";
+
+		_methodParameterTypes100 = new String[] {
+				"long", "long", "java.lang.String", "boolean", "long", "long",
+				"java.util.Date"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -202,14 +220,39 @@ public class FilelogLocalServiceClpInvoker {
 				((Boolean)arguments[1]).booleanValue());
 		}
 
-		if (_methodName88.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes88, parameterTypes)) {
+		if (_methodName92.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes92, parameterTypes)) {
 			return FilelogLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName89.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes89, parameterTypes)) {
+		if (_methodName93.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes93, parameterTypes)) {
 			FilelogLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
+		}
+
+		if (_methodName98.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes98, parameterTypes)) {
+			return FilelogLocalServiceUtil.addFilelogDownload(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(),
+				(java.lang.String)arguments[2],
+				((Boolean)arguments[3]).booleanValue(),
+				((Long)arguments[4]).longValue(), (java.util.Date)arguments[5]);
+		}
+
+		if (_methodName99.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes99, parameterTypes)) {
+			return FilelogLocalServiceUtil.updateElapseFilelog(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue());
+		}
+
+		if (_methodName100.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes100, parameterTypes)) {
+			return FilelogLocalServiceUtil.addFilelogUpload(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(),
+				(java.lang.String)arguments[2],
+				((Boolean)arguments[3]).booleanValue(),
+				((Long)arguments[4]).longValue(),
+				((Long)arguments[5]).longValue(), (java.util.Date)arguments[6]);
 		}
 
 		throw new UnsupportedOperationException();
@@ -247,8 +290,14 @@ public class FilelogLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName88;
-	private String[] _methodParameterTypes88;
-	private String _methodName89;
-	private String[] _methodParameterTypes89;
+	private String _methodName92;
+	private String[] _methodParameterTypes92;
+	private String _methodName93;
+	private String[] _methodParameterTypes93;
+	private String _methodName98;
+	private String[] _methodParameterTypes98;
+	private String _methodName99;
+	private String[] _methodParameterTypes99;
+	private String _methodName100;
+	private String[] _methodParameterTypes100;
 }

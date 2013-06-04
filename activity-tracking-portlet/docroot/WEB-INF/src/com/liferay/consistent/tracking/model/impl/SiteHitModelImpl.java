@@ -65,8 +65,8 @@ public class SiteHitModelImpl extends BaseModelImpl<SiteHit>
 		};
 	public static final String TABLE_SQL_CREATE = "create table CONSIS_TRACK_SiteHit (hitId LONG not null primary key,companyId LONG,siteId LONG,guest BOOLEAN,accessDate LONG)";
 	public static final String TABLE_SQL_DROP = "drop table CONSIS_TRACK_SiteHit";
-	public static final String ORDER_BY_JPQL = " ORDER BY siteHit.siteId ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY CONSIS_TRACK_SiteHit.siteId ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY siteHit.accessDate DESC";
+	public static final String ORDER_BY_SQL = " ORDER BY CONSIS_TRACK_SiteHit.accessDate DESC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -191,7 +191,7 @@ public class SiteHitModelImpl extends BaseModelImpl<SiteHit>
 	}
 
 	public void setSiteId(long siteId) {
-		_columnBitmask = -1L;
+		_columnBitmask |= SITEID_COLUMN_BITMASK;
 
 		if (!_setOriginalSiteId) {
 			_setOriginalSiteId = true;
@@ -235,6 +235,8 @@ public class SiteHitModelImpl extends BaseModelImpl<SiteHit>
 	}
 
 	public void setAccessDate(long accessDate) {
+		_columnBitmask = -1L;
+
 		_accessDate = accessDate;
 	}
 
@@ -284,15 +286,17 @@ public class SiteHitModelImpl extends BaseModelImpl<SiteHit>
 	public int compareTo(SiteHit siteHit) {
 		int value = 0;
 
-		if (getSiteId() < siteHit.getSiteId()) {
+		if (getAccessDate() < siteHit.getAccessDate()) {
 			value = -1;
 		}
-		else if (getSiteId() > siteHit.getSiteId()) {
+		else if (getAccessDate() > siteHit.getAccessDate()) {
 			value = 1;
 		}
 		else {
 			value = 0;
 		}
+
+		value = value * -1;
 
 		if (value != 0) {
 			return value;

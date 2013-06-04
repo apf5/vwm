@@ -4,14 +4,21 @@
 	<model name="com.liferay.consistent.tracking.model.Browser">
 		<field name="browserId" type="long" />
 		<field name="name" type="String" />
-		<field name="version" type="String" />
 	</model>
 	<model name="com.liferay.consistent.tracking.model.Browsinglog">
 		<field name="browsinglogId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userlogId" type="long" />
-		<field name="userAgent" type="String" />
-		<field name="url" type="String" />
+		<field name="clientHost" type="String" />
+		<field name="clientAddr" type="String" />
+		<field name="serverName" type="String" />
+		<field name="serverPort" type="int" />
+		<field name="userAgent" type="String">
+			<hint name="max-length">255</hint>
+		</field>
+		<field name="url" type="String">
+			<hint name="max-length">255</hint>
+		</field>
 		<field name="plId" type="long" />
 		<field name="accessName" type="String" />
 		<field name="accessFound" type="boolean" />
@@ -26,6 +33,7 @@
 		<field name="guest" type="boolean" />
 		<field name="userlogId" type="long" />
 		<field name="fileId" type="long" />
+		<field name="fileVersion" type="String" />
 		<field name="accessDate" type="long" />
 		<field name="elapseLoad" type="long" />
 		<field name="trafic" type="boolean" />
@@ -41,11 +49,12 @@
 	<model name="com.liferay.consistent.tracking.model.OS">
 		<field name="osId" type="long" />
 		<field name="name" type="String" />
-		<field name="version" type="String" />
 	</model>
 	<model name="com.liferay.consistent.tracking.model.Phrase">
 		<field name="phraseId" type="long" />
-		<field name="phraseName" type="String" />
+		<field name="phraseName" type="String">
+			<hint-collection name="CLOB" />
+		</field>
 	</model>
 	<model name="com.liferay.consistent.tracking.model.PortletHit">
 		<field name="hitId" type="long" />
@@ -113,13 +122,21 @@
 		<field name="userlogId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
-		<field name="userName" type="String" />
-		<field name="serverName" type="String" />
+		<field name="userName" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="serverName" type="String">
+			<hint name="max-length">255</hint>
+		</field>
 		<field name="serverPort" type="int" />
-		<field name="remoteHost" type="String" />
+		<field name="remoteHost" type="String">
+			<hint name="max-length">255</hint>
+		</field>
 		<field name="remoteAddress" type="String" />
 		<field name="osId" type="long" />
+		<field name="osManufacturer" type="String" />
 		<field name="browserId" type="long" />
+		<field name="browserVersion" type="String" />
 		<field name="sessionId" type="String" />
 		<field name="accessDate" type="long" />
 		<field name="timeSlapse" type="long" />

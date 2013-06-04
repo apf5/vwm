@@ -264,6 +264,12 @@ public class SiteHitLocalServiceWrapper implements SiteHitLocalService,
 		return _siteHitLocalService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public com.liferay.consistent.tracking.model.SiteHit addSiteHit(
+		long companyId, long siteId, boolean guest, java.util.Date access)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _siteHitLocalService.addSiteHit(companyId, siteId, guest, access);
+	}
+
 	/**
 	 * @deprecated Renamed to {@link #getWrappedService}
 	 */

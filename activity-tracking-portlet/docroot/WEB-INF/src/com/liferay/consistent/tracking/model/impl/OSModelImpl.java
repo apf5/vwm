@@ -58,10 +58,9 @@ public class OSModelImpl extends BaseModelImpl<OS> implements OSModel {
 	public static final String TABLE_NAME = "CONSIS_TRACK_OS";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "osId", Types.BIGINT },
-			{ "name", Types.VARCHAR },
-			{ "version", Types.VARCHAR }
+			{ "name", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table CONSIS_TRACK_OS (osId LONG not null primary key,name VARCHAR(75) null,version VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table CONSIS_TRACK_OS (osId LONG not null primary key,name VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table CONSIS_TRACK_OS";
 	public static final String ORDER_BY_JPQL = " ORDER BY os.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CONSIS_TRACK_OS.name ASC";
@@ -78,7 +77,6 @@ public class OSModelImpl extends BaseModelImpl<OS> implements OSModel {
 				"value.object.column.bitmask.enabled.com.liferay.consistent.tracking.model.OS"),
 			true);
 	public static long NAME_COLUMN_BITMASK = 1L;
-	public static long VERSION_COLUMN_BITMASK = 2L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.com.liferay.consistent.tracking.model.OS"));
 
@@ -115,7 +113,6 @@ public class OSModelImpl extends BaseModelImpl<OS> implements OSModel {
 
 		attributes.put("osId", getOsId());
 		attributes.put("name", getName());
-		attributes.put("version", getVersion());
 
 		return attributes;
 	}
@@ -132,12 +129,6 @@ public class OSModelImpl extends BaseModelImpl<OS> implements OSModel {
 
 		if (name != null) {
 			setName(name);
-		}
-
-		String version = (String)attributes.get("version");
-
-		if (version != null) {
-			setVersion(version);
 		}
 	}
 
@@ -170,29 +161,6 @@ public class OSModelImpl extends BaseModelImpl<OS> implements OSModel {
 
 	public String getOriginalName() {
 		return GetterUtil.getString(_originalName);
-	}
-
-	public String getVersion() {
-		if (_version == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _version;
-		}
-	}
-
-	public void setVersion(String version) {
-		_columnBitmask |= VERSION_COLUMN_BITMASK;
-
-		if (_originalVersion == null) {
-			_originalVersion = _version;
-		}
-
-		_version = version;
-	}
-
-	public String getOriginalVersion() {
-		return GetterUtil.getString(_originalVersion);
 	}
 
 	public long getColumnBitmask() {
@@ -229,7 +197,6 @@ public class OSModelImpl extends BaseModelImpl<OS> implements OSModel {
 
 		osImpl.setOsId(getOsId());
 		osImpl.setName(getName());
-		osImpl.setVersion(getVersion());
 
 		osImpl.resetOriginalValues();
 
@@ -284,8 +251,6 @@ public class OSModelImpl extends BaseModelImpl<OS> implements OSModel {
 
 		osModelImpl._originalName = osModelImpl._name;
 
-		osModelImpl._originalVersion = osModelImpl._version;
-
 		osModelImpl._columnBitmask = 0;
 	}
 
@@ -303,34 +268,24 @@ public class OSModelImpl extends BaseModelImpl<OS> implements OSModel {
 			osCacheModel.name = null;
 		}
 
-		osCacheModel.version = getVersion();
-
-		String version = osCacheModel.version;
-
-		if ((version != null) && (version.length() == 0)) {
-			osCacheModel.version = null;
-		}
-
 		return osCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(5);
 
 		sb.append("{osId=");
 		sb.append(getOsId());
 		sb.append(", name=");
 		sb.append(getName());
-		sb.append(", version=");
-		sb.append(getVersion());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(10);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.consistent.tracking.model.OS");
@@ -343,10 +298,6 @@ public class OSModelImpl extends BaseModelImpl<OS> implements OSModel {
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
 		sb.append(getName());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>version</column-name><column-value><![CDATA[");
-		sb.append(getVersion());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -361,8 +312,6 @@ public class OSModelImpl extends BaseModelImpl<OS> implements OSModel {
 	private long _osId;
 	private String _name;
 	private String _originalName;
-	private String _version;
-	private String _originalVersion;
 	private long _columnBitmask;
 	private OS _escapedModelProxy;
 }

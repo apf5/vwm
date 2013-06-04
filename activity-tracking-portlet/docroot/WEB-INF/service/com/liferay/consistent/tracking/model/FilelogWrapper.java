@@ -49,6 +49,7 @@ public class FilelogWrapper implements Filelog, ModelWrapper<Filelog> {
 		attributes.put("guest", getGuest());
 		attributes.put("userlogId", getUserlogId());
 		attributes.put("fileId", getFileId());
+		attributes.put("fileVersion", getFileVersion());
 		attributes.put("accessDate", getAccessDate());
 		attributes.put("elapseLoad", getElapseLoad());
 		attributes.put("trafic", getTrafic());
@@ -86,6 +87,12 @@ public class FilelogWrapper implements Filelog, ModelWrapper<Filelog> {
 
 		if (fileId != null) {
 			setFileId(fileId);
+		}
+
+		String fileVersion = (String)attributes.get("fileVersion");
+
+		if (fileVersion != null) {
+			setFileVersion(fileVersion);
 		}
 
 		Long accessDate = (Long)attributes.get("accessDate");
@@ -228,6 +235,24 @@ public class FilelogWrapper implements Filelog, ModelWrapper<Filelog> {
 	*/
 	public void setFileId(long fileId) {
 		_filelog.setFileId(fileId);
+	}
+
+	/**
+	* Returns the file version of this filelog.
+	*
+	* @return the file version of this filelog
+	*/
+	public java.lang.String getFileVersion() {
+		return _filelog.getFileVersion();
+	}
+
+	/**
+	* Sets the file version of this filelog.
+	*
+	* @param fileVersion the file version of this filelog
+	*/
+	public void setFileVersion(java.lang.String fileVersion) {
+		_filelog.setFileVersion(fileVersion);
 	}
 
 	/**

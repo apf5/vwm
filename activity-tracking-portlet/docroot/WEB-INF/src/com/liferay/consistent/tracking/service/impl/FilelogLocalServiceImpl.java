@@ -14,7 +14,12 @@
 
 package com.liferay.consistent.tracking.service.impl;
 
+import com.liferay.consistent.tracking.model.Filelog;
 import com.liferay.consistent.tracking.service.base.FilelogLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.SystemException;
+
+
+import java.util.Date;
 
 /**
  * The implementation of the filelog local service.
@@ -36,4 +41,56 @@ public class FilelogLocalServiceImpl extends FilelogLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.liferay.consistent.tracking.service.FilelogLocalServiceUtil} to access the filelog local service.
 	 */
+	public Filelog addFilelogDownload(long companyId, long fileId,String fileVersion, boolean guest, 
+			long userlogId, Date access) throws SystemException{
+		Filelog filelog = filelogPersistence.create(
+				counterLocalService.increment(
+						Filelog.class.getName()));
+		
+		filelog.setCompanyId(companyId);
+		filelog.setFileId(fileId);
+		filelog.setFileVersion(fileVersion);
+		filelog.setGuest(guest);
+		filelog.setTrafic(true);
+		filelog.setUserlogId(-1);
+		if (!guest) {
+			filelog.setUserlogId(userlogId);
+		}
+		filelog.setStatus(false);
+		filelog.setAccessDate(access.getTime());
+				
+		return filelogPersistence.update(filelog, false);
+	}
+	
+		
+	public Filelog updateElapseFilelog(long filelogId,long elapseLoad) throws SystemException{
+		
+		Filelog filelog = filelogPersistence.fetchByPrimaryKey(filelogId);
+		filelog.setElapseLoad(elapseLoad);	
+		filelog.setStatus(true);
+		return filelogPersistence.update(filelog, false);
+	}
+	
+	public Filelog addFilelogUpload(long companyId, long fileId, String fileVersion, boolean guest, 
+			long userlogId, long elapseLoad, Date access) throws SystemException{
+		Filelog filelog = filelogPersistence.create(
+				counterLocalService.increment(
+						Filelog.class.getName()));
+		
+		filelog.setCompanyId(companyId);
+		filelog.setFileId(fileId);
+		filelog.setFileVersion(fileVersion);
+		filelog.setGuest(guest);
+		filelog.setTrafic(false);
+		filelog.setUserlogId(-1);
+		if (guest) {
+			filelog.setUserlogId(userlogId);
+		}
+		filelog.setStatus(true);
+		filelog.setAccessDate(access.getTime());
+		filelog.setElapseLoad(elapseLoad);
+				
+		return filelogPersistence.update(filelog, false);
+	}
+		
 }

@@ -14,6 +14,7 @@
 	<import class="com.liferay.consistent.tracking.model.SearchWordHit" />
 	<import class="com.liferay.consistent.tracking.model.SiteHit" />
 	<import class="com.liferay.consistent.tracking.model.TrackEvent" />
+	<import class="com.liferay.consistent.tracking.model.Tracking" />
 	<import class="com.liferay.consistent.tracking.model.Userlog" />
 	<import class="com.liferay.consistent.tracking.model.Word" />
 	<class name="com.liferay.consistent.tracking.model.impl.BrowserImpl" table="CONSIS_TRACK_Browser">
@@ -22,7 +23,6 @@
 			<generator class="assigned" />
 		</id>
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="version" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.consistent.tracking.model.impl.BrowsinglogImpl" table="CONSIS_TRACK_Browsinglog">
 		<cache usage="read-write" />
@@ -31,6 +31,10 @@
 		</id>
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userlogId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="clientHost" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="clientAddr" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="serverName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="serverPort" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="userAgent" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="url" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="plId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
@@ -50,6 +54,7 @@
 		<property name="guest" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="userlogId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="fileId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="fileVersion" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="accessDate" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="elapseLoad" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="trafic" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
@@ -71,7 +76,6 @@
 			<generator class="assigned" />
 		</id>
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="version" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.consistent.tracking.model.impl.PhraseImpl" table="CONSIS_TRACK_Phrase">
 		<cache usage="read-write" />
@@ -163,7 +167,9 @@
 		<property name="remoteHost" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="remoteAddress" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="osId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="osManufacturer" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="browserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="browserVersion" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sessionId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="accessDate" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="timeSlapse" type="com.liferay.portal.dao.orm.hibernate.LongType" />

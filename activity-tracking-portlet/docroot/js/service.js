@@ -1,0 +1,1 @@
+Liferay.Service.register("Liferay.Service.CONSIS_TRACK", "com.liferay.consistent.tracking.service", "activity-tracking-portlet");

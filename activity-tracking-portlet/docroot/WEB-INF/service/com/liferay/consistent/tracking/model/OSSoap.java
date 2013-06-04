@@ -31,7 +31,6 @@ public class OSSoap implements Serializable {
 
 		soapModel.setOsId(model.getOsId());
 		soapModel.setName(model.getName());
-		soapModel.setVersion(model.getVersion());
 
 		return soapModel;
 	}
@@ -100,15 +99,6 @@ public class OSSoap implements Serializable {
 		_name = name;
 	}
 
-	public String getVersion() {
-		return _version;
-	}
-
-	public void setVersion(String version) {
-		_version = version;
-	}
-
 	private long _osId;
 	private String _name;
-	private String _version;
 }

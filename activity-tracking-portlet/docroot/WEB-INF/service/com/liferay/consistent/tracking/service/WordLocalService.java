@@ -242,4 +242,9 @@ public interface WordLocalService extends BaseLocalService, InvokableLocalServic
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.consistent.tracking.model.Word getWord(
+		java.lang.String wordName)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

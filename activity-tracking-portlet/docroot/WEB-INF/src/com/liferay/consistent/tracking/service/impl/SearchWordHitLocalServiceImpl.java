@@ -14,7 +14,11 @@
 
 package com.liferay.consistent.tracking.service.impl;
 
+import com.liferay.consistent.tracking.model.SearchWordHit;
 import com.liferay.consistent.tracking.service.base.SearchWordHitLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.SystemException;
+
+import java.util.Date;
 
 /**
  * The implementation of the search word hit local service.
@@ -37,4 +41,18 @@ public class SearchWordHitLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link com.liferay.consistent.tracking.service.SearchWordHitLocalServiceUtil} to access the search word hit local service.
 	 */
+	
+	public SearchWordHit addSearchWordHit(long companyId, long wordId, boolean guest, Date access) throws SystemException{
+		SearchWordHit searchWordHit =
+				searchWordHitPersistence.create(
+				counterLocalService.increment(
+						SearchWordHit.class.getName()));
+		searchWordHit.setCompanyId(companyId);
+		searchWordHit.setWordId(wordId);
+		searchWordHit.setGuest(guest);
+		searchWordHit.setAccessDate(access.getTime());
+		
+		return searchWordHitPersistence.update(searchWordHit, false);
+	}
+	
 }

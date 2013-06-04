@@ -59,9 +59,9 @@ public class PhraseModelImpl extends BaseModelImpl<Phrase>
 	public static final String TABLE_NAME = "CONSIS_TRACK_Phrase";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "phraseId", Types.BIGINT },
-			{ "phraseName", Types.VARCHAR }
+			{ "phraseName", Types.CLOB }
 		};
-	public static final String TABLE_SQL_CREATE = "create table CONSIS_TRACK_Phrase (phraseId LONG not null primary key,phraseName VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table CONSIS_TRACK_Phrase (phraseId LONG not null primary key,phraseName TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table CONSIS_TRACK_Phrase";
 	public static final String ORDER_BY_JPQL = " ORDER BY phrase.phraseName ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CONSIS_TRACK_Phrase.phraseName ASC";

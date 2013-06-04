@@ -392,6 +392,10 @@ public class BrowsinglogPersistenceImpl extends BasePersistenceImpl<Browsinglog>
 		browsinglogImpl.setBrowsinglogId(browsinglog.getBrowsinglogId());
 		browsinglogImpl.setCompanyId(browsinglog.getCompanyId());
 		browsinglogImpl.setUserlogId(browsinglog.getUserlogId());
+		browsinglogImpl.setClientHost(browsinglog.getClientHost());
+		browsinglogImpl.setClientAddr(browsinglog.getClientAddr());
+		browsinglogImpl.setServerName(browsinglog.getServerName());
+		browsinglogImpl.setServerPort(browsinglog.getServerPort());
 		browsinglogImpl.setUserAgent(browsinglog.getUserAgent());
 		browsinglogImpl.setUrl(browsinglog.getUrl());
 		browsinglogImpl.setPlId(browsinglog.getPlId());

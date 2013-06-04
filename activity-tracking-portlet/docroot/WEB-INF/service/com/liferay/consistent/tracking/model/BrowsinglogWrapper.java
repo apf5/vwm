@@ -48,6 +48,10 @@ public class BrowsinglogWrapper implements Browsinglog,
 		attributes.put("browsinglogId", getBrowsinglogId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userlogId", getUserlogId());
+		attributes.put("clientHost", getClientHost());
+		attributes.put("clientAddr", getClientAddr());
+		attributes.put("serverName", getServerName());
+		attributes.put("serverPort", getServerPort());
 		attributes.put("userAgent", getUserAgent());
 		attributes.put("url", getUrl());
 		attributes.put("plId", getPlId());
@@ -78,6 +82,30 @@ public class BrowsinglogWrapper implements Browsinglog,
 
 		if (userlogId != null) {
 			setUserlogId(userlogId);
+		}
+
+		String clientHost = (String)attributes.get("clientHost");
+
+		if (clientHost != null) {
+			setClientHost(clientHost);
+		}
+
+		String clientAddr = (String)attributes.get("clientAddr");
+
+		if (clientAddr != null) {
+			setClientAddr(clientAddr);
+		}
+
+		String serverName = (String)attributes.get("serverName");
+
+		if (serverName != null) {
+			setServerName(serverName);
+		}
+
+		Integer serverPort = (Integer)attributes.get("serverPort");
+
+		if (serverPort != null) {
+			setServerPort(serverPort);
 		}
 
 		String userAgent = (String)attributes.get("userAgent");
@@ -205,6 +233,78 @@ public class BrowsinglogWrapper implements Browsinglog,
 	*/
 	public void setUserlogId(long userlogId) {
 		_browsinglog.setUserlogId(userlogId);
+	}
+
+	/**
+	* Returns the client host of this browsinglog.
+	*
+	* @return the client host of this browsinglog
+	*/
+	public java.lang.String getClientHost() {
+		return _browsinglog.getClientHost();
+	}
+
+	/**
+	* Sets the client host of this browsinglog.
+	*
+	* @param clientHost the client host of this browsinglog
+	*/
+	public void setClientHost(java.lang.String clientHost) {
+		_browsinglog.setClientHost(clientHost);
+	}
+
+	/**
+	* Returns the client addr of this browsinglog.
+	*
+	* @return the client addr of this browsinglog
+	*/
+	public java.lang.String getClientAddr() {
+		return _browsinglog.getClientAddr();
+	}
+
+	/**
+	* Sets the client addr of this browsinglog.
+	*
+	* @param clientAddr the client addr of this browsinglog
+	*/
+	public void setClientAddr(java.lang.String clientAddr) {
+		_browsinglog.setClientAddr(clientAddr);
+	}
+
+	/**
+	* Returns the server name of this browsinglog.
+	*
+	* @return the server name of this browsinglog
+	*/
+	public java.lang.String getServerName() {
+		return _browsinglog.getServerName();
+	}
+
+	/**
+	* Sets the server name of this browsinglog.
+	*
+	* @param serverName the server name of this browsinglog
+	*/
+	public void setServerName(java.lang.String serverName) {
+		_browsinglog.setServerName(serverName);
+	}
+
+	/**
+	* Returns the server port of this browsinglog.
+	*
+	* @return the server port of this browsinglog
+	*/
+	public int getServerPort() {
+		return _browsinglog.getServerPort();
+	}
+
+	/**
+	* Sets the server port of this browsinglog.
+	*
+	* @param serverPort the server port of this browsinglog
+	*/
+	public void setServerPort(int serverPort) {
+		_browsinglog.setServerPort(serverPort);
 	}
 
 	/**

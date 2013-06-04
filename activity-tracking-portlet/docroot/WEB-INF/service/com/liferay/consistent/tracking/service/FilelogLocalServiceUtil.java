@@ -273,6 +273,30 @@ public class FilelogLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static com.liferay.consistent.tracking.model.Filelog addFilelogDownload(
+		long companyId, long fileId, java.lang.String fileVersion,
+		boolean guest, long userlogId, java.util.Date access)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addFilelogDownload(companyId, fileId, fileVersion, guest,
+			userlogId, access);
+	}
+
+	public static com.liferay.consistent.tracking.model.Filelog updateElapseFilelog(
+		long filelogId, long elapseLoad)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().updateElapseFilelog(filelogId, elapseLoad);
+	}
+
+	public static com.liferay.consistent.tracking.model.Filelog addFilelogUpload(
+		long companyId, long fileId, java.lang.String fileVersion,
+		boolean guest, long userlogId, long elapseLoad, java.util.Date access)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addFilelogUpload(companyId, fileId, fileVersion, guest,
+			userlogId, elapseLoad, access);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

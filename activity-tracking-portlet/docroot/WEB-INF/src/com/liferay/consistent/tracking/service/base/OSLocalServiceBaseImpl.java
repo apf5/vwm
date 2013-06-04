@@ -27,6 +27,8 @@ import com.liferay.consistent.tracking.service.SearchPhraseHitLocalService;
 import com.liferay.consistent.tracking.service.SearchWordHitLocalService;
 import com.liferay.consistent.tracking.service.SiteHitLocalService;
 import com.liferay.consistent.tracking.service.TrackEventLocalService;
+import com.liferay.consistent.tracking.service.TrackingLocalService;
+import com.liferay.consistent.tracking.service.TrackingService;
 import com.liferay.consistent.tracking.service.UserlogLocalService;
 import com.liferay.consistent.tracking.service.WordLocalService;
 import com.liferay.consistent.tracking.service.persistence.BrowserPersistence;
@@ -734,6 +736,43 @@ public abstract class OSLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the tracking local service.
+	 *
+	 * @return the tracking local service
+	 */
+	public TrackingLocalService getTrackingLocalService() {
+		return trackingLocalService;
+	}
+
+	/**
+	 * Sets the tracking local service.
+	 *
+	 * @param trackingLocalService the tracking local service
+	 */
+	public void setTrackingLocalService(
+		TrackingLocalService trackingLocalService) {
+		this.trackingLocalService = trackingLocalService;
+	}
+
+	/**
+	 * Returns the tracking remote service.
+	 *
+	 * @return the tracking remote service
+	 */
+	public TrackingService getTrackingService() {
+		return trackingService;
+	}
+
+	/**
+	 * Sets the tracking remote service.
+	 *
+	 * @param trackingService the tracking remote service
+	 */
+	public void setTrackingService(TrackingService trackingService) {
+		this.trackingService = trackingService;
+	}
+
+	/**
 	 * Returns the userlog local service.
 	 *
 	 * @return the userlog local service
@@ -1059,6 +1098,10 @@ public abstract class OSLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected TrackEventLocalService trackEventLocalService;
 	@BeanReference(type = TrackEventPersistence.class)
 	protected TrackEventPersistence trackEventPersistence;
+	@BeanReference(type = TrackingLocalService.class)
+	protected TrackingLocalService trackingLocalService;
+	@BeanReference(type = TrackingService.class)
+	protected TrackingService trackingService;
 	@BeanReference(type = UserlogLocalService.class)
 	protected UserlogLocalService userlogLocalService;
 	@BeanReference(type = UserlogPersistence.class)

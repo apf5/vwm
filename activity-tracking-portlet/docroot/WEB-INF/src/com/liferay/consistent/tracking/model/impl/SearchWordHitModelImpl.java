@@ -65,8 +65,8 @@ public class SearchWordHitModelImpl extends BaseModelImpl<SearchWordHit>
 		};
 	public static final String TABLE_SQL_CREATE = "create table CONSIS_TRACK_SearchWordHit (hitId LONG not null primary key,companyId LONG,wordId LONG,guest BOOLEAN,accessDate LONG)";
 	public static final String TABLE_SQL_DROP = "drop table CONSIS_TRACK_SearchWordHit";
-	public static final String ORDER_BY_JPQL = " ORDER BY searchWordHit.wordId ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY CONSIS_TRACK_SearchWordHit.wordId ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY searchWordHit.accessDate DESC";
+	public static final String ORDER_BY_SQL = " ORDER BY CONSIS_TRACK_SearchWordHit.accessDate DESC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -191,7 +191,7 @@ public class SearchWordHitModelImpl extends BaseModelImpl<SearchWordHit>
 	}
 
 	public void setWordId(long wordId) {
-		_columnBitmask = -1L;
+		_columnBitmask |= WORDID_COLUMN_BITMASK;
 
 		if (!_setOriginalWordId) {
 			_setOriginalWordId = true;
@@ -235,6 +235,8 @@ public class SearchWordHitModelImpl extends BaseModelImpl<SearchWordHit>
 	}
 
 	public void setAccessDate(long accessDate) {
+		_columnBitmask = -1L;
+
 		_accessDate = accessDate;
 	}
 
@@ -284,15 +286,17 @@ public class SearchWordHitModelImpl extends BaseModelImpl<SearchWordHit>
 	public int compareTo(SearchWordHit searchWordHit) {
 		int value = 0;
 
-		if (getWordId() < searchWordHit.getWordId()) {
+		if (getAccessDate() < searchWordHit.getAccessDate()) {
 			value = -1;
 		}
-		else if (getWordId() > searchWordHit.getWordId()) {
+		else if (getAccessDate() > searchWordHit.getAccessDate()) {
 			value = 1;
 		}
 		else {
 			value = 0;
 		}
+
+		value = value * -1;
 
 		if (value != 0) {
 			return value;

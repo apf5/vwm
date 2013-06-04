@@ -272,6 +272,12 @@ public class WordLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static com.liferay.consistent.tracking.model.Word getWord(
+		java.lang.String wordName)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getWord(wordName);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

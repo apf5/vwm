@@ -111,6 +111,24 @@ public class FilelogLocalServiceClp implements FilelogLocalService {
 		_methodName17 = "setBeanIdentifier";
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
+
+		_methodName19 = "addFilelogDownload";
+
+		_methodParameterTypes19 = new String[] {
+				"long", "long", "java.lang.String", "boolean", "long",
+				"java.util.Date"
+			};
+
+		_methodName20 = "updateElapseFilelog";
+
+		_methodParameterTypes20 = new String[] { "long", "long" };
+
+		_methodName21 = "addFilelogUpload";
+
+		_methodParameterTypes21 = new String[] {
+				"long", "long", "java.lang.String", "boolean", "long", "long",
+				"java.util.Date"
+			};
 	}
 
 	public com.liferay.consistent.tracking.model.Filelog addFilelog(
@@ -639,6 +657,121 @@ public class FilelogLocalServiceClp implements FilelogLocalService {
 		throw new UnsupportedOperationException();
 	}
 
+	public com.liferay.consistent.tracking.model.Filelog addFilelogDownload(
+		long companyId, long fileId, java.lang.String fileVersion,
+		boolean guest, long userlogId, java.util.Date access)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19,
+					new Object[] {
+						companyId,
+						
+					fileId,
+						
+					ClpSerializer.translateInput(fileVersion),
+						
+					guest,
+						
+					userlogId,
+						
+					ClpSerializer.translateInput(access)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.consistent.tracking.model.Filelog)ClpSerializer.translateOutput(returnObj);
+	}
+
+	public com.liferay.consistent.tracking.model.Filelog updateElapseFilelog(
+		long filelogId, long elapseLoad)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20,
+					new Object[] { filelogId, elapseLoad });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.consistent.tracking.model.Filelog)ClpSerializer.translateOutput(returnObj);
+	}
+
+	public com.liferay.consistent.tracking.model.Filelog addFilelogUpload(
+		long companyId, long fileId, java.lang.String fileVersion,
+		boolean guest, long userlogId, long elapseLoad, java.util.Date access)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName21,
+					_methodParameterTypes21,
+					new Object[] {
+						companyId,
+						
+					fileId,
+						
+					ClpSerializer.translateInput(fileVersion),
+						
+					guest,
+						
+					userlogId,
+						
+					elapseLoad,
+						
+					ClpSerializer.translateInput(access)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.consistent.tracking.model.Filelog)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -676,4 +809,10 @@ public class FilelogLocalServiceClp implements FilelogLocalService {
 	private String[] _methodParameterTypes16;
 	private String _methodName17;
 	private String[] _methodParameterTypes17;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
+	private String _methodName21;
+	private String[] _methodParameterTypes21;
 }

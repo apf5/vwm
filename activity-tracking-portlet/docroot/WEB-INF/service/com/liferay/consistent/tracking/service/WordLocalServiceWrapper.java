@@ -262,6 +262,12 @@ public class WordLocalServiceWrapper implements WordLocalService,
 		return _wordLocalService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public com.liferay.consistent.tracking.model.Word getWord(
+		java.lang.String wordName)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _wordLocalService.getWord(wordName);
+	}
+
 	/**
 	 * @deprecated Renamed to {@link #getWrappedService}
 	 */

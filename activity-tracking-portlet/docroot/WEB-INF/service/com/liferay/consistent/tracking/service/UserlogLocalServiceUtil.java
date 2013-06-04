@@ -273,6 +273,26 @@ public class UserlogLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static com.liferay.consistent.tracking.model.Userlog addUserlog(
+		long companyId, long userId, java.lang.String userName,
+		java.lang.String serverName, int serverPort,
+		java.lang.String remoteHost, java.lang.String remoteAddress, long osId,
+		java.lang.String osManufacturer, long browserId,
+		java.lang.String browserVersion, java.lang.String sessionId,
+		java.util.Date accessDate)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addUserlog(companyId, userId, userName, serverName,
+			serverPort, remoteHost, remoteAddress, osId, osManufacturer,
+			browserId, browserVersion, sessionId, accessDate);
+	}
+
+	public static com.liferay.consistent.tracking.model.Userlog updateTimeSlapse(
+		long userlogId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().updateTimeSlapse(userlogId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

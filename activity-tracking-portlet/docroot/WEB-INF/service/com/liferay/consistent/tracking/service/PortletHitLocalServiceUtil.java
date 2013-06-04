@@ -273,6 +273,15 @@ public class PortletHitLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static com.liferay.consistent.tracking.model.PortletHit addPortletHit(
+		long companyId, java.lang.String portletId, boolean guest, long userId,
+		long userlogId, java.util.Date access)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addPortletHit(companyId, portletId, guest, userId,
+			userlogId, access);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}
