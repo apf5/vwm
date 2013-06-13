@@ -13,40 +13,52 @@
  *
  */
 --%>
-
+<%@page import="com.liferay.portal.kernel.util.ListUtil"%>
+<%@page import="java.util.List"%>
+<%@page import="javax.portlet.PortletURL"%>
 <%@ include file="/html/tracking/init.jsp" %>
 
-
 <liferay-ui:tabs
-	names="user-log,site-log,search-log,doc-log,Tab 3"
+	names="user-log,site-log,search-log,doc-log,browser-so-log"
 	refresh="<%=false%>"
 >
 	<!-- Jhanlos: En cada tab se incluyen los jsps respectivos -->
 	<liferay-ui:section>
-		<!-- Jhanlos: JSP de registros de monitoreo de usuarios -->
+		
 		<liferay-util:include page="/html/tracking/user_log.jsp" servletContext="<%= application %>" />
+				
 	</liferay-ui:section>
+	
 	
 	<liferay-ui:section>
 		<!-- Jhanlos: JSP de registros de monitoreo de sitios -->
 		<liferay-util:include page="/html/tracking/site_log.jsp" servletContext="<%= application %>" />
+				
 	</liferay-ui:section>
 	
+	
+	
 	<liferay-ui:section>
-		<!-- Jhanlos: JSP de registros de monitoreo de busquedas -->
+	
 		<liferay-util:include page="/html/tracking/search_log.jsp" servletContext="<%= application %>" />
+		
 	</liferay-ui:section>
+	
+	
 	
 	<liferay-ui:section>
 		<!-- Jhanlos: JSP de registros de monitoreo de docuemntos -->
 		<liferay-util:include page="/html/tracking/doc_log.jsp" servletContext="<%= application %>" />
+		
 	</liferay-ui:section>
 	
 	
 	<!-- Jhanlos: incluir los JSPs para los estadisticos respectivos  -->
-	<liferay-ui:section>
-		Tab 3
-	</liferay-ui:section>
 	
+	<liferay-ui:section>
+	
+		<liferay-util:include page="/html/tracking/browser_log.jsp" servletContext="<%= application %>" />
 		
+	</liferay-ui:section>
+			
 </liferay-ui:tabs>
