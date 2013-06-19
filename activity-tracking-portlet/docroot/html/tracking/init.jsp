@@ -14,10 +14,6 @@
  */
 --%>
 
-<%@page import="java.util.GregorianCalendar"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.text.DateFormat"%>
-<%@page import="javax.portlet.PortletURL"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
@@ -27,43 +23,37 @@
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
-<%@ page import="com.liferay.portal.kernel.dao.search.DisplayTerms" %>
-<%@page import="com.liferay.portal.kernel.dao.search.SearchContainer" %>
-<%@page import="com.liferay.portal.kernel.exception.PortalException" %>
-<%@page import="com.liferay.portal.kernel.language.LanguageUtil" %>
-<%@page import="com.liferay.portal.kernel.util.CalendarFactoryUtil" %>
-<%@page import="com.liferay.portal.kernel.util.FastDateFormatFactoryUtil" %>
-<%@page import="com.liferay.portal.kernel.util.ParamUtil" %>
-<%@page import="com.liferay.portal.kernel.util.PortalClassInvoker" %>
-<%@page import="com.liferay.portal.kernel.util.StringPool" %>
-<%@page import="com.liferay.portal.kernel.util.Validator" %>
-<%@page import="com.liferay.portal.util.PortalUtil" %>
+<%@ page import="com.liferay.portal.kernel.dao.search.DisplayTerms" %><%@
+page import="com.liferay.portal.kernel.dao.search.SearchContainer" %><%@
+page import="com.liferay.portal.kernel.exception.PortalException" %><%@
+page import="com.liferay.portal.kernel.language.LanguageUtil" %><%@
+page import="com.liferay.portal.kernel.util.CalendarFactoryUtil" %><%@
+page import="com.liferay.portal.kernel.util.FastDateFormatFactoryUtil" %><%@
+page import="com.liferay.portal.kernel.util.ParamUtil" %><%@
+page import="com.liferay.portal.kernel.util.PortalClassInvoker" %><%@
+page import="com.liferay.portal.kernel.util.StringPool" %><%@
+page import="com.liferay.portal.kernel.util.Validator" %><%@
+page import="com.liferay.portal.util.PortalUtil" %>
 
 <%@ page import="java.text.Format" %>
 
-<%@ page import="java.util.Calendar" %>
-<%@page import="java.util.Date" %>
+<%@ page import="java.util.Calendar" %><%@
+page import="java.util.Date" %>
 
 <portlet:defineObjects />
 
 <liferay-theme:defineObjects />
 
 <%
-	String currentURL = PortalUtil.getCurrentURL(request);
-	
-	Calendar today = CalendarFactoryUtil.getCalendar(timeZone, locale);
-	
-	Calendar yesterday = CalendarFactoryUtil.getCalendar(timeZone, locale);
-	
-	yesterday.add(Calendar.DATE, -1);
-	
-	Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
-	
-	PortletURL portletURL = renderResponse.createRenderURL();
-	String msg = "No-se-encontr&oacute;-ning&uacute;n-registro-para-su-consulta";
-	DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-	DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-    Calendar calendar = new GregorianCalendar();
+String currentURL = PortalUtil.getCurrentURL(request);
+
+Calendar today = CalendarFactoryUtil.getCalendar(timeZone, locale);
+
+Calendar yesterday = CalendarFactoryUtil.getCalendar(timeZone, locale);
+
+yesterday.add(Calendar.DATE, -1);
+
+Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>
 
 
